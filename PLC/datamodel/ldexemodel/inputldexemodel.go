@@ -4,6 +4,7 @@ package ldexemodel
 type inputLd struct {
 	NodeName	string
 	NodeInfo		 string
+	Reference		string
 	IsColSp				bool
 	IsColEp				bool
 }
