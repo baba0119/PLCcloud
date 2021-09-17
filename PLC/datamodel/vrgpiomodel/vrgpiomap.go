@@ -1,7 +1,7 @@
 package vrgpiomodel
 
 // 仮想gpioのマッピング用構造体
-// type VRgpioMap struct {
+// type vrgpioMapModel struct {
 // 	gpio0 	VRgpio
 // 	gpio1		VRgpio
 // 	gpio2		VRgpio
@@ -37,3 +37,6 @@ package vrgpiomodel
 // 	gpio32 VRgpio
 // 	gpio33 VRgpio
 // }
+
+// 仮想gpioマッピング用グローバル変数
+// var VRgpioMap vrgpioMapModel
