@@ -9,7 +9,7 @@ type TimerStateModel struct {
 // カウンタ状態把持構造体
 type CounterStateModel struct {
 	LimitCount	int
-	NowCount	int
+	NowCount		int
 	WasState		bool
-	Edge					string
+	Edge				string
 }
