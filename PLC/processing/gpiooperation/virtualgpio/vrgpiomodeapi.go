@@ -6,9 +6,13 @@ import (
 
 // ---------------------------------------------
 // virtual gpio のモードを変更する関数
-// 引数:	num:		GPIO番号
-// 				mode:		inputかoutputか
-// 				vrgpio:	vrgpioのポインター
+//
+// 引数:
+// num:			GPIO番号
+// mode:		inputかoutputか
+// vrgpio:	vrgpioのポインター
+//
+// ladderdebug がこの関数を使う
 // ---------------------------------------------
 func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VRgpio) {
 	vrgpio[pin] = &vrgpiomodel.VRgpio{
