@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"PLC/processing/gpiooperation/virtualgpio"
+)
 
 func main() {
-	fmt.Println("hello world")
+	virtualgpio.CheckVirtualGpio()
 }
