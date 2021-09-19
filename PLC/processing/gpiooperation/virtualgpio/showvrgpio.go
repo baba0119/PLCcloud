@@ -31,4 +31,10 @@ func CheckVirtualGpio() {
 	VrgpioModeChange("Gpio3", "input", vrgpio)
 	ShowVirtualGpio(vrgpio)
 	fmt.Println()
+
+	// virtual gpio の output を変更
+	fmt.Println("アウトプット変更確認")
+	VrgpioOutputChange("Gpio3", true, vrgpio)
+	ShowVirtualGpio(vrgpio)
+	fmt.Println()
 }
