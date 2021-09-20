@@ -66,9 +66,9 @@ type InputLdexeModel struct {
 // ===========================================================
 // 入力部ラダーのとき
 func (ld *InputLdModel) NodeTypeDataCheck(str string) bool {
-	if	str == "vrA" || str == "vrB" ||
-			str == "gpA" || str == "gpB" ||
-			str == "blockSp" || str == "blockEp" {
+	if	str == "vrA"			|| str == "vrB" ||
+			str == "gpA"			|| str == "gpB" ||
+			str == "blockSp"	|| str == "blockEp" {
 		ld.NodeType = str
 		return true
 	} else {

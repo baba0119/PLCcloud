@@ -2,6 +2,7 @@ package virtualgpio
 
 import (
 	"PLC/datamodel/vrgpiomodel"
+	"strconv"
 )
 
 // ---------------------------------------------
@@ -12,13 +13,31 @@ import (
 // mode:		inputかoutputか
 // vrgpio:	vrgpioのポインター
 //
+// 戻り値:bool
+// true:	成功
+// false:	失敗
+//
 // ladderdebug がこの関数を使う
 // ---------------------------------------------
-func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VRgpio) {
-	vrgpio[pin] = &vrgpiomodel.VRgpio{
-		GpioMode: mode,
-		GpioState: vrgpio[pin].GpioState,
+func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VRgpio) bool {
+	// モードが正しい値かチェック
+	if mode != "output" && mode != "input" {
+		return false
 	}
+
+	// gpio が実在するかチェック
+	for i := 0 ; i < 34 ; i++ {
+		str := "Gpio" + strconv.Itoa(i)
+		if pin == str {
+			vrgpio[pin] = &vrgpiomodel.VRgpio{
+				GpioMode: mode,
+				GpioState: vrgpio[pin].GpioState,
+			}
+			return true
+		}
+	}
+
+	return false
 }
 
 // ---------------------------------------------
@@ -29,11 +48,24 @@ func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VR
 // output:	true か false か
 // vrgpio:	vrgpioのポインター
 //
+// 戻り値:bool
+// true:	成功
+// false:	失敗
+//
 // ladderdebug がこの関数を使う
 // ---------------------------------------------
-func VrgpioOutputChange(pin string, op bool, vrgpio map[string]*vrgpiomodel.VRgpio) {
-	vrgpio[pin] = &vrgpiomodel.VRgpio{
-		GpioMode: vrgpio[pin].GpioMode,
-		GpioState: op,
+func VrgpioOutputChange(pin string, op bool, vrgpio map[string]*vrgpiomodel.VRgpio) bool {
+	// gpio が実在するかチェック
+	for i := 0 ; i < 34 ; i++ {
+		str := "Gpio" + strconv.Itoa(i)
+		if pin == str {
+			vrgpio[pin] = &vrgpiomodel.VRgpio{
+				GpioMode: vrgpio[pin].GpioMode,
+				GpioState: op,
+			}
+			return true
+		}
 	}
+
+	return false
 }

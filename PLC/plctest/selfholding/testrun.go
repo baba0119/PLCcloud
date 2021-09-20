@@ -5,11 +5,15 @@ import "PLC/datamodel/ldexemodel"
 // 試運転ではmain関数でこの関数を呼び出す
 // jsonをマッピングするところは飛ばしている
 func SelfholdingRun() {
+
 	// ------------------------------------------
-	// 入力部
+	// 入力部データマッピング
 	// ------------------------------------------
 	// ラダープログラムのマッピング
-	inputLd1 := []ldexemodel.InputLdModel{
+
+	// 1列目
+	// ラダー入力部
+	inputLd1 := []*ldexemodel.InputLdModel{
 		{ // ブロック始端
 			NodeName: "block1",
 			NodeType: "blockSp",
@@ -41,6 +45,30 @@ func SelfholdingRun() {
 			IsColEp:  false,
 		},
 	}
+
+	// ラダー出力部
+
+	// 2列目
+	// ラダー入力部
+	inputLd2 := []*ldexemodel.InputLdModel{
+		{
+			NodeName: "o1",
+			NodeType: "vrA",
+			IsColSp:  false,
+			IsColEp:  false,
+		},
+	}
+
+	// ------------------------------------------
+	// 出力部データスライスマッピング
+	// ------------------------------------------
+
+	// ------------------------------------------
+	// 仮想gpio関連
+	// ------------------------------------------
+	// 仮想gpioマッピング
+	// 仮想gpio setting
+	// 仮想gpio模擬入力機構
 
 	// ラダープログラムの動作(ループ)
 		// 出力dispatcher
