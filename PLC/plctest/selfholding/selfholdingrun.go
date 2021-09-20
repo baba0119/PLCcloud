@@ -1,6 +1,10 @@
 package selfholding
 
-import "PLC/datamodel/ldexemodel"
+import (
+	"fmt"
+	"PLC/datamodel/ldexemodel"
+	"PLC/processing/ladderdebug"
+)
 
 // 試運転ではmain関数でこの関数を呼び出す
 // jsonをマッピングするところは飛ばしている
@@ -20,7 +24,7 @@ func SelfholdingRun() {
 			IsColSp:  false,
 			IsColEp:  false,
 		},
-		{ // a1 a接点
+		{ // Gpio2 a接点
 			NodeName: "Gpio2",
 			NodeType: "gpA",
 			IsColSp:  true,
@@ -38,15 +42,19 @@ func SelfholdingRun() {
 			IsColSp:  false,
 			IsColEp:  false,
 		},
-		{ // b1 b接点
-			NodeName: "b1",
-			NodeType: "vrB",
+		{ // gpio b接点
+			NodeName: "gpio3",
+			NodeType: "gpB",
 			IsColSp:  false,
 			IsColEp:  false,
 		},
 	}
 
 	// ラダー出力部
+	opKey1 := ldexemodel.OutputKeyModel{
+		NodeType: "vrio",
+		NodeName: "o1",
+	}
 
 	// 2列目
 	// ラダー入力部
@@ -59,9 +67,30 @@ func SelfholdingRun() {
 		},
 	}
 
+	// ラダー出力部
+	opKey2 := ldexemodel.OutputKeyModel{
+		NodeType: "gpio",
+		NodeName: "Gpio3",
+	}
+
+	// 入力部ラダースライス生成
+	inputLdSlice := []*ldexemodel.InputLdexeModel {
+		{
+			InputLd:   inputLd1,
+			OutputKey: opKey1,
+		},
+		{
+			InputLd:   inputLd2,
+			OutputKey: opKey2,
+		},
+	}
+
 	// ------------------------------------------
 	// 出力部データスライスマッピング
 	// ------------------------------------------
+	// マッピングされた出力部からスライスを生成する
+	outputStateSlice := ladderdebug.CreateOutputStateSlice(inputLdSlice)
+	fmt.Println(outputStateSlice)
 
 	// ------------------------------------------
 	// 仮想gpio関連

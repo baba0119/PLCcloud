@@ -54,8 +54,13 @@ type OutputKeyModel struct {
 }
 
 // 入力処理で使う構造体
+// 中身は参照されることはあっても変更されることはない
 type InputLdexeModel struct {
-	InputLd		[]InputLdModel
+
+	// ここの情報を参照しながらラダーの出力が決まる
+	InputLd		[]*InputLdModel
+
+	// 出力結果を反映する場所を参照するためのキー
 	OutputKey	OutputKeyModel
 }
 
@@ -63,6 +68,7 @@ type InputLdexeModel struct {
 // フィールド別データチェック
 // -----------------------------------------------------------
 // 適切な値を入れるために、この関数を介して値を代入する
+// jsonからマッピングする際に使う
 // ===========================================================
 // 入力部ラダーのとき
 func (ld *InputLdModel) NodeTypeDataCheck(str string) bool {

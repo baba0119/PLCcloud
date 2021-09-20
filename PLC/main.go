@@ -1,9 +1,9 @@
 package main
 
 import (
-	"PLC/processing/gpiooperation/virtualgpio"
+	"PLC/plctest/selfholding"
 )
 
 func main() {
-	virtualgpio.CheckVirtualGpio()
+	selfholding.SelfholdingRun()
 }
