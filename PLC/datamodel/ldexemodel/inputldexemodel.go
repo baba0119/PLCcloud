@@ -1,7 +1,15 @@
 package ldexemodel
 
+// ===========================================================
+// 型定義
+// -----------------------------------------------------------
+// - 入力部ラダー構造体
+// - 出力キー構造体
+// - 入力処理で使う構造体
+// ===========================================================
+
 // 入力部ラダー構造体
-type inputLd struct {
+type InputLdModel struct {
 
 	// ノードの名前をここに入れる
 	// C1
@@ -10,13 +18,15 @@ type inputLd struct {
 	NodeName	string
 
 	// ノードの情報(種類)をここに入力する
-	// A:				a接点
-	// B:				b接点
+	// vrA:			仮想a接点
+	// vrB:			仮想b接点
+	// gpA:			GPIOa接点
+	// gpB:			GPIOb接点
 	// blockSp:	ブロック始端
 	// blockEp:	ブロック終端
 	// これらのどれかが入る
 	// TypeScript の union ほしい (´・ω・｀)
-	NodeInfo	string
+	NodeType	string
 
 	// ブロック始端
 	IsColSp		bool
@@ -26,7 +36,7 @@ type inputLd struct {
 }
 
 // 出力キー構造体
-type outputKey struct {
+type OutputKeyModel struct {
 
 	// ノードの種類
 	// ここの値によって処理が分かれる
@@ -44,7 +54,34 @@ type outputKey struct {
 }
 
 // 入力処理で使う構造体
-type InputLdexeMode struct {
-	InputLd		[]inputLd
-	OutputKey	outputKey
+type InputLdexeModel struct {
+	InputLd		[]InputLdModel
+	OutputKey	OutputKeyModel
+}
+
+// ===========================================================
+// フィールド別データチェック
+// -----------------------------------------------------------
+// 適切な値を入れるために、この関数を介して値を代入する
+// ===========================================================
+// 入力部ラダーのとき
+func (ld *InputLdModel) NodeTypeDataCheck(str string) bool {
+	if	str == "vrA" || str == "vrB" ||
+			str == "gpA" || str == "gpB" ||
+			str == "blockSp" || str == "blockEp" {
+		ld.NodeType = str
+		return true
+	} else {
+		return false
+	}
+}
+
+// 出力キーのとき
+func (ld *OutputKeyModel) NodeTypeDataCheck(str string) bool {
+	if str == "gpio" || str == "vrio" || str == "c" || str == "t" {
+		ld.NodeType = str
+		return true
+	} else {
+		return false
+	}
 }
