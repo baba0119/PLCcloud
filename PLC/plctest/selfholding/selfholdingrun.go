@@ -1,9 +1,10 @@
 package selfholding
 
 import (
-	"fmt"
 	"PLC/datamodel/ldexemodel"
+	"PLC/processing/gpiooperation/virtualgpio"
 	"PLC/processing/ladderdebug"
+	"fmt"
 )
 
 // 試運転ではmain関数でこの関数を呼び出す
@@ -43,7 +44,7 @@ func SelfholdingRun() {
 			IsColEp:  false,
 		},
 		{ // gpio b接点
-			NodeName: "gpio3",
+			NodeName: "Gpio3",
 			NodeType: "gpB",
 			IsColSp:  false,
 			IsColEp:  false,
@@ -102,8 +103,17 @@ func SelfholdingRun() {
 	// 仮想gpio関連
 	// ------------------------------------------
 	// 仮想gpioマッピング
+	vrgpio := virtualgpio.VirtualGpioMapping()
 	// 仮想gpio setting
+	if !virtualgpio.VrgpioSetting(inputLdSlice, vrgpio) {
+		fmt.Println("gpio setting missed.")
+		return
+	}
+	// gpio設定変更確認
+	virtualgpio.ShowVirtualGpio(vrgpio)
+
 	// 仮想gpio模擬入力機構
+	// 実行中はコマンドプロンプトからGpioの入力を変更できる
 
 	// ラダープログラムの動作(ループ)
 		// 出力dispatcher
