@@ -5,6 +5,7 @@ import (
 	"PLC/plctest"
 	"PLC/processing/gpiooperation/virtualgpio"
 	"PLC/processing/ladderdebug"
+	"PLC/processing/ladderrun"
 	"fmt"
 )
 
@@ -122,9 +123,16 @@ func SelfholdingRun() {
 	go plctest.VrgpioSimulated(vrgpio)
 
 	// ラダープログラムの動作(無限ループ)
-	var i int
-	for { i++ }
-		// 出力dispatcher
+	for {
+		if !ladderrun.LadderPlay(
+			inputLdSlice,			// 入力部ラダースライス
+			outputStateSlice,	// 出力保持スライス
+			vrgpio,						// virtual gpio
+		) {
+			fmt.Println("processing missed.")
+			return
+		}
+	}
 }
 
 
