@@ -17,7 +17,7 @@ func SelfholdingRun() {
 
 	// 1列目
 	// ラダー入力部
-	inputLd1 := []*ldexemodel.InputLdModel{
+	inputLd1 := []*ldexemodel.InputLdModel {
 		{ // ブロック始端
 			NodeName: "block1",
 			NodeType: "blockSp",
@@ -51,14 +51,14 @@ func SelfholdingRun() {
 	}
 
 	// ラダー出力部
-	opKey1 := ldexemodel.OutputKeyModel{
+	opKey1 := ldexemodel.OutputKeyModel {
 		NodeType: "vrio",
 		NodeName: "o1",
 	}
 
 	// 2列目
 	// ラダー入力部
-	inputLd2 := []*ldexemodel.InputLdModel{
+	inputLd2 := []*ldexemodel.InputLdModel {
 		{
 			NodeName: "o1",
 			NodeType: "vrA",
@@ -68,7 +68,7 @@ func SelfholdingRun() {
 	}
 
 	// ラダー出力部
-	opKey2 := ldexemodel.OutputKeyModel{
+	opKey2 := ldexemodel.OutputKeyModel {
 		NodeType: "gpio",
 		NodeName: "Gpio3",
 	}
@@ -90,7 +90,13 @@ func SelfholdingRun() {
 	// ------------------------------------------
 	// マッピングされた出力部からスライスを生成する
 	outputStateSlice := ladderdebug.CreateOutputStateSlice(inputLdSlice)
-	fmt.Println(outputStateSlice)
+
+	// 出力保持スライスの確認
+	fmt.Println("\n出力保持スライス生成直後")
+	fmt.Printf("o1,\nNodeType=%v\nState=%v\n\n",
+		outputStateSlice["o1"].NodeType,
+		outputStateSlice["o1"].State,
+	)
 
 	// ------------------------------------------
 	// 仮想gpio関連
