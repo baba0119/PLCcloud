@@ -2,6 +2,7 @@ package selfholding
 
 import (
 	"PLC/datamodel/ldexemodel"
+	"PLC/plctest"
 	"PLC/processing/gpiooperation/virtualgpio"
 	"PLC/processing/ladderdebug"
 	"fmt"
@@ -71,7 +72,7 @@ func SelfholdingRun() {
 	// ラダー出力部
 	opKey2 := ldexemodel.OutputKeyModel {
 		NodeType: "gpio",
-		NodeName: "Gpio3",
+		NodeName: "Gpio4",
 	}
 
 	// 入力部ラダースライス生成
@@ -110,14 +111,22 @@ func SelfholdingRun() {
 		return
 	}
 	// gpio設定変更確認
+	fmt.Println("virtual gpio 初期状態")
 	virtualgpio.ShowVirtualGpio(vrgpio)
+	fmt.Println()
 
 	// 仮想gpio模擬入力機構
 	// 実行中はコマンドプロンプトからGpioの入力を変更できる
+	// input モードのとこのみ変更可能
+	// ゴルーチンで処理を動かす
+	go plctest.VrgpioSimulated(vrgpio)
 
-	// ラダープログラムの動作(ループ)
+	// ラダープログラムの動作(無限ループ)
+	var i int
+	for { i++ }
 		// 出力dispatcher
 }
+
 
 // 関数に、スライスをそのまま渡すと、この構造体が値コピーされて渡る。
 // 内部にデータへのポインタを持っているので、そのまま渡しても参照先の配列

@@ -69,3 +69,37 @@ func VrgpioOutputChange(pin string, op bool, vrgpio map[string]*vrgpiomodel.VRgp
 
 	return false
 }
+
+// ---------------------------------------------
+// virtual gpio の入力を変更する関数
+//
+// 引数:
+// gpio:		GPIO番号
+// input:		true か false か
+// vrgpio:	vrgpioのポインター
+//
+// 戻り値:bool
+// true:	成功
+// false:	失敗
+//
+// ladderdebug がこの関数を使う
+// ---------------------------------------------
+func VrgpioInputChange(
+	gpio string,
+	input bool,
+	vrgpio map[string]*vrgpiomodel.VRgpio,
+) bool {
+	// gpio が実在するかチェック
+	for i := 0 ; i < 34 ; i++ {
+		str := "Gpio" + strconv.Itoa(i)
+		if gpio == str || vrgpio[str].GpioMode == "input" {
+			vrgpio[gpio] = &vrgpiomodel.VRgpio{
+				GpioMode: vrgpio[gpio].GpioMode,
+				GpioState: input,
+			}
+			return true
+		}
+	}
+
+	return false
+}
