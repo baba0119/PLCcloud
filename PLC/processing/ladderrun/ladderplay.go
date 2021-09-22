@@ -44,6 +44,14 @@ func LadderPlay(
 			}
 			// 出力dispatcher 呼出し
 			fmt.Println(outCome)
+			if !Dispatcher(
+				outCome,
+				ld.OutputKey,
+				opStateSlice,
+				vrgpio,
+			) {
+				return false
+			}
 		}
 	// }
 	return false

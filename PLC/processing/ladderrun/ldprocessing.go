@@ -36,8 +36,7 @@ func BlockInnerProcessing(
 	var BrockOp bool
 	// 行ごとの演算結果
 	var recordOp []bool
-	recordOp = append(recordOp, false)
-	fmt.Println(recordOp)
+	recordOp = append(recordOp, true)
 	// 現在の行のインデックス
 	recordNum := 0
 
@@ -46,7 +45,7 @@ func BlockInnerProcessing(
 
 		// 行の始まりの時の処理
 		if blockLdSlice[i].IsColSp {
-			recordOp = append(recordOp, false)
+			recordOp = append(recordOp, true)
 			recordNum++
 		}
 
@@ -87,13 +86,16 @@ func BlockInnerProcessing(
 		// gpio入力だったら
 		case blockLdSlice[i].NodeType == "gpA":
 			recordOp[recordNum] = recordOp[recordNum] && vrgpio[blockLdSlice[i].NodeName].GpioState
+			// fmt.Printf("%v %v\n", blockLdSlice[i].NodeName, recordOp[recordNum])
 
 		case blockLdSlice[i].NodeType == "gpB":
 			recordOp[recordNum] = recordOp[recordNum] && !vrgpio[blockLdSlice[i].NodeName].GpioState
+			// fmt.Printf("%v %v\n", blockLdSlice[i].NodeName, recordOp[recordNum])
 		}
 	}
 
 	// ブロックの各行どうしの演算
+	fmt.Printf("行終わり %v\n", recordOp)
 	for _, op := range recordOp {
 		BrockOp = BrockOp || op // or演算
 	}

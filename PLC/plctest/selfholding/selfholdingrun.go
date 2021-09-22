@@ -119,7 +119,9 @@ func SelfholdingRun() {
 	if !virtualgpio.VrgpioInputChange("Gpio2", true, vrgpio) {
 		fmt.Println("gpio state changed missed.")
 	}
+	fmt.Println("virtual gpio 状態変更後")
 	virtualgpio.ShowVirtualGpio(vrgpio)
+	fmt.Println()
 
 	// 仮想gpio模擬入力機構
 	// 実行中はコマンドプロンプトからGpioの入力を変更できる
@@ -128,16 +130,15 @@ func SelfholdingRun() {
 	go plctest.VrgpioSimulated(vrgpio)
 
 	// ラダープログラムの動作(無限ループ)
-	// for {
-		if !ladderrun.LadderPlay(
-			inputLdSlice,			// 入力部ラダースライス
-			outputStateSlice,	// 出力保持スライス
-			vrgpio,						// virtual gpio
-		) {
-			fmt.Println("processing missed.")
-			return
-		}
-	// }
+	// ラダープレイの中で無限ループ
+	if !ladderrun.LadderPlay(
+		inputLdSlice,			// 入力部ラダースライス
+		outputStateSlice,	// 出力保持スライス
+		vrgpio,						// virtual gpio
+	) {
+		fmt.Println("processing missed.")
+		return
+	}
 }
 
 
