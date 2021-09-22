@@ -3,6 +3,7 @@ package ladderrun
 import (
 	"PLC/datamodel/ldexemodel"
 	"PLC/datamodel/vrgpiomodel"
+	"fmt"
 )
 
 // ---------------------------------------------
@@ -27,7 +28,23 @@ func LadderPlay(
 	vrgpio				map[string]*vrgpiomodel.VRgpio,
 	// uniquiOpSlice	*ldexemodel.UniqueOutputStateModel,
 ) bool {
-	// ラダープログラム処理 ture or false return
-	// 出力dispatcher 呼出し
-	return true
+	// var ldop bool
+	// for {
+		for _, ld := range inputLdSlice {
+			// ラダープログラム処理 ture or false return
+			outCome, result := BlockInnerProcessing(
+				ld.InputLd[:],
+				opStateSlice,
+				vrgpio,
+			)
+			// もし処理に失敗したら
+			if !result {
+				fmt.Println("processing missed.")
+				return false
+			}
+			// 出力dispatcher 呼出し
+			fmt.Println(outCome)
+		}
+	// }
+	return false
 }

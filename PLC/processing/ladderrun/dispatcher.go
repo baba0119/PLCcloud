@@ -9,8 +9,9 @@ import (
 // この関数から出力処理が始まる
 //
 // 引数:
-// opStateSlice:map[string]*ldexemodel.OutputLdexeModel
-// vrgpio:map[string]*vrgpiomodel.VRgpio
+// ldOutputKey:		OutputKeyModel
+// opStateSlice:	map[string]*ldexemodel.OutputLdexeModel
+// vrgpio:				map[string]*vrgpiomodel.VRgpio
 //
 // 戻り値:bool
 // true:	成功
