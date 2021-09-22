@@ -95,7 +95,6 @@ func BlockInnerProcessing(
 	}
 
 	// ブロックの各行どうしの演算
-	fmt.Printf("行終わり %v\n", recordOp)
 	for _, op := range recordOp {
 		BrockOp = BrockOp || op // or演算
 	}

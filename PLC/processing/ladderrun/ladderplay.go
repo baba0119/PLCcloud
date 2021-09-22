@@ -29,7 +29,7 @@ func LadderPlay(
 	// uniquiOpSlice	*ldexemodel.UniqueOutputStateModel,
 ) bool {
 	// var ldop bool
-	// for {
+	for {
 		for _, ld := range inputLdSlice {
 			// ラダープログラム処理 ture or false return
 			outCome, result := BlockInnerProcessing(
@@ -43,7 +43,6 @@ func LadderPlay(
 				return false
 			}
 			// 出力dispatcher 呼出し
-			fmt.Println(outCome)
 			if !Dispatcher(
 				outCome,
 				ld.OutputKey,
@@ -53,6 +52,5 @@ func LadderPlay(
 				return false
 			}
 		}
-	// }
-	return false
+	}
 }
