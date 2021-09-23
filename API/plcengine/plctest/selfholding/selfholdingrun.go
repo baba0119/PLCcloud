@@ -1,11 +1,10 @@
 package selfholding
 
 import (
-	"PLC/datamodel/ldexemodel"
-	"PLC/plctest"
-	"PLC/processing/gpiooperation/virtualgpio"
-	"PLC/processing/ladderdebug"
-	"PLC/processing/ladderrun"
+	"API/plcengine/plctest"
+	"API/plcengine/processing/gpiooperation/virtualgpio"
+	"API/plcengine/processing/ladderdebug"
+	"API/plcengine/processing/ladderrun"
 	"fmt"
 	"sync"
 )
@@ -17,99 +16,30 @@ func SelfholdingRun() {
 	// ------------------------------------------
 	// 入力部データマッピング
 	// ------------------------------------------
-	// ラダープログラムのマッピング
-
-	// 1列目
-	// ラダー入力部
-	inputLd1 := []*ldexemodel.InputLdModel {
-		{ // ブロック始端
-			NodeName: "block1",
-			NodeType: "blockSp",
-			IsColSp:  false,
-			IsColEp:  false,
-		},
-		{ // Gpio2 a接点
-			NodeName: "Gpio2",
-			NodeType: "gpA",
-			IsColSp:  false,
-			IsColEp:  false,
-		},
-		{ // o1 a接点
-			NodeName: "o1",
-			NodeType: "vrA",
-			IsColSp:  true,
-			IsColEp:  true,
-		},
-		{ // ブロック終端
-			NodeName: "block1",
-			NodeType: "blockEp",
-			IsColSp:  false,
-			IsColEp:  false,
-		},
-		{ // gpio b接点
-			NodeName: "Gpio3",
-			NodeType: "gpB",
-			IsColSp:  false,
-			IsColEp:  false,
-		},
-	}
-
-	// ラダー出力部
-	opKey1 := ldexemodel.OutputKeyModel {
-		NodeType: "vrio",
-		NodeName: "o1",
-	}
-
-	// 2列目
-	// ラダー入力部
-	inputLd2 := []*ldexemodel.InputLdModel {
-		{
-			NodeName: "o1",
-			NodeType: "vrA",
-			IsColSp:  false,
-			IsColEp:  false,
-		},
-	}
-
-	// ラダー出力部
-	opKey2 := ldexemodel.OutputKeyModel {
-		NodeType: "gpio",
-		NodeName: "Gpio4",
-	}
-
 	// 入力部ラダースライス生成
-	inputLdSlice := []*ldexemodel.InputLdexeModel {
-		{
-			InputLd:   inputLd1,
-			OutputKey: opKey1,
-		},
-		{
-			InputLd:   inputLd2,
-			OutputKey: opKey2,
-		},
-	}
+	inputLdSlice := SelfholdingMapping()
 
 	// ------------------------------------------
 	// 出力部データスライスマッピング
 	// ------------------------------------------
-	var ClientMutex struct {
-		sync.Mutex
-	}
 	// マッピングされた出力部からスライスを生成する
 	outputStateSlice := ladderdebug.CreateOutputStateSlice(inputLdSlice)
 
 	// 出力保持スライスの確認
-	ClientMutex.Lock()  // ロック
 	fmt.Println("\n出力保持スライス生成直後")
 	fmt.Printf("o1,\nNodeType=%v\nState=%v\n\n",
 		outputStateSlice["o1"].NodeType,
 		outputStateSlice["o1"].State,
 	)
-	ClientMutex.Unlock() // アンロック
 
 	// ------------------------------------------
 	// 仮想gpio関連
 	// ------------------------------------------
+
+	var ClientMutex struct {
+		sync.Mutex
+	}
+
 	// 仮想gpioマッピング
 	vrgpio := virtualgpio.VirtualGpioMapping()
 

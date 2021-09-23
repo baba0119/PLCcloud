@@ -1,8 +1,8 @@
 package plctest
 
 import (
-	"PLC/datamodel/vrgpiomodel"
-	"PLC/processing/gpiooperation/virtualgpio"
+	"API/plcengine/datamodel/vrgpiomodel"
+	"API/plcengine/processing/gpiooperation/virtualgpio"
 	"fmt"
 )
 
