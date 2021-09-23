@@ -17,7 +17,7 @@ import (
 // 標準入力の値によって処理を分岐する
 // 処理は上記の二つ
 // ===========================================================
-func VrgpioSimulated(vrgpio map[string]*vrgpiomodel.VRgpio) {
+func VrgpioSimulated(done chan bool, vrgpio map[string]*vrgpiomodel.VRgpio) {
 	fmt.Println("仮想gpio模擬入力機構動作開始")
 	var process string
 	var vrpin		string
@@ -41,7 +41,9 @@ func VrgpioSimulated(vrgpio map[string]*vrgpiomodel.VRgpio) {
 				vrgpio,
 			) {
 				fmt.Println("change missed.")
+				done <- false
 			}
+			done <- true
 		}
 	}
 }

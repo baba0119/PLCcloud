@@ -7,6 +7,7 @@ import (
 	"PLC/processing/ladderdebug"
 	"PLC/processing/ladderrun"
 	"fmt"
+	"sync"
 )
 
 // 試運転ではmain関数でこの関数を呼び出す
@@ -91,21 +92,28 @@ func SelfholdingRun() {
 	// ------------------------------------------
 	// 出力部データスライスマッピング
 	// ------------------------------------------
+	var ClientMutex struct {
+		sync.Mutex
+	}
 	// マッピングされた出力部からスライスを生成する
 	outputStateSlice := ladderdebug.CreateOutputStateSlice(inputLdSlice)
 
 	// 出力保持スライスの確認
+	ClientMutex.Lock()  // ロック
 	fmt.Println("\n出力保持スライス生成直後")
 	fmt.Printf("o1,\nNodeType=%v\nState=%v\n\n",
 		outputStateSlice["o1"].NodeType,
 		outputStateSlice["o1"].State,
 	)
+	ClientMutex.Unlock() // アンロック
 
 	// ------------------------------------------
 	// 仮想gpio関連
 	// ------------------------------------------
 	// 仮想gpioマッピング
 	vrgpio := virtualgpio.VirtualGpioMapping()
+
+	ClientMutex.Lock()  // ロック
 	// 仮想gpio setting
 	if !virtualgpio.VrgpioSetting(inputLdSlice, vrgpio) {
 		fmt.Println("gpio setting missed.")
@@ -115,23 +123,19 @@ func SelfholdingRun() {
 	fmt.Println("virtual gpio 初期状態")
 	virtualgpio.ShowVirtualGpio(vrgpio)
 	fmt.Println()
-
-	if !virtualgpio.VrgpioInputChange("Gpio2", true, vrgpio) {
-		fmt.Println("gpio state changed missed.")
-	}
-	fmt.Println("virtual gpio 状態変更後")
-	virtualgpio.ShowVirtualGpio(vrgpio)
-	fmt.Println()
+	ClientMutex.Unlock() // アンロック
 
 	// 仮想gpio模擬入力機構
 	// 実行中はコマンドプロンプトからGpioの入力を変更できる
 	// input モードのとこのみ変更可能
 	// ゴルーチンで処理を動かす
-	go plctest.VrgpioSimulated(vrgpio)
+	done := make(chan bool)
+	go plctest.VrgpioSimulated(done, vrgpio)
 
 	// ラダープログラムの動作(無限ループ)
 	// ラダープレイの中で無限ループ
 	if !ladderrun.LadderPlay(
+		done,							// ゴルーチンチャネル
 		inputLdSlice,			// 入力部ラダースライス
 		outputStateSlice,	// 出力保持スライス
 		vrgpio,						// virtual gpio
@@ -139,6 +143,11 @@ func SelfholdingRun() {
 		fmt.Println("processing missed.")
 		return
 	}
+
+	// エラー状況
+	// plctest.VrgpioSimulated(vrgpio)
+	// ladderrun.LadderPlay()
+	// これらでmapへのアクセスが重複する
 }
 
 

@@ -3,6 +3,7 @@ package virtualgpio
 import (
 	"PLC/datamodel/vrgpiomodel"
 	"strconv"
+	"sync"
 )
 
 // ---------------------------------------------
@@ -20,6 +21,9 @@ import (
 // ladderdebug がこの関数を使う
 // ---------------------------------------------
 func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VRgpio) bool {
+	var ClientMutex struct {
+		sync.Mutex
+	}
 	// モードが正しい値かチェック
 	if mode != "output" && mode != "input" {
 		return false
@@ -29,10 +33,12 @@ func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VR
 	for i := 0 ; i < 34 ; i++ {
 		str := "Gpio" + strconv.Itoa(i)
 		if pin == str {
+			ClientMutex.Lock()  // ロック
 			vrgpio[pin] = &vrgpiomodel.VRgpio{
 				GpioMode: mode,
 				GpioState: vrgpio[pin].GpioState,
 			}
+			ClientMutex.Unlock() // アンロック
 			return true
 		}
 	}
@@ -55,14 +61,20 @@ func VrgpioModeChange(pin string, mode string, vrgpio map[string]*vrgpiomodel.VR
 // ladderdebug がこの関数を使う
 // ---------------------------------------------
 func VrgpioOutputChange(pin string, op bool, vrgpio map[string]*vrgpiomodel.VRgpio) bool {
+	var ClientMutex struct {
+		sync.Mutex
+	}
+
 	// gpio が実在するかチェック
 	for i := 0 ; i < 34 ; i++ {
 		str := "Gpio" + strconv.Itoa(i)
 		if pin == str {
+			ClientMutex.Lock()  // ロック
 			vrgpio[pin] = &vrgpiomodel.VRgpio{
 				GpioMode: vrgpio[pin].GpioMode,
 				GpioState: op,
 			}
+			ClientMutex.Unlock()
 			return true
 		}
 	}
@@ -89,17 +101,33 @@ func VrgpioInputChange(
 	input bool,
 	vrgpio map[string]*vrgpiomodel.VRgpio,
 ) bool {
+	// mapをゴルーチンでそうさするため排他的に
+	// lock/unlockする必要があった
+	var ClientMutex struct {
+		sync.Mutex
+	}
+
 	// gpio が実在するかチェック
 	for i := 0 ; i < 34 ; i++ {
 		str := "Gpio" + strconv.Itoa(i)
+		ClientMutex.Lock()  // ロック
 		if gpio == str || vrgpio[str].GpioMode == "input" {
 			vrgpio[gpio] = &vrgpiomodel.VRgpio{
 				GpioMode: vrgpio[gpio].GpioMode,
 				GpioState: input,
 			}
+			ClientMutex.Unlock() // アンロック
 			return true
 		}
+		ClientMutex.Unlock() // アンロック
 	}
 
 	return false
 }
+
+// 呼出し
+// defer funcname()()
+
+// func funcname() func() {
+//
+// }

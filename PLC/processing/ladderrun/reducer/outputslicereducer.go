@@ -1,6 +1,8 @@
 package reducer
 
-import "PLC/datamodel/ldexemodel"
+import (
+	"PLC/datamodel/ldexemodel"
+)
 
 // 引数として必要な情報
 // - 出力保持スライス

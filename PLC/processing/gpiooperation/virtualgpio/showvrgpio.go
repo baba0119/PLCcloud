@@ -4,16 +4,24 @@ import (
 	"PLC/datamodel/vrgpiomodel"
 	"fmt"
 	"strconv"
+	"sync"
 )
 
 // virtual gpio の中身を表示する
 // 最初はrangeでやったがうまくいかなかった
 // rangeは乱択であり、かつ表示できる要素数に制限があるのかも
 func ShowVirtualGpio(vrgpio map[string]*vrgpiomodel.VRgpio) {
+	var ClientMutex struct {
+		sync.Mutex
+	}
 	for i := 0 ; i < 34 ; i++ {
 		str := "Gpio" + strconv.Itoa(i)
+		ClientMutex.Lock()  // ロック
 		fmt.Printf("%v\t{mode:%v,\tstate:%v}\n",
-			str, vrgpio[str].GpioMode, vrgpio[str].GpioState)
+			str, vrgpio[str].GpioMode,
+			vrgpio[str].GpioState,
+		)
+		ClientMutex.Unlock() // アンロック
 	}
 }
 

@@ -23,6 +23,7 @@ import (
 // false:	失敗
 // ---------------------------------------------
 func LadderPlay(
+	done chan bool,
 	inputLdSlice 	[]*ldexemodel.InputLdexeModel,
 	opStateSlice 	map[string]*ldexemodel.OutputLdexeModel,
 	vrgpio				map[string]*vrgpiomodel.VRgpio,
@@ -30,26 +31,28 @@ func LadderPlay(
 ) bool {
 	// var ldop bool
 	for {
-		for _, ld := range inputLdSlice {
-			// ラダープログラム処理 ture or false return
-			outCome, result := BlockInnerProcessing(
-				ld.InputLd[:],
-				opStateSlice,
-				vrgpio,
-			)
-			// もし処理に失敗したら
-			if !result {
-				fmt.Println("processing missed.")
-				return false
-			}
-			// 出力dispatcher 呼出し
-			if !Dispatcher(
-				outCome,
-				ld.OutputKey,
-				opStateSlice,
-				vrgpio,
-			) {
-				return false
+		if <-done {
+			for _, ld := range inputLdSlice {
+				// ラダープログラム処理 ture or false return
+				outCome, result := BlockInnerProcessing(
+					ld.InputLd[:],
+					opStateSlice,
+					vrgpio,
+				)
+				// もし処理に失敗したら
+				if !result {
+					fmt.Println("processing missed.")
+					return false
+				}
+				// 出力dispatcher 呼出し
+				if !Dispatcher(
+					outCome,
+					ld.OutputKey,
+					opStateSlice,
+					vrgpio,
+				) {
+					return false
+				}
 			}
 		}
 	}

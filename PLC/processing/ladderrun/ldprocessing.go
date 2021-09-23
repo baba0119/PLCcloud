@@ -36,6 +36,7 @@ func BlockInnerProcessing(
 	var BrockOp bool
 	// 行ごとの演算結果
 	var recordOp []bool
+
 	recordOp = append(recordOp, true)
 	// 現在の行のインデックス
 	recordNum := 0
@@ -98,7 +99,6 @@ func BlockInnerProcessing(
 	for _, op := range recordOp {
 		BrockOp = BrockOp || op // or演算
 	}
-
 	return BrockOp, true
 }
 
