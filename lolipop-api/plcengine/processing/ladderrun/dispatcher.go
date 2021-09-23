@@ -1,9 +1,9 @@
 package ladderrun
 
 import (
-	"API/plcengine/datamodel/ldexemodel"
-	"API/plcengine/datamodel/vrgpiomodel"
-	"API/plcengine/processing/ladderrun/reducer"
+	"lolipop-api/plcengine/datamodel/ldexemodel"
+	"lolipop-api/plcengine/datamodel/vrgpiomodel"
+	"lolipop-api/plcengine/processing/ladderrun/reducer"
 	"fmt"
 )
 

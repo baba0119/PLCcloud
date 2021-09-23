@@ -1,7 +1,7 @@
 package ladderdebug
 
 import (
-	"API/plcengine/datamodel/ldexemodel"
+	"lolipop-api/plcengine/datamodel/ldexemodel"
 )
 
 // ---------------------------------------------

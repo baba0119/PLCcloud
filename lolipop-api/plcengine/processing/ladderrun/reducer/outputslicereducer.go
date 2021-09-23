@@ -1,7 +1,7 @@
 package reducer
 
 import (
-	"API/plcengine/datamodel/ldexemodel"
+	"lolipop-api/plcengine/datamodel/ldexemodel"
 )
 
 // 引数として必要な情報

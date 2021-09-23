@@ -1,6 +1,6 @@
 package main
 
-import "API/plcengine/plctest/selfholding"
+import "lolipop-api/plcengine/plctest/selfholding"
 
 func main() {
 	selfholding.SelfholdingRun()

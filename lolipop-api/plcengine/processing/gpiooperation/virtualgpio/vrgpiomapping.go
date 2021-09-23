@@ -1,7 +1,7 @@
 package virtualgpio
 
 import (
-	"API/plcengine/datamodel/vrgpiomodel"
+	"lolipop-api/plcengine/datamodel/vrgpiomodel"
 	"strconv"
 )
 

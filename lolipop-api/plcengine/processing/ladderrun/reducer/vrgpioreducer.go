@@ -1,8 +1,8 @@
 package reducer
 
 import (
-	"API/plcengine/datamodel/vrgpiomodel"
-	"API/plcengine/processing/gpiooperation/virtualgpio"
+	"lolipop-api/plcengine/datamodel/vrgpiomodel"
+	"lolipop-api/plcengine/processing/gpiooperation/virtualgpio"
 	"fmt"
 )
 
