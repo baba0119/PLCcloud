@@ -10,6 +10,9 @@
 
 - TypeScript
 - React(next.js)
+- styled-components
+- context API
+- Redux tool kit
 
 **サーバーサイド(Webアプリ)**
 
