@@ -1,9 +1,6 @@
 # PLCcloud
-<<<<<<< HEAD
+
 エンドポイントのPLCとそれの管理を簡単にするプラットフォーム
-=======
-エンドポイントのPLCとそれの管理を簡単にするプラットフォーム 
->>>>>>> 03e7dafc24195d7b4124eeb2acfaecb5f60ccff2
 
 ## 機能(予定)
 
@@ -33,7 +30,3 @@
 
 - raspberry pi 3 model B+
 - Go
-<<<<<<< HEAD
-
-=======
->>>>>>> 03e7dafc24195d7b4124eeb2acfaecb5f60ccff2
