@@ -27,7 +27,7 @@ func LadderPlay(
 	inputLdSlice 	[]*ldexemodel.InputLdexeModel,
 	opStateSlice 	map[string]*ldexemodel.OutputLdexeModel,
 	vrgpio				map[string]*vrgpiomodel.VRgpio,
-	// uniquiOpSlice	*ldexemodel.UniqueOutputStateModel,
+	// uniqueOpSlice	*ldexemodel.UniqueOutputStateModel,
 ) bool {
 	OpStateSliceCache := make(map[string]*ldexemodel.OutputLdexeModel)
 	vrgpioCache := make(map[string]*vrgpiomodel.VRgpio)
