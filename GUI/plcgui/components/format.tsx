@@ -45,6 +45,9 @@ const MainContentSpace = styled.div`
   width: 60%;
 `;
 
+// ---------------------------------------------
+// Format コンポーネント
+// ---------------------------------------------
 const Format: VFC = () => {
   return (
     <>
