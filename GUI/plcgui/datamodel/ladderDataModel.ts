@@ -10,7 +10,7 @@ export type ladderNodeModel = {
   name: string,
   info: "contact" | "a" | "b" | "relay"
   attr: "timer" | "counter" | ""
-  attrInfo: timerDataModel | counterDataModel
+  attrInfo: timerDataModel | counterDataModel | null
 }
 
 // タイマーの情報格納

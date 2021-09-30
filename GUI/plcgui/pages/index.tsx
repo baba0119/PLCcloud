@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
+import Format from '../components/format'
 
 const Home: NextPage = () => {
   return (
-    <div>
-      あいうえお
-    </div>
+    <>
+      <Format></Format>
+    </>
   )
 }
 
