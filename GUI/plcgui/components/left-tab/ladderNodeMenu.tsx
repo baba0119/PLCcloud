@@ -2,24 +2,15 @@
 import { VFC } from 'react';
 import styled from "styled-components";
 
-import { ladderNodeMenuDataModel, ladderNodeMenuData } from './ladderNodeMenuData';
-
-type Props = { ladderNodeMenuData: ladderNodeMenuDataModel };
-
-// テスト用データ
-// import a from './images/a.png'
-// const testdata: ladderNodeMenuDataModel = {
-//   id: "fjgklsjglsjdklg",
-//   image: a,
-//   alt: "a接点",
-//   control: "a"
-// }
+import { ladderNodeMenuData } from './ladderNodeMenuData';
 
 // スタイル
 // 表示部親要素
 const MenuParent = styled.div`
+  margin-left: auto;
   display: flex;
-  width: 240px;
+  flex-wrap: wrap;
+  width: 248px;
 `;
 
 // ボタンのデザイン
@@ -30,6 +21,9 @@ const NodeButton = styled.button`
   width: 70px;
   height: 70px;
   border-radius: 8px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 10px 10px 0 0;
 `;
 
 //
@@ -39,36 +33,17 @@ const LadderNodeMenu: VFC = () => {
   return (
     <>
       <MenuParent>
-        {() =>
-          ladderNodeMenuData.map(data => (
-            <div key={data.id}>
-              <NodeButton>
-                <img
-                  src={data.image.src}
-                  alt={data.alt}>
-                </img>
-              </NodeButton>
-            </div>
-          ))
-        }
+        {ladderNodeMenuData.map(data => (
+            <NodeButton key={data.id}>
+              <img
+                src={data.image.src}
+                alt={data.alt}>
+              </img>
+            </NodeButton>
+        ))}
       </MenuParent>
     </>
   );
 }
-
-//
-// 各接点のボタンとなるコンポーネント
-//
-
-// const LadderNodeButton: VFC<Props> = ({ ladderNodeMenuData }) => {
-//   return (
-//     <NodeButton>
-//       <img
-//         src={ladderNodeMenuData.image.src}
-//         alt={ladderNodeMenuData.alt}>
-//       </img>
-//     </NodeButton>
-//   )
-// }
 
 export default LadderNodeMenu;
