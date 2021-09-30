@@ -1,5 +1,6 @@
 import { VFC } from 'react';
 import styled from "styled-components";
+import LadderNodeMenu from './left-tab/ladderNodeMenu';
 
 // ---------------------------------------------
 // スタイルの作成
@@ -58,7 +59,9 @@ const Format: VFC = () => {
       </Header>
       <ParentMainContent>
         <ContentSpace>
-          <SideTabSpace>左</SideTabSpace>
+          <SideTabSpace>
+            <LadderNodeMenu/>
+          </SideTabSpace>
           <MainContentSpace>まんなか</MainContentSpace>
           <SideTabSpace>右</SideTabSpace>
         </ContentSpace>
