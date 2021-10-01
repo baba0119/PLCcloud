@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
-import Format from '../components/format'
+import LadderCreateFormat from '../components/LadderCreateFormat'
 
 const Home: NextPage = () => {
   return (
     <>
-      <Format></Format>
+      <LadderCreateFormat/>
     </>
   )
 }

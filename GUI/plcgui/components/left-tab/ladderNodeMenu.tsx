@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { VFC } from 'react';
+import Image from 'next/image';
 import styled from "styled-components";
 
 import { ladderNodeMenuData } from './ladderNodeMenuData';
@@ -8,6 +8,7 @@ import { ladderNodeMenuData } from './ladderNodeMenuData';
 // 表示部親要素
 const MenuParent = styled.div`
   margin-left: auto;
+  padding: 8px 0 8px 0;
   display: flex;
   flex-wrap: wrap;
   width: 248px;
@@ -23,7 +24,10 @@ const NodeButton = styled.button`
   border-radius: 8px;
   text-align: center;
   vertical-align: middle;
-  margin: 16px 10px 0 0;
+  margin: 8px 10px 8px 0;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 //
@@ -35,10 +39,10 @@ const LadderNodeMenu: VFC = () => {
       <MenuParent>
         {ladderNodeMenuData.map(data => (
           <NodeButton key={data.id}>
-            <img
-              src={data.image.src}
+            <Image
+              src={data.image}
               alt={data.alt}>
-            </img>
+            </Image>
           </NodeButton>
         ))}
       </MenuParent>

@@ -1,14 +1,13 @@
 // 縦の接続の表現
-export type colStateModel = {
+type colStateModel = {
   isUpCol: boolean,
   isDownCol: boolean
 }
 
 // ラダーの各接点本体の情報
-export type ladderNodeModel = {
-  id: number,
+type ladderNodeModel = {
   name: string,
-  info: "contact" | "a" | "b" | "relay"
+  info: "contact" | "a" | "b" | "relay" | ""
   attr: "timer" | "counter" | ""
   attrInfo: timerDataModel | counterDataModel | null
 }
@@ -27,4 +26,12 @@ type timerDataModel = {
 type counterDataModel = {
   count: number,
   edge: "rising" | "falling"
+}
+
+// ラダープログラムを格納する構造体
+export type ladderDataModel = {
+  id: string,
+  isProof: boolean,
+  colState: colStateModel,
+  ladderNode: ladderNodeModel
 }
