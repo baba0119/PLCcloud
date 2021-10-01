@@ -53,16 +53,12 @@ const Format: VFC = () => {
   return (
     <>
       <Header>
-        <PageTitle>
-          plc-web-app
-        </PageTitle>
+        <PageTitle>plc-web-app</PageTitle>
       </Header>
       <ParentMainContent>
         <ContentSpace>
-          <SideTabSpace>
-            <LadderNodeMenu/>
-          </SideTabSpace>
-          <MainContentSpace>まんなか</MainContentSpace>
+          <SideTabSpace><LadderNodeMenu/></SideTabSpace>
+          <MainContentSpace>  まんなか</MainContentSpace>
           <SideTabSpace>右</SideTabSpace>
         </ContentSpace>
       </ParentMainContent>

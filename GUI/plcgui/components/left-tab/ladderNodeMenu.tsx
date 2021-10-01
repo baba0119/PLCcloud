@@ -23,7 +23,7 @@ const NodeButton = styled.button`
   border-radius: 8px;
   text-align: center;
   vertical-align: middle;
-  margin: 10px 10px 0 0;
+  margin: 16px 10px 0 0;
 `;
 
 //
@@ -34,12 +34,12 @@ const LadderNodeMenu: VFC = () => {
     <>
       <MenuParent>
         {ladderNodeMenuData.map(data => (
-            <NodeButton key={data.id}>
-              <img
-                src={data.image.src}
-                alt={data.alt}>
-              </img>
-            </NodeButton>
+          <NodeButton key={data.id}>
+            <img
+              src={data.image.src}
+              alt={data.alt}>
+            </img>
+          </NodeButton>
         ))}
       </MenuParent>
     </>
