@@ -34,9 +34,9 @@ const ControlPanel = styled.div`
 `;
 
 // デバッグ開始ボタンのスタイル
-const DebugButton = styled.button`
-  background-color: #1fbb27;
-  color: #d2ffd4;
+const CreateButton = styled.button`
+  background-color: #ff6600;
+  color: #ffecc3;
   height: 36px;
   width: 64px;
   margin: 10px auto;
@@ -52,7 +52,7 @@ const ParentMainContent = styled.div`
   margin: 0;
   width: 100%;
   height: 100%;
-  background-color: #f4f5ff;
+  background-color: #fdfddf;
 `;
 
 // 主となるコンテンツのスペース
@@ -69,28 +69,28 @@ const SideTabSpace = styled.div`
 
 // メインタブのスペース
 const MainContentSpace = styled.div`
-  background-color: #f9faff;
+  background-color: #ffffef;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
 `;
 // ---------------------------------------------
 
-const LadderCreateFormat: VFC = () => {
+const LadderDebugFormat: VFC = () => {
   return (
     <>
       <Header>
         <PageTitle>plc-web-app</PageTitle>
         <ControlPanel>
-          <Link href="/debug" passHref>
-            <DebugButton>
-              debug
-            </DebugButton>
+          <Link href="/" passHref>
+            <CreateButton>
+              create
+            </CreateButton>
           </Link>
         </ControlPanel>
       </Header>
       <ParentMainContent>
         <ContentSpace>
-          <SideTabSpace><LadderNodeMenu/></SideTabSpace>
+          <SideTabSpace></SideTabSpace>
           <MainContentSpace><LadderDisplay/></MainContentSpace>
           <SideTabSpace></SideTabSpace>
         </ContentSpace>
@@ -99,4 +99,4 @@ const LadderCreateFormat: VFC = () => {
   );
 }
 
-export default LadderCreateFormat;
+export default LadderDebugFormat;

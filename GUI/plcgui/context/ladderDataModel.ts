@@ -1,6 +1,6 @@
 // 縦の接続の表現
-type colStateModel = {
-  isUpCol: boolean,
+export type colStateModel = {
+  isUpCol: boolean
   isDownCol: boolean
 }
 
@@ -24,14 +24,20 @@ type timerDataModel = {
 // rising -> 立ち上がり
 // falling -> 立下り
 type counterDataModel = {
-  count: number,
+  count: number
   edge: "rising" | "falling"
 }
 
 // ラダープログラムを格納する構造体
 export type ladderDataModel = {
-  id: string,
-  isProof: boolean,
-  colState: colStateModel,
+  id: string
+  isProof: boolean
+  colState: colStateModel
   ladderNode: ladderNodeModel
+}
+
+// ラダープログラムを格納する構造体 - レコードごとのid追加
+export type ladderRecordDataModel = {
+  id: string
+  ladderData: ladderDataModel[]
 }
