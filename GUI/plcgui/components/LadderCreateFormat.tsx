@@ -1,12 +1,10 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import LadderNodeMenu from './left-tab/ladderNodeMenu';
 import Link from 'next/link'
+import LadderNodeMenu from './left-tab/ladderNodeMenu';
 import LadderDisplay from './ladder-display/ladderDisplay';
 
-// ---------------------------------------------
-// スタイルの作成
-// ---------------------------------------------
+// スタイルの作成 ------------------------------
 // ヘッダー
 const Header = styled.header`
   width: 100%;
@@ -76,10 +74,8 @@ const MainContentSpace = styled.div`
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
 `;
+// ---------------------------------------------
 
-// ---------------------------------------------
-// Format コンポーネント
-// ---------------------------------------------
 const LadderCreateFormat: VFC = () => {
   return (
     <>
