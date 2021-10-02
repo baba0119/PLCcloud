@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import { ladderInitialState } from '../../context/ladderInitialState';
+import { ladderInitialState } from '../../context/create/ladderInitialState';
 import NodeNotProof from './ladderNode';
 
 // ディスプレイ親要素
@@ -30,15 +30,14 @@ const LadderDisplay: VFC = () => {
   return (
     <DisplayParent>
       <LadderDisplayWidth>
-        {ladderInitialState.map((record, y) => (
+        {ladderInitialState.map((record) => (
           <LadderRecordParent key={record.id}>
-            {record.ladderData.map((data, x) => {
+            {record.ladderData.map((data) => {
               if ( !data.isProof ) {
                 return (
                   <NodeNotProof
                     id={data.id}
                     colState={data.colState}
-                    point={{x: x, y: y}}
                   />
                 )
               }

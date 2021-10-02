@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import { colStateModel } from '../../context/ladderDataModel';
+import { colStateModel } from '../../context/create/ladderDataModel';
 
 // -- スタイル --
 // ノードの親要素
@@ -42,14 +42,9 @@ const LadderConnectionLineDown = styled.div`
 `;
 
 // 何もノードがないときの表示
-type Point = {
-  x: number
-  y: number
-}
 type Props = {
   id: string
   colState: colStateModel
-  point: Point
 }
 const NodeNotProof: VFC<Props> = (props) => {
   return (

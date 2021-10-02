@@ -51,13 +51,11 @@ const DebugButton = styled.button`
 const ParentMainContent = styled.div`
   margin: 0;
   width: 100%;
-  height: 100%;
   background-color: #f4f5ff;
 `;
 
 // 主となるコンテンツのスペース
 const ContentSpace = styled.div`
-  width: 100%;
   margin: 0 auto;
   display: flex;
 `;

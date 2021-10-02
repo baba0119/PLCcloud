@@ -32,6 +32,7 @@ type counterDataModel = {
 export type ladderDataModel = {
   id: string
   isProof: boolean
+  isChoice: boolean
   colState: colStateModel
   ladderNode: ladderNodeModel
 }
