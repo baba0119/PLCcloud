@@ -7,7 +7,6 @@ import { ladderNodeMenuData } from './ladderNodeMenuData';
 // スタイル
 // 表示部親要素
 const MenuParent = styled.div`
-  margin-left: auto;
   padding: 8px 0 8px 0;
   display: flex;
   flex-wrap: wrap;

@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
-import LadderCreateFormat from '../components/LadderCreateFormat'
+import Header from '../components/header/header'
+import LadderCreateFormat from '../components/ladder/format/LadderCreateFormat'
 
 const Home: NextPage = () => {
   return (
     <>
+      <Header info="index"/>
       <LadderCreateFormat/>
     </>
   )

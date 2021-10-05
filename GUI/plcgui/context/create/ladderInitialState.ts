@@ -1,5 +1,5 @@
 // uuidを生成する関数のインポート
-import { getUniqueStr} from '../../infrastructure/uuid';
+import { getUniqueStr} from '../../utils/uuid';
 
 import { ladderRecordDataModel } from './ladderDataModel';
 import { ladderDataModel } from './ladderDataModel';
@@ -33,7 +33,7 @@ const ladderInitialStateRecord: ladderDataModel[] = [
   ladderInitialStateNode, // 10
 ]
 
-const ladderRecordData: ladderRecordDataModel = {
+export const ladderRecordData: ladderRecordDataModel = {
   id: getUniqueStr(),
   ladderData: ladderInitialStateRecord
 }

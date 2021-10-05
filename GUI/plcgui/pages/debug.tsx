@@ -1,9 +1,13 @@
 import type { NextPage } from 'next'
-import LadderDebugFormat from '../components/LadderDebugFormat'
+import Header from '../components/header/header'
+import LadderDebugFormat from '../components/ladder/format/LadderDebugFormat'
 
 const Home: NextPage = () => {
   return (
-    <LadderDebugFormat/>
+    <>
+      <Header info="debug"/>
+      <LadderDebugFormat/>
+    </>
   )
 }
 

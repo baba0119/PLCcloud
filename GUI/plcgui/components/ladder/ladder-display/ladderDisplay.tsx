@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import { ladderInitialState } from '../../context/create/ladderInitialState';
-import NodeNotProof from './ladderNode';
+import { ladderInitialState } from '../../../context/create/ladderInitialState';
+import NodeNotProof from './ladderNodes/nodeNotProof';
 
 // ディスプレイ親要素
 const DisplayParent = styled.div`

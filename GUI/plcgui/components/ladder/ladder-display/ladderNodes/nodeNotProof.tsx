@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import { colStateModel } from '../../context/create/ladderDataModel';
+import { colStateModel } from '../../../../context/create/ladderDataModel';
 
 // -- スタイル --
 // ノードの親要素

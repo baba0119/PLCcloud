@@ -1,16 +1,16 @@
 // 画像データ読み込み
-import a from './images/a.png'
-import b from './images/b.png'
-import ConnectLowerBoth from './images/ConnectLowerBoth.png'
-import ConnectLowerLeft from './images/ConnectLowerLeft.png'
-import ConnectLowerRight from './images/ConnectLowerRight.png'
-import ConnectUpperBoth from './images/ConnectUpperBoth.png'
-import ConnectUpperLeft from './images/ConnectUpperLeft.png'
-import ConnectUpperRight from './images/ConnectUpperRight.png'
-import outputPoint from './images/outputPoint.png'
+import a from '../images/a.png'
+import b from '../images/b.png'
+import ConnectLowerBoth from '../images/ConnectLowerBoth.png'
+import ConnectLowerLeft from '../images/ConnectLowerLeft.png'
+import ConnectLowerRight from '../images/ConnectLowerRight.png'
+import ConnectUpperBoth from '../images/ConnectUpperBoth.png'
+import ConnectUpperLeft from '../images/ConnectUpperLeft.png'
+import ConnectUpperRight from '../images/ConnectUpperRight.png'
+import outputPoint from '../images/outputPoint.png'
 
 // uuidを生成する関数のインポート
-import { getUniqueStr} from '../../infrastructure/uuid';
+import { getUniqueStr} from '../../../../utils/uuid';
 
 // 操作の種類
 type controlType =
