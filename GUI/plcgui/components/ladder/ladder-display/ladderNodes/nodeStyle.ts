@@ -7,7 +7,19 @@ export const NodeParentStyle = styled.div`
   height: 120px;
   border-bottom: 1px solid #e9e9e9;
   display: flex;
+  position: relative;
 `;
+
+// ラダー選択中のところの色付け
+export const NodeSelectStyle = styled.div<{isChoice: boolean}>`
+  margin: 0;
+  width: 96px;
+  height: 100%;
+  outline: ${ ({ isChoice }) => isChoice ? "4px solid #fdfddf" : "none"};
+  outline-offset: -4px;
+  position: absolute;
+`;
+// ${ ( isChoice ) => isChoice ? "4px solid #fdfddf" : "none"}
 
 // ラダーの接点の表示スペース
 export const LadderNodePrint = styled.div`

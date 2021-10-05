@@ -2,6 +2,7 @@ import { VFC } from 'react';
 import { colStateModel } from '../../../../context/create/ladderDataModel';
 import {
   NodeParentStyle,
+  NodeSelectStyle,
   LadderNodePrint,
   LadderConnection,
   LadderConnectionLineDown,
@@ -14,10 +15,21 @@ import {
 type Props = {
   id: string
   colState: colStateModel
+  isChoice: boolean
+  x: number
+  y: number
 }
-const NodeNotProof: VFC<Props> = ({id, colState}) => {
+const NodeNotProof: VFC<Props> = ({
+  id,
+  colState,
+  isChoice,
+  x,
+  y
+}) => {
+
   return (
     <NodeParentStyle key={id}>
+      <NodeSelectStyle isChoice={isChoice}/>
       <LadderNodePrint></LadderNodePrint>
       <LadderConnection>
         <LadderConnectionLineUp conn={colState.isUpCol}/>

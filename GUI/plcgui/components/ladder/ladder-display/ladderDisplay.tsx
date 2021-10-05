@@ -30,14 +30,17 @@ const LadderDisplay: VFC = () => {
   return (
     <DisplayParent>
       <LadderDisplayWidth>
-        {ladderInitialState.map((record) => (
+        {ladderInitialState.map((record, y) => (
           <LadderRecordParent key={record.id}>
-            {record.ladderData.map((data) => {
+            {record.ladderData.map((data, x) => {
               if ( !data.isProof ) {
                 return (
                   <NodeNotProof
                     id={data.id}
                     colState={data.colState}
+                    isChoice={data.isChoice}
+                    x={x}
+                    y={y}
                   />
                 )
               }
