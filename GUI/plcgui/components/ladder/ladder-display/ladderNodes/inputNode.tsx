@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { colStateModel } from '../../../../context/create/ladderDataModel';
+import { colStateModel } from '../../../../context/ladderEntity/ladderDataModel';
 import {
   NodeParentStyle,
   NodeSelectStyle,

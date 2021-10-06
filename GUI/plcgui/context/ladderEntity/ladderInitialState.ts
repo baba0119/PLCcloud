@@ -1,5 +1,6 @@
 // uuidを生成する関数のインポート
 import { getUniqueStr} from '../../utils/uuid';
+import { point } from '../create/ladderDisplayContext/ladderContextModel';
 
 import { ladderRecordDataModel } from './ladderDataModel';
 import { ladderDataModel } from './ladderDataModel';
@@ -51,3 +52,13 @@ export const ladderInitialState: ladderRecordDataModel[] = [
   ladderRecordData, // 10
   ladderRecordData  // 11
 ];
+
+export type ladderDisplayInitialStateModel = {
+  ladderRecordData: ladderRecordDataModel[];
+  point: point;
+}
+
+export const ladderDisplayInitialState: ladderDisplayInitialStateModel = {
+  ladderRecordData: ladderInitialState,
+  point: { x: 0, y: 0 }
+}

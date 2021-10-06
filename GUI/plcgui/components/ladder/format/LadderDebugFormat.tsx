@@ -1,5 +1,7 @@
-import { VFC } from 'react';
+import { useContext, VFC } from 'react';
 import styled from "styled-components";
+import { ladderDisplayContext } from '../../../context/create/ladderDisplayContext/ladderContextModel';
+import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContext/ladderDisplayContextProvider';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 
 // スタイルの作成 ------------------------------
@@ -32,14 +34,18 @@ const MainContentSpace = styled.div`
 // ---------------------------------------------
 
 const LadderDebugFormat: VFC = () => {
+  const { displayState, pointSelecter } = useContext(ladderDisplayContext);
+
   return (
     <>
       <ParentMainContent>
-        <ContentSpace>
-          <SideTabSpace></SideTabSpace>
-          <MainContentSpace><LadderDisplay/></MainContentSpace>
-          <SideTabSpace></SideTabSpace>
-        </ContentSpace>
+        <LadderDisplayContextProvider>
+          <ContentSpace>
+            <SideTabSpace></SideTabSpace>
+            <MainContentSpace><LadderDisplay/></MainContentSpace>
+            <SideTabSpace></SideTabSpace>
+          </ContentSpace>
+        </LadderDisplayContextProvider>
       </ParentMainContent>
     </>
   );

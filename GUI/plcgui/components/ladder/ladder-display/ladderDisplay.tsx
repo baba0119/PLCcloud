@@ -1,6 +1,6 @@
-import { VFC } from 'react';
+import { useContext, VFC } from 'react';
 import styled from "styled-components";
-import { ladderInitialState } from '../../../context/create/ladderInitialState';
+import { ladderDisplayContext } from '../../../context/create/ladderDisplayContext/ladderContextModel';
 import NodeNotProof from './ladderNodes/nodeNotProof';
 
 // ディスプレイ親要素
@@ -27,10 +27,12 @@ const LadderRecordParent = styled.div`
 `;
 
 const LadderDisplay: VFC = () => {
+  const { displayState, pointSelecter } = useContext(ladderDisplayContext);
+
   return (
     <DisplayParent>
       <LadderDisplayWidth>
-        {ladderInitialState.map((record, y) => (
+        {displayState.ladderRecordData.map((record, y) => (
           <LadderRecordParent key={record.id}>
             {record.ladderData.map((data, x) => {
               if ( !data.isProof ) {
