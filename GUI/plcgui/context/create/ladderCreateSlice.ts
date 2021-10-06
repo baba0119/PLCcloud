@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderDisplayInitialState } from "../ladderEntity/ladderInitialState";
 import { point } from "./ladderDisplayContext/ladderContextModel";
-import { getUniqueStr } from "../../utils/uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 export const ladderCreateSlice = createSlice({
   name: 'ladderDisplay',
@@ -17,7 +17,7 @@ export const ladderCreateSlice = createSlice({
       let record = state.ladderRecordData[y];
       let node = record.ladderData[x];
       record.ladderData.splice(x, 1, {
-        id: getUniqueStr(),
+        id: uuidv4(),
         isProof: node.isProof,
         isChoice: true,
         colState: node.colState,
@@ -31,7 +31,7 @@ export const ladderCreateSlice = createSlice({
       record = state.ladderRecordData[beforeY];
       node = record.ladderData[beforeX];
       record.ladderData.splice(beforeX, 1, {
-        id: getUniqueStr(),
+        id: uuidv4(),
         isProof: node.isProof,
         isChoice: false,
         colState: node.colState,
