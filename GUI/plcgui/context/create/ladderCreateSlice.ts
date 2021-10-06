@@ -7,6 +7,7 @@ export const ladderCreateSlice = createSlice({
   name: 'ladderDisplay',
   initialState: ladderDisplayInitialState,
   reducers: {
+    // 座標の状態に関わる処理
     pointSelecter: (state, action: PayloadAction<point>) => {
       const x = action.payload.x;
       const y = action.payload.y;

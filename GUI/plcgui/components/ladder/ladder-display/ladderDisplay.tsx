@@ -34,9 +34,16 @@ const LadderDisplay: VFC = () => {
       <LadderDisplayWidth>
         {displayState.ladderRecordData.map((record, y) => (
           <LadderRecordParent key={record.id}>
-            {record.ladderData.map((data, x) => {
-              if ( !data.isProof ) {
-                return (
+            {record.ladderData.map((data, x) => (
+              ( !data.isProof ? (
+                <NodeNotProof
+                  id={data.id}
+                  colState={data.colState}
+                  isChoice={data.isChoice}
+                  x={x}
+                  y={y}
+                />
+              ) : ( data.ladderNode.info === "relay" ? (
                   <NodeNotProof
                     id={data.id}
                     colState={data.colState}
@@ -44,9 +51,18 @@ const LadderDisplay: VFC = () => {
                     x={x}
                     y={y}
                   />
-                )
-              }
-            })}
+                ) : (
+                  <NodeNotProof
+                    id={data.id}
+                    colState={data.colState}
+                    isChoice={data.isChoice}
+                    x={x}
+                    y={y}
+                  />
+
+              )
+              ))
+            ))}
           </LadderRecordParent>
         ))}
       </LadderDisplayWidth>

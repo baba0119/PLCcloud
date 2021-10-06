@@ -21,7 +21,7 @@ type Props = {
   x: number
   y: number
 }
-const InputNode: VFC<Props> = ({
+const OutputNode: VFC<Props> = ({
   id,
   colState,
   isChoice,
@@ -46,4 +46,4 @@ const InputNode: VFC<Props> = ({
   );
 }
 
-export default InputNode
+export default OutputNode
