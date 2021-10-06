@@ -9,7 +9,7 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
   );
 
   const { pointSelecter } = ladderCreateSlice.actions;
-  const action: pointSelectActionModel = {
+  const pointSelect: pointSelectActionModel = {
     pointSelect: (point: point) => dispatch(pointSelecter(point))
   }
 
@@ -17,7 +17,7 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
     <ladderDisplayContext.Provider
       value={{
         displayState: ladderState,
-        pointSelecter: action
+        pointSelecter: pointSelect
       }}
     >
       {children}

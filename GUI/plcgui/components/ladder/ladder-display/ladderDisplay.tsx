@@ -2,7 +2,6 @@ import { useContext, VFC } from 'react';
 import styled from "styled-components";
 import { ladderDisplayContext } from '../../../context/create/ladderDisplayContext/ladderContextModel';
 import NodeNotProof from './ladderNodes/nodeNotProof';
-import OutputNode from './ladderNodes/outputNode';
 
 // ディスプレイ親要素
 const DisplayParent = styled.div`
@@ -37,11 +36,10 @@ const LadderDisplay: VFC = () => {
           <LadderRecordParent key={record.id}>
             {record.ladderData.map((data, x) => (
               ( !data.isProof ? (
-                <OutputNode
+                <NodeNotProof
                   id={data.id}
                   colState={data.colState}
                   isChoice={data.isChoice}
-                  nodeData={data.ladderNode}
                   x={x}
                   y={y}
                 />
