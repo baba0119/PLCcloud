@@ -19,7 +19,6 @@ export const NodeSelectStyle = styled.div<{isChoice: boolean}>`
   outline-offset: -4px;
   position: absolute;
 `;
-// ${ ( isChoice ) => isChoice ? "4px solid #fdfddf" : "none"}
 
 // ラダーの接点の表示スペース
 export const LadderNodePrint = styled.div`
