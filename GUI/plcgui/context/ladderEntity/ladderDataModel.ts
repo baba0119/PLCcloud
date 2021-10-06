@@ -5,7 +5,7 @@ export type colStateModel = {
 }
 
 // ラダーの各接点本体の情報
-type ladderNodeModel = {
+export type ladderNodeModel = {
   name: string,
   info: "contact" | "a" | "b" | "relay" | ""
   attr: "timer" | "counter" | ""
