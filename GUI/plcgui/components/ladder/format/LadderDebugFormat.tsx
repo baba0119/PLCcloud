@@ -1,6 +1,5 @@
-import { useContext, VFC } from 'react';
+import { VFC } from 'react';
 import styled from "styled-components";
-import { ladderDisplayContext } from '../../../context/create/ladderDisplayContext/ladderContextModel';
 import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContext/ladderDisplayContextProvider';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 
@@ -34,8 +33,6 @@ const MainContentSpace = styled.div`
 // ---------------------------------------------
 
 const LadderDebugFormat: VFC = () => {
-  const { displayState, pointSelecter } = useContext(ladderDisplayContext);
-
   return (
     <>
       <ParentMainContent>

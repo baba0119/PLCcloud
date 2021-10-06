@@ -27,7 +27,7 @@ const LadderRecordParent = styled.div`
 `;
 
 const LadderDisplay: VFC = () => {
-  const { displayState, pointSelecter } = useContext(ladderDisplayContext);
+  const { displayState } = useContext(ladderDisplayContext);
 
   return (
     <DisplayParent>

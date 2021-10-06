@@ -1,4 +1,5 @@
-import { VFC } from 'react';
+import { useContext, VFC } from 'react';
+import { ladderDisplayContext } from '../../../../context/create/ladderDisplayContext/ladderContextModel';
 import { colStateModel } from '../../../../context/ladderEntity/ladderDataModel';
 import {
   NodeParentStyle,
@@ -26,9 +27,13 @@ const NodeNotProof: VFC<Props> = ({
   x,
   y
 }) => {
+  const { pointSelecter } = useContext(ladderDisplayContext);
 
   return (
-    <NodeParentStyle key={id}>
+    <NodeParentStyle
+      key={id}
+      onClick={() => pointSelecter.pointSelect({x: x, y: y})}
+    >
       <NodeSelectStyle isChoice={isChoice}/>
       <LadderNodePrint></LadderNodePrint>
       <LadderConnection>
