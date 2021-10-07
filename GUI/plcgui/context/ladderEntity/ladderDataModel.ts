@@ -5,9 +5,10 @@ export type colStateModel = {
 }
 
 // ラダーの各接点本体の情報
+export type inputKinds = "contact" | "a" | "b"
 export type ladderNodeModel = {
   name: string,
-  info: "contact" | "a" | "b" | "relay" | ""
+  info: inputKinds | "relay" | ""
   attr: "timer" | "counter" | ""
   attrInfo: timerDataModel | counterDataModel | null
 }

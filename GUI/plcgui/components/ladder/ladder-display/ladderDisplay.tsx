@@ -1,7 +1,9 @@
 import { useContext, VFC } from 'react';
 import styled from "styled-components";
 import { ladderDisplayContext } from '../../../context/create/ladderDisplayContext/ladderContextModel';
+import InputNode from './ladderNodes/inputNode';
 import NodeNotProof from './ladderNodes/nodeNotProof';
+import OutputNode from './ladderNodes/outputNode';
 
 // ディスプレイ親要素
 const DisplayParent = styled.div`
@@ -44,22 +46,23 @@ const LadderDisplay: VFC = () => {
                   y={y}
                 />
               ) : ( data.ladderNode.info === "relay" ? (
-                  <NodeNotProof
+                  <OutputNode
                     id={data.id}
                     colState={data.colState}
                     isChoice={data.isChoice}
+                    nodeData={data.ladderNode}
                     x={x}
                     y={y}
                   />
                 ) : (
-                  <NodeNotProof
-                    id={data.id}
-                    colState={data.colState}
-                    isChoice={data.isChoice}
-                    x={x}
-                    y={y}
-                  />
-
+                  <InputNode
+                  id={data.id}
+                  colState={data.colState}
+                  isChoice={data.isChoice}
+                  nodeData={data.ladderNode}
+                  x={x}
+                  y={y}
+                />
               )
               ))
             ))}

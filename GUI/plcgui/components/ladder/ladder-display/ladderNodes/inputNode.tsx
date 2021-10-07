@@ -1,6 +1,8 @@
 import { useContext, VFC } from 'react';
 import { ladderDisplayContext } from '../../../../context/create/ladderDisplayContext/ladderContextModel';
-import { colStateModel, ladderDataModel } from '../../../../context/ladderEntity/ladderDataModel';
+import { colStateModel, ladderNodeModel } from '../../../../context/ladderEntity/ladderDataModel';
+import NomalInput from './inputKinds/nomalInput';
+// スタイルの読み込み
 import {
   NodeParentStyle,
   NodeSelectStyle,
@@ -17,7 +19,7 @@ type Props = {
   id: string
   colState: colStateModel
   isChoice: boolean
-  nodeData: ladderDataModel
+  nodeData: ladderNodeModel
   x: number
   y: number
 }
@@ -37,7 +39,12 @@ const InputNode: VFC<Props> = ({
       onClick={() => pointSelecter.pointSelect({x: x, y: y})}
     >
       <NodeSelectStyle isChoice={isChoice}/>
-      <LadderNodePrint></LadderNodePrint>
+      <LadderNodePrint>
+        <NomalInput
+          name={nodeData.name}
+          kinds={nodeData.info}
+        />
+      </LadderNodePrint>
       <LadderConnection>
         <LadderConnectionLineUp conn={colState.isUpCol}/>
         <LadderConnectionLineDown conn={colState.isDownCol}/>
