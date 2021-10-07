@@ -35,9 +35,8 @@ const NodeImage = styled.div`
 `;
 
 //
-// 普通出力ノード
+// 普通入力ノード
 //
-
 type inputNodeKindsModel = {
   [index: string]: {
     src: StaticImageData
