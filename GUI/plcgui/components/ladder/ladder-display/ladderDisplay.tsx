@@ -1,6 +1,6 @@
 import { useContext, VFC } from 'react';
 import styled from "styled-components";
-import { ladderDisplayContext } from '../../../context/create/ladderDisplayContext/ladderDisplayContextModel';
+import { ladderDisplayContext } from '../../../model/ladderDisplayContextModel';
 import InputNode from './ladderNodes/inputNode';
 import NodeNotProof from './ladderNodes/nodeNotProof';
 import OutputNode from './ladderNodes/outputNode';

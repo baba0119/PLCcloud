@@ -4,15 +4,6 @@ export type colStateModel = {
   isDownCol: boolean
 }
 
-// ラダーの各接点本体の情報
-export type KindsModel = "contact" | "a" | "b" | "relay" | ""
-export type ladderNodeModel = {
-  name: string,
-  info: KindsModel
-  attr: "timer" | "counter" | ""
-  attrInfo: timerDataModel | counterDataModel | null
-}
-
 // タイマーの情報格納
 // on -> オンディレイタイマ
 // off -> オフディレイタイマ
@@ -27,6 +18,15 @@ type timerDataModel = {
 type counterDataModel = {
   count: number
   edge: "rising" | "falling"
+}
+
+// ラダーの各接点本体の情報
+export type KindsModel = "contact" | "a" | "b" | "relay" | ""
+export type ladderNodeModel = {
+  name: string,
+  info: KindsModel
+  attr: "timer" | "counter" | ""
+  attrInfo: timerDataModel | counterDataModel | null
 }
 
 // ラダープログラムを格納する構造体

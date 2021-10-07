@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderDisplayInitialState } from "../ladderEntity/ladderInitialState";
-import { point } from "./ladderDisplayContext/ladderDisplayContextModel";
+import { point } from "../../model/ladderDisplayContextModel";
 import { v4 as uuidv4 } from 'uuid';
-import { colPatternModel } from "./ladderNodeMenuContext/NodeMenuContextModel";
-import { KindsModel } from "../ladderEntity/ladderDataModel";
+import { KindsModel } from "../../model/ladderDataModel";
+import { colPatternModel } from "../../model/nodeMenuContextModel";
 
 export const ladderCreateSlice = createSlice({
   name: 'ladderDisplay',

@@ -3,8 +3,8 @@ import Image from 'next/image';
 import styled from "styled-components";
 
 import { ladderNodeMenuData, ladderNodeMenuDataModel } from './ladderNodeMenuData';
-import { colPatternModel, NodeMenuContext } from '../../../../context/create/ladderNodeMenuContext/NodeMenuContextModel';
-import { KindsModel } from '../../../../context/ladderEntity/ladderDataModel';
+import { colPatternModel, NodeMenuContext } from '../../../../model/nodeMenuContextModel';
+import { KindsModel } from '../../../../model/ladderDataModel';
 
 // スタイル
 // 表示部親要素

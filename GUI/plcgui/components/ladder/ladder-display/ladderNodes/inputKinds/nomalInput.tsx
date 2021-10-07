@@ -5,7 +5,7 @@ import styled from "styled-components";
 import a from '../../images/a.png'
 import b from '../../images/b.png'
 import contact from '../../images/contact.png'
-import { inputKinds } from "../../../../../context/ladderEntity/ladderDataModel";
+import { KindsModel } from "../../../../../model/ladderDataModel";
 
 //
 // スタイル
@@ -46,7 +46,7 @@ type inputNodeKindsModel = {
 
 type Props = {
   name: string
-  kinds: inputKinds | "relay" | ""
+  kinds: KindsModel
 }
 const NomalInput: VFC<Props> = ({ name, kinds }) => {
   const inputNodeKinds: inputNodeKindsModel = {};

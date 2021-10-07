@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { ladderDisplayInitialStateModel } from '../../ladderEntity/ladderInitialState';
+import { ladderDisplayInitialStateModel } from '../context/ladderEntity/ladderInitialState';
 
 // 座標を取り扱う型
 export type point = {

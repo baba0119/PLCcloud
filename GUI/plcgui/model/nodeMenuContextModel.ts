@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { KindsModel } from '../../ladderEntity/ladderDataModel';
+import { KindsModel } from './ladderDataModel';
 
 // 縦列接続のパターン
 export type colPatternModel = {

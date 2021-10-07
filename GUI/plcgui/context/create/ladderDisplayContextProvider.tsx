@@ -1,9 +1,9 @@
 import { FC, useReducer } from 'react';
-import { KindsModel } from '../ladderEntity/ladderDataModel';
+import { KindsModel } from '../../model/ladderDataModel';
 import { ladderDisplayInitialState } from '../ladderEntity/ladderInitialState';
 import { ladderCreateSlice } from './ladderCreateSlice';
-import { ladderDisplayContext, point, pointSelectActionModel } from './ladderDisplayContext/ladderDisplayContextModel';
-import { colPatternModel, ladderUpdateActionModel, NodeMenuContext } from './ladderNodeMenuContext/NodeMenuContextModel';
+import { ladderDisplayContext, point, pointSelectActionModel } from '../../model/ladderDisplayContextModel';
+import { colPatternModel, ladderUpdateActionModel, NodeMenuContext } from '../../model/nodeMenuContextModel';
 
 const LadderDisplayContextProvider: FC = ({ children }) => {
   const [ladderState, dispatch] = useReducer(

@@ -12,8 +12,8 @@ import connection from '../images/connection.png'
 
 // uuidを生成する関数のインポート
 import { getUniqueStr} from '../../../../utils/uuid';
-import { colPatternModel } from '../../../../context/create/ladderNodeMenuContext/NodeMenuContextModel'
-import { KindsModel } from '../../../../context/ladderEntity/ladderDataModel'
+import { colPatternModel } from '../../../../model/nodeMenuContextModel'
+import { KindsModel } from '../../../../model/ladderDataModel'
 
 // 操作の種類
 export type ladderNodeMenuDataModel = {

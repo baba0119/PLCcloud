@@ -1,6 +1,6 @@
 import { useContext, VFC } from 'react';
-import { ladderDisplayContext } from '../../../../context/create/ladderDisplayContext/ladderDisplayContextModel';
-import { colStateModel, ladderNodeModel } from '../../../../context/ladderEntity/ladderDataModel';
+import { ladderDisplayContext } from '../../../../model/ladderDisplayContextModel';
+import { colStateModel, ladderNodeModel } from '../../../../model/ladderDataModel';
 import NomalInput from './inputKinds/nomalInput';
 // スタイルの読み込み
 import {
