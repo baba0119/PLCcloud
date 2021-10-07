@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderDisplayInitialState } from "../ladderEntity/ladderInitialState";
-import { point } from "./ladderDisplayContext/ladderContextModel";
+import { point } from "./ladderDisplayContext/ladderDisplayContextModel";
 import { v4 as uuidv4 } from 'uuid';
+import { colPatternModel } from "./ladderNodeMenuContext/NodeMenuContextModel";
+import { KindsModel } from "../ladderEntity/ladderDataModel";
 
 export const ladderCreateSlice = createSlice({
   name: 'ladderDisplay',
@@ -44,6 +46,14 @@ export const ladderCreateSlice = createSlice({
       state.point.y = y;
 
       return state
+    },
+    // ノードの設定
+    nodeUpdate: (state, action: PayloadAction<KindsModel>) => {
+      console.log("nodeUpdate", action.payload);
+    },
+    // 縦列接続の設定
+    colUpdate: (state, action: PayloadAction<colPatternModel>) => {
+      console.log("colUpdate", action.payload);
     }
   }
 });

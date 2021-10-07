@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContext/ladderDisplayContextProvider';
+import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContextProvider';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 
 // スタイルの作成 ------------------------------

@@ -1,5 +1,5 @@
 import { useContext, VFC } from 'react';
-import { ladderDisplayContext } from '../../../../context/create/ladderDisplayContext/ladderContextModel';
+import { ladderDisplayContext } from '../../../../context/create/ladderDisplayContext/ladderDisplayContextModel';
 import { colStateModel, ladderNodeModel } from '../../../../context/ladderEntity/ladderDataModel';
 import {
   NodeParentStyle,

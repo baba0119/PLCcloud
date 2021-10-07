@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import styled from "styled-components";
 import LadderNodeMenu from '../nodeMenuTab/create/ladderNodeMenu';
 import LadderDisplay from '../ladder-display/ladderDisplay';
-import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContext/ladderDisplayContextProvider';
+import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContextProvider';
 
 // スタイルの作成 ------------------------------
 // 親要素として最大幅

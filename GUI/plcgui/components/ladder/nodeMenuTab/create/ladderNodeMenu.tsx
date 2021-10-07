@@ -1,8 +1,10 @@
-import { VFC } from 'react';
+import { useContext, VFC } from 'react';
 import Image from 'next/image';
 import styled from "styled-components";
 
-import { ladderNodeMenuData } from './ladderNodeMenuData';
+import { ladderNodeMenuData, ladderNodeMenuDataModel } from './ladderNodeMenuData';
+import { colPatternModel, NodeMenuContext } from '../../../../context/create/ladderNodeMenuContext/NodeMenuContextModel';
+import { KindsModel } from '../../../../context/ladderEntity/ladderDataModel';
 
 // スタイル
 // 表示部親要素
@@ -37,16 +39,54 @@ const LadderNodeMenu: VFC = () => {
     <>
       <MenuParent>
         {ladderNodeMenuData.map(data => (
-          <NodeButton key={data.id}>
-            <Image
-              src={data.image}
-              alt={data.alt}>
-            </Image>
-          </NodeButton>
+          <div key={data.id}>
+            <MenuNode
+              id={data.id}
+              kinds={data.kinds}
+              image={data.image}
+              alt={data.alt}
+              control={data.control}
+            />
+          </div>
         ))}
       </MenuParent>
     </>
   );
+}
+
+//
+// 各操作を行うボタン
+//
+const MenuNode: VFC<ladderNodeMenuDataModel> = ({
+  kinds,
+  image,
+  alt,
+  control
+}) => {
+  const { nodeUpdate, colUpdate } = useContext(NodeMenuContext);
+  switch ( kinds ) {
+    case "node": {
+      return (
+        <NodeButton onClick={() => nodeUpdate(control as KindsModel)}>
+          <Image
+            src={image}
+            alt={alt}>
+          </Image>
+        </NodeButton>
+      )
+    }
+    case "col": {
+      return (
+        <NodeButton onClick={() => colUpdate(control as colPatternModel)}>
+          <Image
+            src={image}
+            alt={alt}>
+          </Image>
+        </NodeButton>
+      )
+    }
+  }
+
 }
 
 export default LadderNodeMenu;

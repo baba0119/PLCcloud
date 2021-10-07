@@ -1,6 +1,6 @@
 // uuidを生成する関数のインポート
 import { v4 as uuidv4 } from 'uuid';
-import { point } from '../create/ladderDisplayContext/ladderContextModel';
+import { point } from '../create/ladderDisplayContext/ladderDisplayContextModel';
 
 import { ladderRecordDataModel } from './ladderDataModel';
 import { ladderDataModel } from './ladderDataModel';
