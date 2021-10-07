@@ -13,7 +13,7 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
   const { pointSelecter, nodeUpdate, colUpdate } = ladderCreateSlice.actions;
 
   const ladderUpdateAction: ladderUpdateActionModel = {
-    nodeUpdate: (kinds: string) => dispatch(nodeUpdate(kinds)),
+    nodeUpdate: (kinds: KindsModel) => dispatch(nodeUpdate(kinds)),
     colUpdate: (colPattern: colPatternModel) => dispatch(colUpdate(colPattern))
   }
 
