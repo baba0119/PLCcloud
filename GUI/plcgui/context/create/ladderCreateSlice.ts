@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderDisplayInitialState } from "../ladderEntity/ladderInitialState";
 import { point } from "../../model/ladderDisplayContextModel";
-import { v4 as uuidv4 } from 'uuid';
 import { KindsModel } from "../../model/ladderDataModel";
 import { colPatternModel } from "../../model/nodeMenuContextModel";
 import { pointSelect } from "./reducers/pointSelect";
@@ -25,7 +24,7 @@ export const ladderCreateSlice = createSlice({
     nodeUpdate: (state, action: PayloadAction<KindsModel>) => {
       console.log("nodeUpdate", action.payload);
 
-      // 座標の指定 (relayの場合一番左)
+      // 座標の指定 (relayの場合一番右)
       if ( action.payload === "relay" ) {
         state = pointSelect(state, {x: 9, y: state.point.y});
       }
@@ -42,6 +41,11 @@ export const ladderCreateSlice = createSlice({
       ladderData[x].isProof = true;
 
       console.log(action.payload);
+      if ( x < 9 ) {
+        state = pointSelect(state, {x: x+1, y: y})
+      } else {
+        state = pointSelect(state, {x: 0, y: y+1})
+      }
 
       return state;
     },

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LadderNodeMenu from '../nodeMenuTab/create/ladderNodeMenu';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContextProvider';
+import NodeInfoTab from '../nodeInfoTab/nodeInfo';
 
 // スタイルの作成 ------------------------------
 // 親要素として最大幅
@@ -40,7 +41,7 @@ const LadderCreateFormat: VFC = () => {
           <ContentSpace>
             <SideTabSpace><LadderNodeMenu/></SideTabSpace>
             <MainContentSpace><LadderDisplay/></MainContentSpace>
-            <SideTabSpace></SideTabSpace>
+            <SideTabSpace><NodeInfoTab/></SideTabSpace>
           </ContentSpace>
         </LadderDisplayContextProvider>
       </ParentMainContent>

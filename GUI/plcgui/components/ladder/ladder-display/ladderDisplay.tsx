@@ -30,7 +30,6 @@ const LadderRecordParent = styled.div`
 
 const LadderDisplay: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
-  console.log(displayState);
 
   return (
     <DisplayParent>
@@ -57,14 +56,14 @@ const LadderDisplay: VFC = () => {
                   />
                 ) : (
                   <InputNode
-                  id={data.id}
-                  colState={data.colState}
-                  isChoice={data.isChoice}
-                  nodeData={data.ladderNode}
-                  x={x}
-                  y={y}
-                />
-              )
+                    id={data.id}
+                    colState={data.colState}
+                    isChoice={data.isChoice}
+                    nodeData={data.ladderNode}
+                    x={x}
+                    y={y}
+                  />
+                )
               ))
             ))}
           </LadderRecordParent>
