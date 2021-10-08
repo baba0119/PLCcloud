@@ -60,27 +60,90 @@ export const ladderCreateSlice = createSlice({
             case "up" : {
               state.
               ladderRecordData[y].
-              ladderData[x].colState = {
-                isUpCol: true,
-                isDownCol: false
-              }
+              ladderData[x].colState.isUpCol = true;
               state.
               ladderRecordData[y-1].
-              ladderData[x].colState = {
-                isUpCol: false,
-                isDownCol: true
-              }
+              ladderData[x].colState.isDownCol = true;
+
+              break
             }
             case "low" : {
+              state.
+              ladderRecordData[y].
+              ladderData[x].colState.isDownCol = true;
+              state.
+              ladderRecordData[y+1].
+              ladderData[x].colState.isUpCol = true;
 
+              break
             }
           }
+
+          break;
         }
         case "left": {
+          switch ( action.payload.col ) {
+            case "up" : {
+              state.
+              ladderRecordData[y].
+              ladderData[x-1].colState.isUpCol = true;
+              state.
+              ladderRecordData[y-1].
+              ladderData[x-1].colState.isDownCol = true;
 
+              break
+            }
+            case "low" : {
+              state.
+              ladderRecordData[y].
+              ladderData[x-1].colState.isDownCol = true;
+              state.
+              ladderRecordData[y+1].
+              ladderData[x-1].colState.isUpCol = true;
+
+              break
+            }
+          }
+
+          break;
         }
         case "both": {
+          switch ( action.payload.col ) {
+            case "up" : {
+              state.
+              ladderRecordData[y].
+              ladderData[x].colState.isUpCol = true;
+              state.
+              ladderRecordData[y-1].
+              ladderData[x].colState.isDownCol = true;
+              state.
+              ladderRecordData[y].
+              ladderData[x-1].colState.isUpCol = true;
+              state.
+              ladderRecordData[y-1].
+              ladderData[x-1].colState.isDownCol = true;
 
+              break
+            }
+            case "low" : {
+              state.
+              ladderRecordData[y].
+              ladderData[x].colState.isDownCol = true
+              state.
+              ladderRecordData[y+1].
+              ladderData[x].colState.isUpCol = true;
+              state.
+              ladderRecordData[y].
+              ladderData[x-1].colState.isDownCol = true;
+              state.
+              ladderRecordData[y+1].
+              ladderData[x-1].colState.isUpCol = true;
+
+              break;
+            }
+          }
+
+          break;
         }
       }
 
