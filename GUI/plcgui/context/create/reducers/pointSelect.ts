@@ -20,6 +20,10 @@ export const pointSelect = (state: any, point: point) => {
   const beforeX = state.point.x;
   const beforeY = state.point.y;
 
+  if ( beforeX === x && beforeY === y ) {
+    return state;
+  }
+
   record = state.ladderRecordData[beforeY];
   node = record.ladderData[beforeX];
   record.ladderData.splice(beforeX, 1, {
