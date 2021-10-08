@@ -108,7 +108,7 @@ export const ladderNodeMenuData: ladderNodeMenuDataModel[] = [
   },
   {
     id: getUniqueStr(),
-    kinds: "col",
+    kinds: "node",
     image: connection,
     alt: "横に接続",
     control: "contact"

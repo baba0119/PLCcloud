@@ -23,7 +23,7 @@ type counterDataModel = {
 // ラダーの各接点本体の情報
 export type KindsModel = "contact" | "a" | "b" | "relay" | ""
 export type ladderNodeModel = {
-  name: string,
+  name: string
   info: KindsModel
   attr: "timer" | "counter" | ""
   attrInfo: timerDataModel | counterDataModel | null

@@ -30,6 +30,7 @@ const LadderRecordParent = styled.div`
 
 const LadderDisplay: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
+  console.log(displayState);
 
   return (
     <DisplayParent>
@@ -45,7 +46,7 @@ const LadderDisplay: VFC = () => {
                   x={x}
                   y={y}
                 />
-              ) : ( data.ladderNode.info === "relay" ? (
+              ) : ( data.ladderNode.info === 'relay' ? (
                   <OutputNode
                     id={data.id}
                     colState={data.colState}
