@@ -4,13 +4,14 @@ import { ladderDisplayInitialState } from '../ladderEntity/ladderInitialState';
 import { ladderCreateSlice } from './ladderCreateSlice';
 import { ladderDisplayContext, point, pointSelectActionModel } from '../../model/ladderDisplayContextModel';
 import { colPatternModel, ladderUpdateActionModel, NodeMenuContext } from '../../model/nodeMenuContextModel';
+import { colSettingModel, NodeInfoContext, nodeInfoUpdateModel } from '../../model/nodeInfoContextModel';
 
 const LadderDisplayContextProvider: FC = ({ children }) => {
   const [ladderState, dispatch] = useReducer(
     ladderCreateSlice.reducer, ladderDisplayInitialState
   );
 
-  const { pointSelecter, nodeUpdate, colUpdate } = ladderCreateSlice.actions;
+  const { pointSelecter, nodeUpdate, colUpdate, colSetting, nodeNameUpdate } = ladderCreateSlice.actions;
 
   const ladderUpdateAction: ladderUpdateActionModel = {
     nodeUpdate: (kinds: KindsModel) => dispatch(nodeUpdate(kinds)),
@@ -19,6 +20,11 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
 
   const pointSelect: pointSelectActionModel = {
     pointSelect: (point: point) => dispatch(pointSelecter(point))
+  }
+
+  const nodeInfoUpdate: nodeInfoUpdateModel = {
+    nameChange: (name: string) => dispatch(nodeNameUpdate(name)),
+    colSetting: (colSettingInfo: colSettingModel) => dispatch(colSetting(colSettingInfo))
   }
 
   return (
@@ -34,7 +40,14 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
           pointSelecter: pointSelect
         }}
       >
-        {children}
+        <NodeInfoContext.Provider
+          value={{
+            nameChange: nodeInfoUpdate.nameChange,
+            colSetting: nodeInfoUpdate.colSetting
+          }}
+        >
+          {children}
+        </NodeInfoContext.Provider>
       </ladderDisplayContext.Provider>
     </NodeMenuContext.Provider>
   );

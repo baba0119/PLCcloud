@@ -5,6 +5,8 @@ import { KindsModel } from "../../model/ladderDataModel";
 import { colPatternModel } from "../../model/nodeMenuContextModel";
 import { pointSelect } from "./reducers/pointSelect";
 import { colStateSet } from "./reducers/colStateSet";
+import { colSettingModel } from "../../model/nodeInfoContextModel";
+import { colSetting } from "./reducers/colSetting";
 
 export const ladderCreateSlice = createSlice({
   name: 'ladderDisplay',
@@ -22,8 +24,6 @@ export const ladderCreateSlice = createSlice({
     },
     // ノードの設定
     nodeUpdate: (state, action: PayloadAction<KindsModel>) => {
-      console.log("nodeUpdate", action.payload);
-
       // 座標の指定 (relayの場合一番右)
       if ( action.payload === "relay" ) {
         state = pointSelect(state, {x: 9, y: state.point.y});
@@ -51,9 +51,19 @@ export const ladderCreateSlice = createSlice({
     },
     // 縦列接続の設定
     colUpdate: (state, action: PayloadAction<colPatternModel>) => {
-      console.log("colUpdate", action.payload);
-
       return colStateSet(state, action);
+    },
+    // node name の変更
+    nodeNameUpdate: (state, action: PayloadAction<string>) => {
+      const x = state.point.x;
+      const y = state.point.y;
+
+      state.ladderRecordData[y].ladderData[x].ladderNode.name = action.payload;
+
+      return state;
+    },
+    colSetting: (state, action: PayloadAction<colSettingModel>) => {
+      return colSetting(state, action)
     }
   }
 });
