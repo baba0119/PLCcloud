@@ -11,7 +11,7 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
     ladderCreateSlice.reducer, ladderDisplayInitialState
   );
 
-  const { pointSelecter, nodeUpdate, colUpdate, colSetting, nodeNameUpdate } = ladderCreateSlice.actions;
+  const { pointSelecter, nodeUpdate, colUpdate, colSetting, nodeNameUpdate, nodeDelete } = ladderCreateSlice.actions;
 
   const ladderUpdateAction: ladderUpdateActionModel = {
     nodeUpdate: (kinds: KindsModel) => dispatch(nodeUpdate(kinds)),
@@ -24,7 +24,8 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
 
   const nodeInfoUpdate: nodeInfoUpdateModel = {
     nameChange: (name: string) => dispatch(nodeNameUpdate(name)),
-    colSetting: (colSettingInfo: colSettingModel) => dispatch(colSetting(colSettingInfo))
+    colSetting: (colSettingInfo: colSettingModel) => dispatch(colSetting(colSettingInfo)),
+    nodeDelete: () => dispatch(nodeDelete())
   }
 
   return (
@@ -43,7 +44,8 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
         <NodeInfoContext.Provider
           value={{
             nameChange: nodeInfoUpdate.nameChange,
-            colSetting: nodeInfoUpdate.colSetting
+            colSetting: nodeInfoUpdate.colSetting,
+            nodeDelete: nodeInfoUpdate.nodeDelete
           }}
         >
           {children}

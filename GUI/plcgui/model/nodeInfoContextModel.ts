@@ -14,6 +14,7 @@ export type colSettingModel = {
 export type nodeInfoUpdateModel = {
   nameChange: (name: string) => void;
   colSetting: (colSettingInfo: colSettingModel) => void;
+  nodeDelete: () => void;
 }
 
 export const NodeInfoContext = createContext<nodeInfoUpdateModel>({} as nodeInfoUpdateModel)

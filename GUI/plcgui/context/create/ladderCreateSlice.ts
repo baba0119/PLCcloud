@@ -64,6 +64,18 @@ export const ladderCreateSlice = createSlice({
     },
     colSetting: (state, action: PayloadAction<colSettingModel>) => {
       return colSetting(state, action)
+    },
+    nodeDelete: (state) => {
+      const x = state.point.x;
+      const y = state.point.y;
+
+      state.ladderRecordData[y].ladderData[x].ladderNode.name = "";
+      state.ladderRecordData[y].ladderData[x].ladderNode.info = "";
+      state.ladderRecordData[y].ladderData[x].ladderNode.attr = "";
+      state.ladderRecordData[y].ladderData[x].ladderNode.attrInfo = null;
+      state.ladderRecordData[y].ladderData[x].isProof = false;
+
+      return state;
     }
   }
 });

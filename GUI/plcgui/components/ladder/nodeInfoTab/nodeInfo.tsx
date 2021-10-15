@@ -1,5 +1,7 @@
-import { VFC } from "react";
+import { useContext, VFC } from "react";
 import styled from "styled-components";
+import { ladderDisplayContext } from "../../../model/ladderDisplayContextModel";
+import { NodeInfoContext } from "../../../model/nodeInfoContextModel";
 import ColConnectSetting from "./nodeInfoParts/colConnectSetting";
 import NodeNameInput from "./nodeInfoParts/nodeNameInput";
 
@@ -25,9 +27,44 @@ const NodeInfoTab: VFC = () => {
         <NodeNameInput/>
         <Underline/>
         <ColConnectSetting/>
+        <Underline/>
+        <NodeDeleteControl/>
       </NodeInfoBody>
     </>
   )
+}
+
+const DeleteButtonArea = styled.div`
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const NodeDeleteTitle = styled.h3`
+  color: #4e4e4e;
+  font-size: 14px;
+  margin: 8px 0 0 0;
+`;
+
+const NodeDeleteButton = styled.button`
+
+`;
+
+const NodeDeleteControl: VFC = () => {
+  const { nodeDelete } = useContext(NodeInfoContext);
+
+  return (
+    <>
+      <NodeDeleteTitle>接点の削除</NodeDeleteTitle>
+      <DeleteButtonArea>
+        <NodeDeleteButton onClick={() => nodeDelete()}>
+          Delete
+        </NodeDeleteButton>
+      </DeleteButtonArea>
+    </>
+  );
 }
 
 export default NodeInfoTab
