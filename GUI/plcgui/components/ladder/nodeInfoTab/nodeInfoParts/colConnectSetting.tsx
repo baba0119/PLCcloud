@@ -25,9 +25,9 @@ const ColConnectSetting: VFC = () => {
     <>
       <ColSetTitle>接点の接続</ColSetTitle>
       <ColSetDisplayArea>
-        <ColSettingPanel side="right"></ColSettingPanel>
-        <ColStateDisplay></ColStateDisplay>
         <ColSettingPanel side="left"></ColSettingPanel>
+        <ColStateDisplay></ColStateDisplay>
+        <ColSettingPanel side="right"></ColSettingPanel>
       </ColSetDisplayArea>
     </>
   )

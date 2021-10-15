@@ -1,6 +1,10 @@
 import { createContext } from 'react';
 import { colPatternModel } from './nodeMenuContextModel';
 
+// type colPatternModel = {
+//   around: "right" | "left" | "both";
+//   col: "up" | "low";
+// }
 export type colSettingModel = {
   colPattern: colPatternModel;
   isCol: boolean;
