@@ -4,6 +4,7 @@ import { colSettingModel } from "../../../model/nodeInfoContextModel";
 export const colSetting = (state: any, action: PayloadAction<colSettingModel>) => {
   const x = state.point.x;
   const y = state.point.y;
+  const isColState = action.payload.isCol;
 
   // 入力パターン
   // around: "right" | "left" | "both";
@@ -14,20 +15,20 @@ export const colSetting = (state: any, action: PayloadAction<colSettingModel>) =
         case "up" : {
           state.
           ladderRecordData[y].
-          ladderData[x].colState.isUpCol = true;
+          ladderData[x].colState.isUpCol = isColState;
           state.
           ladderRecordData[y-1].
-          ladderData[x].colState.isDownCol = true;
+          ladderData[x].colState.isDownCol = isColState;
 
           break
         }
         case "low" : {
           state.
           ladderRecordData[y].
-          ladderData[x].colState.isDownCol = true;
+          ladderData[x].colState.isDownCol = isColState;
           state.
           ladderRecordData[y+1].
-          ladderData[x].colState.isUpCol = true;
+          ladderData[x].colState.isUpCol = isColState;
 
           break
         }
@@ -40,20 +41,20 @@ export const colSetting = (state: any, action: PayloadAction<colSettingModel>) =
         case "up" : {
           state.
           ladderRecordData[y].
-          ladderData[x-1].colState.isUpCol = true;
+          ladderData[x-1].colState.isUpCol = isColState;
           state.
           ladderRecordData[y-1].
-          ladderData[x-1].colState.isDownCol = true;
+          ladderData[x-1].colState.isDownCol = isColState;
 
           break
         }
         case "low" : {
           state.
           ladderRecordData[y].
-          ladderData[x-1].colState.isDownCol = true;
+          ladderData[x-1].colState.isDownCol = isColState;
           state.
           ladderRecordData[y+1].
-          ladderData[x-1].colState.isUpCol = true;
+          ladderData[x-1].colState.isUpCol = isColState;
 
           break
         }
@@ -66,32 +67,32 @@ export const colSetting = (state: any, action: PayloadAction<colSettingModel>) =
         case "up" : {
           state.
           ladderRecordData[y].
-          ladderData[x].colState.isUpCol = true;
+          ladderData[x].colState.isUpCol = isColState;
           state.
           ladderRecordData[y-1].
-          ladderData[x].colState.isDownCol = true;
+          ladderData[x].colState.isDownCol = isColState;
           state.
           ladderRecordData[y].
-          ladderData[x-1].colState.isUpCol = true;
+          ladderData[x-1].colState.isUpCol = isColState;
           state.
           ladderRecordData[y-1].
-          ladderData[x-1].colState.isDownCol = true;
+          ladderData[x-1].colState.isDownCol = isColState;
 
           break
         }
         case "low" : {
           state.
           ladderRecordData[y].
-          ladderData[x].colState.isDownCol = true
+          ladderData[x].colState.isDownCol = isColState
           state.
           ladderRecordData[y+1].
-          ladderData[x].colState.isUpCol = true;
+          ladderData[x].colState.isUpCol = isColState;
           state.
           ladderRecordData[y].
-          ladderData[x-1].colState.isDownCol = true;
+          ladderData[x-1].colState.isDownCol = isColState;
           state.
           ladderRecordData[y+1].
-          ladderData[x-1].colState.isUpCol = true;
+          ladderData[x-1].colState.isUpCol = isColState;
 
           break;
         }

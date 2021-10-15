@@ -10,12 +10,12 @@ const NodeNameTitle = styled.h3`
 `;
 
 const NodeNameForm = styled.input`
-
+  color: #4e4e4e;
 `;
 
 const NodeNameInput: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
-  const { nameChange, colSetting } = useContext(NodeInfoContext)
+  const { nameChange } = useContext(NodeInfoContext)
 
   const x = displayState.point.x;
   const y = displayState.point.y;
