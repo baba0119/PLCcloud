@@ -1,6 +1,6 @@
 import { useContext, VFC } from 'react';
 import styled from "styled-components";
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { ladderDisplayContext } from '../../model/ladderDisplayContextModel';
 import { localurl } from '../../utils/url';
 
@@ -20,9 +20,13 @@ const DebugButtonStyle = styled.button`
 
 const DebugButton: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
+  const router = useRouter()
 
   const DebugReqest = () => {
+    // データの解析・サーバーで読めるよう編集
     console.log(JSON.stringify(displayState.ladderRecordData));
+
+    // httpリクエスト
     fetch(localurl(), {
       method: 'post',
       headers: {
@@ -30,6 +34,9 @@ const DebugButton: VFC = () => {
       },
       body: JSON.stringify(displayState.point)
     })
+
+    // httpの通信によってページ遷移
+    router.replace('/debug')
   }
 
   return (
