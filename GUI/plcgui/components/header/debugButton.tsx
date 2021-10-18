@@ -1,6 +1,8 @@
-import { VFC } from 'react';
+import { useContext, VFC } from 'react';
 import styled from "styled-components";
 import Link from 'next/link'
+import { ladderDisplayContext } from '../../model/ladderDisplayContextModel';
+import { localurl } from '../../utils/url';
 
 // デバッグ開始ボタンのスタイル
 const DebugButtonStyle = styled.button`
@@ -17,13 +19,27 @@ const DebugButtonStyle = styled.button`
 `;
 
 const DebugButton: VFC = () => {
+  const { displayState } = useContext(ladderDisplayContext);
+
+  const DebugReqest = () => {
+    console.log(JSON.stringify(displayState.ladderRecordData));
+    fetch(localurl(), {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(displayState.point)
+    })
+  }
+
   return (
-    <Link href="/debug" passHref>
-      <DebugButtonStyle>
-        debug
-      </DebugButtonStyle>
-    </Link>
+    <DebugButtonStyle onClick={DebugReqest}>
+      debug
+    </DebugButtonStyle>
   )
 }
+
+// <Link href="/debug" passHref>
+// <Link/>
 
 export default DebugButton

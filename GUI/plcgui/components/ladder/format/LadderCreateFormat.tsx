@@ -4,6 +4,7 @@ import LadderNodeMenu from '../nodeMenuTab/create/ladderNodeMenu';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContextProvider';
 import NodeInfoTab from '../nodeInfoTab/nodeInfo';
+import Header from '../../header/header';
 
 // スタイルの作成 ------------------------------
 // 親要素として最大幅
@@ -36,15 +37,16 @@ const MainContentSpace = styled.div`
 const LadderCreateFormat: VFC = () => {
   return (
     <>
-      <ParentMainContent>
-        <LadderDisplayContextProvider>
+      <LadderDisplayContextProvider>
+        <Header info="index"/>
+        <ParentMainContent>
           <ContentSpace>
             <SideTabSpace><LadderNodeMenu/></SideTabSpace>
             <MainContentSpace><LadderDisplay/></MainContentSpace>
             <SideTabSpace><NodeInfoTab/></SideTabSpace>
           </ContentSpace>
-        </LadderDisplayContextProvider>
-      </ParentMainContent>
+        </ParentMainContent>
+      </LadderDisplayContextProvider>
     </>
   );
 }

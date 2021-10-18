@@ -1,6 +1,5 @@
 import { useContext, VFC } from "react";
 import styled from "styled-components";
-import { ladderDisplayContext } from "../../../model/ladderDisplayContextModel";
 import { NodeInfoContext } from "../../../model/nodeInfoContextModel";
 import ColConnectSetting from "./nodeInfoParts/colConnectSetting";
 import NodeNameInput from "./nodeInfoParts/nodeNameInput";
