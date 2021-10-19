@@ -1,6 +1,7 @@
 import { VFC } from 'react';
 import styled from "styled-components";
 import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContextProvider';
+import LadderDebugContextProvider from '../../../context/debug/ladderDebugContextProvider';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 
 // スタイルの作成 ------------------------------
@@ -36,13 +37,13 @@ const LadderDebugFormat: VFC = () => {
   return (
     <>
       <ParentMainContent>
-        <LadderDisplayContextProvider>
+        <LadderDebugContextProvider>
           <ContentSpace>
             <SideTabSpace></SideTabSpace>
             <MainContentSpace><LadderDisplay/></MainContentSpace>
             <SideTabSpace></SideTabSpace>
           </ContentSpace>
-        </LadderDisplayContextProvider>
+        </LadderDebugContextProvider>
       </ParentMainContent>
     </>
   );

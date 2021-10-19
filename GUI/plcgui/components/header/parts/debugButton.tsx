@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRouter } from 'next/router'
 import { ladderDisplayContext } from '../../../model/ladderDisplayContextModel';
 import { localurl } from '../../../utils/url';
-import { ladderAnalysis } from '../../../utils/ladderAnalysis';
+import { ladderRecordDataModel } from '../../../model/ladderDataModel';
 
 // デバッグ開始ボタンのスタイル
 const DebugButtonStyle = styled.button`
@@ -19,26 +19,31 @@ const DebugButtonStyle = styled.button`
   }
 `;
 
+type reqBody = {
+  ladder: ladderRecordDataModel[]
+}
+
 const DebugButton: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
   const router = useRouter()
 
   const DebugReqest = () => {
     // データの解析・サーバーで読めるよう編集
-    const convertLadder = ladderAnalysis(displayState.ladderRecordData);
-    console.log(convertLadder);
+    const Ladder: reqBody = {
+      ladder: displayState.ladderRecordData
+    }
 
     // jsonの形式でデータを保存
     sessionStorage.setItem('ladderData', JSON.stringify(displayState.ladderRecordData));
 
     // httpリクエスト
-    // fetch(localurl(), {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(convertLadder)
-    // })
+    fetch(localurl(), {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(Ladder)
+    })
 
     // リダイレクト
     router.push('/debug');
