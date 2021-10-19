@@ -1,5 +1,7 @@
-import { useContext, VFC } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState, VFC } from 'react';
 import styled from "styled-components";
+import { ladderDisplayInitialState, ladderDisplayInitialStateModel } from '../../../context/ladderEntity/ladderInitialState';
+import { ladderRecordDataModel } from '../../../model/ladderDataModel';
 import { ladderDisplayContext } from '../../../model/ladderDisplayContextModel';
 import InputNode from './ladderNodes/inputNode';
 import NodeNotProof from './ladderNodes/nodeNotProof';
@@ -29,7 +31,22 @@ const LadderRecordParent = styled.div`
 `;
 
 const LadderDisplay: VFC = () => {
-  const { displayState } = useContext(ladderDisplayContext);
+  const { displayState, ladderDisplayAction } = useContext(ladderDisplayContext);
+
+  // 一番最初に session storage の確認 データ取り出し
+  useEffect(() => {
+    const ladderData: ladderRecordDataModel[] = JSON.parse(sessionStorage.getItem('ladderData') as string) as ladderRecordDataModel[];
+    if (sessionStorage.getItem('ladderData')) {
+      ladderDisplayAction.ladderSet(ladderData);
+    } else {
+      ladderDisplayAction.ladderSet(ladderDisplayInitialState.ladderRecordData);
+    }
+
+    // sessionstorage データ確認
+    // console.log(JSON.parse(sessionStorage.getItem('ladderData') as string));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <DisplayParent>

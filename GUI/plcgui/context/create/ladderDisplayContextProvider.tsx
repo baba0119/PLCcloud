@@ -1,8 +1,8 @@
 import { FC, useReducer } from 'react';
-import { KindsModel } from '../../model/ladderDataModel';
-import { ladderDisplayInitialState } from '../ladderEntity/ladderInitialState';
+import { KindsModel, ladderRecordDataModel } from '../../model/ladderDataModel';
+import { ladderDisplayInitialState, ladderDisplayInitialStateModel } from '../ladderEntity/ladderInitialState';
 import { ladderCreateSlice } from './ladderCreateSlice';
-import { ladderDisplayContext, point, pointSelectActionModel } from '../../model/ladderDisplayContextModel';
+import { ladderDisplayActionModel, ladderDisplayContext, point } from '../../model/ladderDisplayContextModel';
 import { colPatternModel, ladderUpdateActionModel, NodeMenuContext } from '../../model/nodeMenuContextModel';
 import { colSettingModel, NodeInfoContext, nodeInfoUpdateModel } from '../../model/nodeInfoContextModel';
 
@@ -11,15 +11,16 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
     ladderCreateSlice.reducer, ladderDisplayInitialState
   );
 
-  const { pointSelecter, nodeUpdate, colUpdate, colSetting, nodeNameUpdate, nodeDelete } = ladderCreateSlice.actions;
+  const { pointSelecter, nodeUpdate, colUpdate, colSetting, nodeNameUpdate, nodeDelete, ladderSet } = ladderCreateSlice.actions;
 
   const ladderUpdateAction: ladderUpdateActionModel = {
     nodeUpdate: (kinds: KindsModel) => dispatch(nodeUpdate(kinds)),
     colUpdate: (colPattern: colPatternModel) => dispatch(colUpdate(colPattern))
   }
 
-  const pointSelect: pointSelectActionModel = {
-    pointSelect: (point: point) => dispatch(pointSelecter(point))
+  const ladderDisplayAction: ladderDisplayActionModel = {
+    pointSelect: (point: point) => dispatch(pointSelecter(point)),
+    ladderSet:(displayData: ladderRecordDataModel[]) => dispatch(ladderSet(displayData))
   }
 
   const nodeInfoUpdate: nodeInfoUpdateModel = {
@@ -38,7 +39,7 @@ const LadderDisplayContextProvider: FC = ({ children }) => {
       <ladderDisplayContext.Provider
         value={{
           displayState: ladderState,
-          pointSelecter: pointSelect
+          ladderDisplayAction: ladderDisplayAction
         }}
       >
         <NodeInfoContext.Provider

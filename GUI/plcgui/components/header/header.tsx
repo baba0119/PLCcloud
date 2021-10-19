@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import CreateButton from './createButton';
-import DebugButton from './debugButton';
+import CreateButton from './parts/createButton';
+import DebugButton from './parts/debugButton';
 
 // ヘッダー
 const HeaderContent = styled.header`

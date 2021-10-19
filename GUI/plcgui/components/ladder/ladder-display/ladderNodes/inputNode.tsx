@@ -31,12 +31,12 @@ const InputNode: VFC<Props> = ({
   x,
   y
 }) => {
-  const { pointSelecter } = useContext(ladderDisplayContext);
+  const { ladderDisplayAction } = useContext(ladderDisplayContext);
 
   return (
     <NodeParentStyle
       key={id}
-      onClick={() => pointSelecter.pointSelect({x: x, y: y})}
+      onClick={() => ladderDisplayAction.pointSelect({x: x, y: y})}
     >
       <NodeSelectStyle isChoice={isChoice}/>
       <LadderNodePrint>

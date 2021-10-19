@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ladderDisplayInitialState } from "../ladderEntity/ladderInitialState";
+import { ladderDisplayInitialState, ladderDisplayInitialStateModel } from "../ladderEntity/ladderInitialState";
 import { point } from "../../model/ladderDisplayContextModel";
-import { KindsModel } from "../../model/ladderDataModel";
+import { KindsModel, ladderRecordDataModel } from "../../model/ladderDataModel";
 import { colPatternModel } from "../../model/nodeMenuContextModel";
 import { pointSelect } from "./reducers/pointSelect";
 import { colStateSet } from "./reducers/colStateSet";
@@ -62,9 +62,11 @@ export const ladderCreateSlice = createSlice({
 
       return state;
     },
+    // 接点の接続の詳細設定
     colSetting: (state, action: PayloadAction<colSettingModel>) => {
       return colSetting(state, action)
     },
+    // 接点の削除
     nodeDelete: (state) => {
       const x = state.point.x;
       const y = state.point.y;
@@ -75,6 +77,10 @@ export const ladderCreateSlice = createSlice({
       state.ladderRecordData[y].ladderData[x].ladderNode.attrInfo = null;
       state.ladderRecordData[y].ladderData[x].isProof = false;
 
+      return state;
+    },
+    ladderSet: (state, action: PayloadAction<ladderRecordDataModel[]>) => {
+      state.ladderRecordData = action.payload;
       return state;
     }
   }

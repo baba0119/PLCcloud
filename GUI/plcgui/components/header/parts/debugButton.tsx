@@ -1,8 +1,9 @@
 import { useContext, VFC } from 'react';
 import styled from "styled-components";
 import { useRouter } from 'next/router'
-import { ladderDisplayContext } from '../../model/ladderDisplayContextModel';
-import { localurl } from '../../utils/url';
+import { ladderDisplayContext } from '../../../model/ladderDisplayContextModel';
+import { localurl } from '../../../utils/url';
+import { ladderAnalysis } from '../../../utils/ladderAnalysis';
 
 // デバッグ開始ボタンのスタイル
 const DebugButtonStyle = styled.button`
@@ -24,19 +25,23 @@ const DebugButton: VFC = () => {
 
   const DebugReqest = () => {
     // データの解析・サーバーで読めるよう編集
-    console.log(JSON.stringify(displayState.ladderRecordData));
+    const convertLadder = ladderAnalysis(displayState.ladderRecordData);
+    console.log(convertLadder);
+
+    // jsonの形式でデータを保存
+    sessionStorage.setItem('ladderData', JSON.stringify(displayState.ladderRecordData));
 
     // httpリクエスト
-    fetch(localurl(), {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(displayState.point)
-    })
+    // fetch(localurl(), {
+    //   method: 'post',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(convertLadder)
+    // })
 
-    // httpの通信によってページ遷移
-    router.replace('/debug')
+    // リダイレクト
+    router.push('/debug');
   }
 
   return (
