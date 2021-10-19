@@ -24,7 +24,20 @@ export const ladderDebugSlice = createSlice({
     },
     // ラダープログラムの置換
     ladderSet: (state, action: PayloadAction<ladderRecordDataModel[]>) => {
-      state.ladderRecordData = action.payload;
+      state.ladderRecordData = action.payload as ladderRecordDataModel[];
+
+      state.point.x = 0;
+      state.point.y = 0;
+
+      state.ladderRecordData.map((record, yIndex) => {
+        record.ladderData.map((node, xIndex) => {
+          if ( node.isChoice ) {
+            state.ladderRecordData[yIndex].ladderData[xIndex].isChoice = false;
+          }
+        })
+      })
+      state.ladderRecordData[0].ladderData[0].isChoice = true;
+
       return state;
     }
   }
