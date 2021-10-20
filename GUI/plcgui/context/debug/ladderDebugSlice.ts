@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderRecordDataModel } from "../../model/ladderDataModel";
+import { ioStateSetModel } from "../../model/ladderDebugContextModel";
 import { point } from "../../model/ladderDisplayContextModel";
 import { pointSelect } from "../create/reducers/pointSelect";
-import { ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
+import { ioStateModel, ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
 
 export const ladderDebugSlice = createSlice({
   name: 'ladderDebug',
@@ -33,6 +34,16 @@ export const ladderDebugSlice = createSlice({
         })
       })
       state.ladderRecordData[0].ladderData[0].isChoice = true;
+
+      return state;
+    },
+    // 入出力のスライスをセットする
+    ioStateSet: (state, action: PayloadAction<ioStateSetModel>) => {
+      if ( action.payload.ioType === "input" ) {
+        state.inputState = action.payload.ioList;
+      } else {
+        state.outputState = action.payload.ioList;
+      }
 
       return state;
     }

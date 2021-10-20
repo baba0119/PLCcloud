@@ -1,15 +1,31 @@
 import { VFC } from "react";
 import styled from "styled-components";
+import { ioStateModel } from "../../../context/ladderEntity/ladderInitialState";
 
-const PanelFlex = styled.div`
-  display: flex;
+const NodeName = styled.h3`
+  color: #4f4f4f;
 `;
 
-const ControlPanel: VFC = () => {
-  return (
-    <PanelFlex>
+// #f57543
+// #4381f5
+const PinState = styled.h3<{pin: boolean}>`
+  color: ${({ pin }) => ( pin ? "#f57543" : "#4381f5")} ;
+`;
 
-    </PanelFlex>
+const GpioControl = styled.button`
+  color: #4f4f4f;
+`;
+
+const ControlPanel: VFC<ioStateModel> = ({
+  nodeName,
+  ioState
+}) => {
+  return (
+    <>
+      <NodeName>{nodeName}</NodeName>
+      <PinState pin={ioState}>{(ioState ? "High" : "Low")}</PinState>
+      <GpioControl>Push</GpioControl>
+    </>
   )
 }
 

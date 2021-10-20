@@ -1,9 +1,14 @@
-import { useContext, useEffect, VFC } from "react";
+import { useContext, useEffect, useState, VFC } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from 'uuid';
+import { ioStateModel } from "../../../context/ladderEntity/ladderInitialState";
+import { inputActionContext, ioStateSetModel } from "../../../model/ladderDebugContextModel";
 import { ladderDisplayContext } from "../../../model/ladderDisplayContextModel";
+import ControlPanel from "./controlPanel";
 import { ladderInputAnalysis } from "./ladderInputAnalysis";
 
-const InputControlBody = styled.div`
+const PanelFlex = styled.div`
+  display: flex;
   width: 232px;
   margin: 16px 8px;
   padding: 8px 8px 16px 12px;
@@ -15,15 +20,33 @@ const InputControlBody = styled.div`
 const InputControl: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
 
+  const pinData = ladderInputAnalysis(displayState.ladderRecordData);
+
+  const [inputList, inputListSet] = useState<ioStateModel[]>(pinData);
+
+  // .map(pin => ({
+  //   nodeName: pin.nodeName,
+  //   ioState: pin.ioState
+  // }))
+
   useEffect(() => {
-    const inputList = ladderInputAnalysis(displayState.ladderRecordData);
     console.log(inputList)
 
-  }, [displayState.ladderRecordData])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputList])
 
   return (
-    <InputControlBody>
-    </InputControlBody>
+    <>
+      {inputList.map(ioPin => (
+          <PanelFlex key={uuidv4()}>
+            <ControlPanel
+              nodeName={ioPin.nodeName}
+              ioState={ioPin.ioState}
+            />
+          </PanelFlex>
+        ))
+      }
+    </>
   )
 }
 
