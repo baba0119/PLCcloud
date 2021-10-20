@@ -9,9 +9,10 @@ import { ladderInputAnalysis } from "./ladderInputAnalysis";
 
 const PanelFlex = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 232px;
   margin: 16px 8px;
-  padding: 8px 8px 16px 12px;
+  padding: 8px 16px 8px 16px;
   border-radius: 8px;
   box-shadow: 2px 2px 4px 2px #a7a7a7;
   background-color: #f9fbff;
