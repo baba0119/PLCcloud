@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from "styled-components";
-import LadderDisplayContextProvider from '../../../context/create/ladderDisplayContextProvider';
 import LadderDebugContextProvider from '../../../context/debug/ladderDebugContextProvider';
+import InputControl from '../inputControl/inputControl';
 import LadderDisplay from '../ladder-display/ladderDisplay';
 
 // スタイルの作成 ------------------------------
@@ -15,14 +15,14 @@ const ParentMainContent = styled.div`
 
 // 主となるコンテンツのスペース
 const ContentSpace = styled.div`
-  width: 100%;
-  margin: 0 auto;
   display: flex;
+  justify-content: center;
+  overflow-x: auto;
 `;
 
 // 両側タブのスペース
 const SideTabSpace = styled.div`
-  width: 20%;
+  width: 248px;
 `;
 
 // メインタブのスペース
@@ -39,7 +39,7 @@ const LadderDebugFormat: VFC = () => {
       <ParentMainContent>
         <LadderDebugContextProvider>
           <ContentSpace>
-            <SideTabSpace></SideTabSpace>
+            <SideTabSpace><InputControl/></SideTabSpace>
             <MainContentSpace><LadderDisplay/></MainContentSpace>
             <SideTabSpace></SideTabSpace>
           </ContentSpace>

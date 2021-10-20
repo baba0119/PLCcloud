@@ -43,3 +43,22 @@ export const ladderDisplayInitialState: ladderDisplayInitialStateModel = {
   ladderRecordData: ladderInitialState,
   point: { x: 0, y: 0 }
 }
+
+export type ioStateModel = {
+  nodeName: string;
+  ioState: boolean;
+}
+
+export type ladderDebugInitialStateModel = {
+  ladderRecordData: ladderRecordDataModel[];
+  point: point;
+  inputState: ioStateModel[];
+  outputState: ioStateModel[];
+}
+
+export const ladderDebugInitialState: ladderDebugInitialStateModel = {
+  ladderRecordData: ladderInitialState,
+  point: { x: 0, y: 0 },
+  inputState: [],
+  outputState: []
+}

@@ -2,15 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderRecordDataModel } from "../../model/ladderDataModel";
 import { point } from "../../model/ladderDisplayContextModel";
 import { pointSelect } from "../create/reducers/pointSelect";
-import { ladderDisplayInitialState } from "../ladderEntity/ladderInitialState";
-
-type ladderDuebugModel = {
-  ladderRecordData: ladderRecordDataModel[],
-}
+import { ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
 
 export const ladderDebugSlice = createSlice({
   name: 'ladderDebug',
-  initialState: ladderDisplayInitialState,
+  initialState: ladderDebugInitialState,
   reducers: {
     // 座標の状態に関わる処理
     pointSelecter: (state, action: PayloadAction<point>) => {
@@ -24,7 +20,7 @@ export const ladderDebugSlice = createSlice({
     },
     // ラダープログラムの置換
     ladderSet: (state, action: PayloadAction<ladderRecordDataModel[]>) => {
-      state.ladderRecordData = action.payload as ladderRecordDataModel[];
+      state.ladderRecordData = action.payload;
 
       state.point.x = 0;
       state.point.y = 0;
