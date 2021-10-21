@@ -21,32 +21,26 @@ const PanelFlex = styled.div`
 const InputControl: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
 
-  const pinData = ladderInputAnalysis(displayState.ladderRecordData);
+  // 入力パネルのリスト
+  const [inputList, setInputList] = useState<ioStateModel[]>([]);
 
-  const [inputList, inputListSet] = useState<ioStateModel[]>(pinData);
-
-  // .map(pin => ({
-  //   nodeName: pin.nodeName,
-  //   ioState: pin.ioState
-  // }))
-
+  // 初回のレンダリングで行う処理
   useEffect(() => {
-    console.log(inputList)
+    const pinList = ladderInputAnalysis(displayState.ladderRecordData);
+    setInputList(pinList);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputList])
+  }, [displayState.ladderRecordData])
 
   return (
     <>
       {inputList.map(ioPin => (
-          <PanelFlex key={uuidv4()}>
-            <ControlPanel
-              nodeName={ioPin.nodeName}
-              ioState={ioPin.ioState}
-            />
-          </PanelFlex>
-        ))
-      }
+        <PanelFlex key={uuidv4()}>
+          <ControlPanel
+            nodeName={ioPin.nodeName}
+            ioState={ioPin.ioState}
+          />
+        </PanelFlex>
+      ))}
     </>
   )
 }
