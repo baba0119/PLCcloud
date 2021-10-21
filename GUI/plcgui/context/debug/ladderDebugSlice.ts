@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderRecordDataModel } from "../../model/ladderDataModel";
 import { point } from "../../model/ladderDisplayContextModel";
+import { localurl } from "../../utils/url";
 import { pointSelect } from "../create/reducers/pointSelect";
 import { ioStateModel, ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
 
@@ -44,7 +45,26 @@ export const ladderDebugSlice = createSlice({
     ioStateSet: (state, action: PayloadAction<ioStateModel[]>) => {
       // 入力から出力を求める
       // サーバーとの通信もはさむ
+
+      type reqDataModel = {
+        ladder: ladderRecordDataModel[];
+        inputState: ioStateModel[];
+      }
+
+      const reqData:reqDataModel = {
+        ladder: state.ladderRecordData,
+        inputState: action.payload
+      }
+
       console.log(action.payload)
+      fetch(localurl(), {
+        method: "post",
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reqData)
+      });
 
       return state;
     }
