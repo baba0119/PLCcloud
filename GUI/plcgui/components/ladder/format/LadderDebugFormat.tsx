@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LadderDebugContextProvider from '../../../context/debug/ladderDebugContextProvider';
 import InputControl from '../inputControl/inputControl';
 import LadderDisplay from '../ladder-display/ladderDisplay';
+import OutputDisplay from '../outputDisplay/outputDisplay';
 
 // スタイルの作成 ------------------------------
 // 親要素として最大幅
@@ -41,7 +42,7 @@ const LadderDebugFormat: VFC = () => {
           <ContentSpace>
             <SideTabSpace><InputControl/></SideTabSpace>
             <MainContentSpace><LadderDisplay/></MainContentSpace>
-            <SideTabSpace></SideTabSpace>
+            <SideTabSpace><OutputDisplay/></SideTabSpace>
           </ContentSpace>
         </LadderDebugContextProvider>
       </ParentMainContent>

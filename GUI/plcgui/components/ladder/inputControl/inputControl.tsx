@@ -25,7 +25,6 @@ const InputControl: VFC = () => {
   // 入力パネルのリスト
   const [inputList, setInputList] = useState<ioStateModel[]>([]);
 
-  // 初回のレンダリングで行う処理
   useEffect(() => {
     const pinList = ladderInputAnalysis(displayState.ladderRecordData);
     setInputList(pinList);
@@ -37,6 +36,8 @@ const InputControl: VFC = () => {
     const inputListCopy = inputList.slice();
     inputListCopy.splice(diffIo, 1, io);
     setInputList(inputListCopy);
+
+    ioStateSet(inputListCopy);
   }
 
   return (

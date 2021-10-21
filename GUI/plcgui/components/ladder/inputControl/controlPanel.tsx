@@ -1,7 +1,6 @@
-import { useContext, VFC } from "react";
+import { VFC } from "react";
 import styled from "styled-components";
 import { ioStateModel } from "../../../context/ladderEntity/ladderInitialState";
-import { inputActionContext } from "../../../model/ladderDebugContextModel";
 
 const NodeName = styled.h3`
   margin: 0;

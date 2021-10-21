@@ -9,3 +9,8 @@ export type inputControlActionModel = {
 export const inputActionContext = createContext<inputControlActionModel>({} as inputControlActionModel)
 
 // 出力部コンテキスト(viewのみ)
+export type outputNodeStateModel = {
+  nodeList: ioStateModel[]
+}
+
+export const outputStateContext = createContext<outputNodeStateModel>({} as outputNodeStateModel)

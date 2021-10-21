@@ -42,8 +42,9 @@ export const ladderDebugSlice = createSlice({
     },
     // 出力のスライスをセットする
     ioStateSet: (state, action: PayloadAction<ioStateModel[]>) => {
-      console.log("出力pinマッピング")
-      state.outputState = action.payload;
+      // 入力から出力を求める
+      // サーバーとの通信もはさむ
+      console.log(action.payload)
 
       return state;
     }

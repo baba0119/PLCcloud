@@ -1,6 +1,6 @@
 import { FC, useReducer } from "react";
 import { ladderRecordDataModel } from "../../model/ladderDataModel";
-import { inputActionContext, inputControlActionModel } from "../../model/ladderDebugContextModel";
+import { inputActionContext, inputControlActionModel, outputNodeStateModel, outputStateContext } from "../../model/ladderDebugContextModel";
 import { ladderDisplayActionModel, point, ladderDisplayContext } from "../../model/ladderDisplayContextModel";
 import { ioStateModel, ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
 import { ladderDebugSlice } from "./ladderDebugSlice";
@@ -42,7 +42,13 @@ const LadderDebugContextProvider: FC = ({ children }) => {
           ioStateSet: inputControlAction.ioStateSet
         }}
       >
-        {children}
+        <outputStateContext.Provider
+          value={{
+            nodeList: ladderState.outputState
+          }}
+        >
+          {children}
+        </outputStateContext.Provider>
       </inputActionContext.Provider>
     </ladderDisplayContext.Provider>
   )
