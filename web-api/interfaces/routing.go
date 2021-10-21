@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"lolipop-api/controlers"
+	"plc-web-api/controlers"
 	"net/http"
 )
 

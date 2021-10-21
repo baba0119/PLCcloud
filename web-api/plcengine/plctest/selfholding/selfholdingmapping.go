@@ -1,6 +1,6 @@
 package selfholding
 
-import "lolipop-api/plcengine/datamodel/ldexemodel"
+import "plc-web-api/plcengine/datamodel/ldexemodel"
 
 func SelfholdingMapping() []*ldexemodel.InputLdexeModel {
 	// 1列目

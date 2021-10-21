@@ -1,8 +1,8 @@
 package plctest
 
 import (
-	"lolipop-api/plcengine/datamodel/vrgpiomodel"
-	"lolipop-api/plcengine/processing/gpiooperation/virtualgpio"
+	"plc-web-api/plcengine/datamodel/vrgpiomodel"
+	"plc-web-api/plcengine/processing/gpiooperation/virtualgpio"
 	"fmt"
 )
 

@@ -1,10 +1,10 @@
 package selfholding
 
 import (
-	"lolipop-api/plcengine/plctest"
-	"lolipop-api/plcengine/processing/gpiooperation/virtualgpio"
-	"lolipop-api/plcengine/processing/ladderdebug"
-	"lolipop-api/plcengine/processing/ladderrun"
+	"plc-web-api/plcengine/plctest"
+	"plc-web-api/plcengine/processing/gpiooperation/virtualgpio"
+	"plc-web-api/plcengine/processing/ladderdebug"
+	"plc-web-api/plcengine/processing/ladderrun"
 	"fmt"
 	"sync"
 )

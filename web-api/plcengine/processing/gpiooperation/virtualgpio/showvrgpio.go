@@ -1,7 +1,7 @@
 package virtualgpio
 
 import (
-	"lolipop-api/plcengine/datamodel/vrgpiomodel"
+	"plc-web-api/plcengine/datamodel/vrgpiomodel"
 	"fmt"
 	"strconv"
 	"sync"
