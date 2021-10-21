@@ -1,6 +1,7 @@
-import { VFC } from "react";
+import { useContext, VFC } from "react";
 import styled from "styled-components";
 import { ioStateModel } from "../../../context/ladderEntity/ladderInitialState";
+import { inputActionContext } from "../../../model/ladderDebugContextModel";
 
 const NodeName = styled.h3`
   margin: 0;
@@ -20,15 +21,30 @@ const GpioControl = styled.button`
   color: #4f4f4f;
 `;
 
-const ControlPanel: VFC<ioStateModel> = ({
-  nodeName,
-  ioState
+type Props = {
+  io: ioStateModel
+  ioControl: (io: ioStateModel) => void;
+}
+const ControlPanel: VFC<Props> = ({
+  io,
+  ioControl
 }) => {
   return (
     <>
-      <NodeName>{nodeName}</NodeName>
-      <PinState pin={ioState}>{(ioState ? "High" : "Low")}</PinState>
-      <GpioControl>Push</GpioControl>
+      <NodeName>{io.nodeName}</NodeName>
+      <PinState pin={io.ioState}>{(io.ioState ? "High" : "Low")}</PinState>
+      <GpioControl
+        onMouseDown={() => ioControl({
+          nodeName: io.nodeName,
+          ioState: true
+        })}
+        onMouseUp={() => ioControl({
+          nodeName: io.nodeName,
+          ioState: false
+        })}
+      >
+        Push
+      </GpioControl>
     </>
   )
 }

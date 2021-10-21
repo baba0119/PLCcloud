@@ -1,13 +1,11 @@
 import { createContext } from "react"
 import { ioStateModel } from "../context/ladderEntity/ladderInitialState"
 
-export type ioStateSetModel = {
-  ioList: ioStateModel[]
-  ioType: "input" | "output"
-}
-
+// 入力部コンテキスト(処理のみ)
 export type inputControlActionModel = {
-  ioStateSet: (ioState: ioStateSetModel) => void;
+  ioStateSet: (ioState: ioStateModel[]) => void;
 }
 
 export const inputActionContext = createContext<inputControlActionModel>({} as inputControlActionModel)
+
+// 出力部コンテキスト(viewのみ)

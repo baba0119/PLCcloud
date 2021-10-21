@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, VFC } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
 import { ioStateModel } from "../../../context/ladderEntity/ladderInitialState";
-import { inputActionContext, ioStateSetModel } from "../../../model/ladderDebugContextModel";
+import { inputActionContext } from "../../../model/ladderDebugContextModel";
 import { ladderDisplayContext } from "../../../model/ladderDisplayContextModel";
 import ControlPanel from "./controlPanel";
 import { ladderInputAnalysis } from "./ladderInputAnalysis";
@@ -20,6 +20,7 @@ const PanelFlex = styled.div`
 
 const InputControl: VFC = () => {
   const { displayState } = useContext(ladderDisplayContext);
+  const { ioStateSet } = useContext(inputActionContext);
 
   // 入力パネルのリスト
   const [inputList, setInputList] = useState<ioStateModel[]>([]);
@@ -28,16 +29,23 @@ const InputControl: VFC = () => {
   useEffect(() => {
     const pinList = ladderInputAnalysis(displayState.ladderRecordData);
     setInputList(pinList);
-
   }, [displayState.ladderRecordData])
+
+  // マウス操作時の処理
+  const inputSend = (io: ioStateModel) => {
+    const diffIo = inputList.findIndex(node => node.nodeName === io.nodeName);
+    const inputListCopy = inputList.slice();
+    inputListCopy.splice(diffIo, 1, io);
+    setInputList(inputListCopy);
+  }
 
   return (
     <>
       {inputList.map(ioPin => (
         <PanelFlex key={uuidv4()}>
           <ControlPanel
-            nodeName={ioPin.nodeName}
-            ioState={ioPin.ioState}
+            io={ioPin}
+            ioControl={inputSend}
           />
         </PanelFlex>
       ))}

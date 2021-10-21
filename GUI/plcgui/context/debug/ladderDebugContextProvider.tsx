@@ -1,8 +1,8 @@
 import { FC, useReducer } from "react";
 import { ladderRecordDataModel } from "../../model/ladderDataModel";
-import { inputActionContext, inputControlActionModel, ioStateSetModel } from "../../model/ladderDebugContextModel";
+import { inputActionContext, inputControlActionModel } from "../../model/ladderDebugContextModel";
 import { ladderDisplayActionModel, point, ladderDisplayContext } from "../../model/ladderDisplayContextModel";
-import { ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
+import { ioStateModel, ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
 import { ladderDebugSlice } from "./ladderDebugSlice";
 
 const LadderDebugContextProvider: FC = ({ children }) => {
@@ -24,7 +24,7 @@ const LadderDebugContextProvider: FC = ({ children }) => {
 
   // 入力にかかわる処理の配信
   const inputControlAction: inputControlActionModel = {
-    ioStateSet: (ioState: ioStateSetModel) => dispatch(ioStateSet(ioState))
+    ioStateSet: (ioState: ioStateModel[]) => dispatch(ioStateSet(ioState))
   }
 
   return (

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ladderRecordDataModel } from "../../model/ladderDataModel";
-import { ioStateSetModel } from "../../model/ladderDebugContextModel";
 import { point } from "../../model/ladderDisplayContextModel";
 import { pointSelect } from "../create/reducers/pointSelect";
 import { ioStateModel, ladderDebugInitialState } from "../ladderEntity/ladderInitialState";
@@ -26,24 +25,25 @@ export const ladderDebugSlice = createSlice({
       state.point.x = 0;
       state.point.y = 0;
 
+      let x: number = 0, y: number = 0;
+
       state.ladderRecordData.map((record, yIndex) => {
         record.ladderData.map((node, xIndex) => {
           if ( node.isChoice ) {
-            state.ladderRecordData[yIndex].ladderData[xIndex].isChoice = false;
+            x = xIndex;
+            y = yIndex;
           }
         })
       })
+      state.ladderRecordData[x].ladderData[y].isChoice = false;
       state.ladderRecordData[0].ladderData[0].isChoice = true;
 
       return state;
     },
-    // 入出力のスライスをセットする
-    ioStateSet: (state, action: PayloadAction<ioStateSetModel>) => {
-      if ( action.payload.ioType === "input" ) {
-        state.inputState = action.payload.ioList;
-      } else {
-        state.outputState = action.payload.ioList;
-      }
+    // 出力のスライスをセットする
+    ioStateSet: (state, action: PayloadAction<ioStateModel[]>) => {
+      console.log("出力pinマッピング")
+      state.outputState = action.payload;
 
       return state;
     }
