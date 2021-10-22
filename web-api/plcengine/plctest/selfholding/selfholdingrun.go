@@ -6,12 +6,18 @@ import (
 	"plc-web-api/plcengine/processing/ladderdebug"
 	"plc-web-api/plcengine/processing/ladderrun"
 	"fmt"
-	"sync"
 )
 
 // 試運転ではmain関数でこの関数を呼び出す
 // jsonをマッピングするところは飛ばしている
 func SelfholdingRun() {
+	// ------------------------------------------
+	// ラダープログラムjson取得
+	// ------------------------------------------
+	/* --
+		とりあえず SelfholdingMapping()
+		と同じものを吐くかどうかでチェック
+	-- */
 
 	// ------------------------------------------
 	// 入力部データマッピング
@@ -35,15 +41,8 @@ func SelfholdingRun() {
 	// ------------------------------------------
 	// 仮想gpio関連
 	// ------------------------------------------
-
-	var ClientMutex struct {
-		sync.Mutex
-	}
-
 	// 仮想gpioマッピング
 	vrgpio := virtualgpio.VirtualGpioMapping()
-
-	ClientMutex.Lock()  // ロック
 	// 仮想gpio setting
 	if !virtualgpio.VrgpioSetting(inputLdSlice, vrgpio) {
 		fmt.Println("gpio setting missed.")
@@ -53,7 +52,6 @@ func SelfholdingRun() {
 	fmt.Println("virtual gpio 初期状態")
 	virtualgpio.ShowVirtualGpio(vrgpio)
 	fmt.Println()
-	ClientMutex.Unlock() // アンロック
 
 	// 仮想gpio模擬入力機構
 	// 実行中はコマンドプロンプトからGpioの入力を変更できる
