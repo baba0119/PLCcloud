@@ -16,9 +16,9 @@ import (
 // 戻り値:
 // どこにノードがあるかの座標リスト
 // ---------------------------------------------
-func NodeCheckExistence(ladder interface{}) ([]debugmodels.NodeCoordinate, error) {
+func NodeCheckExistence(ladder interface{}) ([]debugmodels.NodePoint, error) {
 	var err error
-	var NodeCoordinate debugmodels.NodeCoordinate
+	var NodeCoordinate debugmodels.NodePoint
 
 	ld := dproxy.New(ladder).M("ladder")
 
@@ -44,7 +44,7 @@ func NodeCheckExistence(ladder interface{}) ([]debugmodels.NodeCoordinate, error
 	}
 	fmt.Println(nodeQua)
 
-	NodeExistList := make([]debugmodels.NodeCoordinate, nodeQua)
+	NodeExistList := make([]debugmodels.NodePoint, nodeQua)
 
 	qua := 0
 	for y := 0; y < i ; y++ {
@@ -55,8 +55,8 @@ func NodeCheckExistence(ladder interface{}) ([]debugmodels.NodeCoordinate, error
 				break
 			}
 			if isProof {
-				NodeCoordinate[0] = x
-				NodeCoordinate[1] = y
+				NodeCoordinate.X = x
+				NodeCoordinate.Y = y
 				NodeExistList[qua] = NodeCoordinate
 				qua++
 			}
