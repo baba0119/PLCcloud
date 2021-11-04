@@ -37,6 +37,7 @@ func SelfholdingDebug() {
 		return
 	}
 
+	// 接続確認から入出力の振り分けまで
 	IOpointSlice, err := ladderdebug.LdContactCheck(jsonData, nodeExist)
 	if err != nil {
 		log.Fatal(err)
@@ -45,4 +46,6 @@ func SelfholdingDebug() {
 	for i, p := range IOpointSlice {
 		fmt.Println(i, p)
 	}
+
+	// 実行用ラダーへ変換する
 }
