@@ -10,10 +10,10 @@ const ContentArea = styled.div`
   width: 100%;
 `;
 
-type homeModel = {
+type LoginModel = {
   HeaderPart: VFC
 }
-const HomeFlame: VFC<homeModel> = ({
+const LoginFrame: VFC<LoginModel> = ({
   HeaderPart
 }) => {
   return (
@@ -26,4 +26,4 @@ const HomeFlame: VFC<homeModel> = ({
   )
 }
 
-export default HomeFlame
+export default LoginFrame

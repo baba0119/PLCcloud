@@ -1,10 +1,8 @@
 import type { NextPage } from 'next'
+import Login from '../../component/assembly/login'
 
-const Login: NextPage = () => {
-  return (
-    <div>
-    </div>
-  )
+const LoginPage: NextPage = () => {
+  return <Login/>
 }
 
-export default Login
+export default LoginPage
