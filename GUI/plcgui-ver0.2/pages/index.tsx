@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
+import Home from '../component/assembly/home'
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
-    <div>
-    </div>
+    <Home/>
   )
 }
 
-export default Home
+export default HomePage
