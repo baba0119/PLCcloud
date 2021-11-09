@@ -13,6 +13,9 @@ const LoginButtonStyle = styled.button`
   font-size: 18px;
   width: 128px;
   height: 48px;
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 const LoginButton: VFC = () => {
