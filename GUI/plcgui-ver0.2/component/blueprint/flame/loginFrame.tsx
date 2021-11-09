@@ -8,20 +8,33 @@ const HeaderArea = styled.div`
 
 const ContentArea = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const LoginFormFlame = styled.div`
+  width: 778px;
+  margin: 42px 0 0 0;
 `;
 
 type LoginModel = {
   HeaderPart: VFC
+  LoginFormPart: VFC
 }
 const LoginFrame: VFC<LoginModel> = ({
-  HeaderPart
+  HeaderPart,
+  LoginFormPart
 }) => {
   return (
     <>
       <HeaderArea>
         <HeaderPart/>
       </HeaderArea>
-      <ContentArea></ContentArea>
+      <ContentArea>
+        <LoginFormFlame>
+          <LoginFormPart/>
+        </LoginFormFlame>
+      </ContentArea>
     </>
   )
 }

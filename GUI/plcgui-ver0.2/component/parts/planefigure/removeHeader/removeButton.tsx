@@ -7,6 +7,7 @@ const RemoveButtonStyle = styled.div`
 `;
 
 const RemoveButtonText = styled.p`
+  font-size: 24px;
   color: #f7f7f7;
   line-height: 64px;
   margin: 0 0 0 12px;
