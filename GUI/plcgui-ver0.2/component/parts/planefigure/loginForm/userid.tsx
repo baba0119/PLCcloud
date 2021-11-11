@@ -5,8 +5,6 @@ const ParentArea = styled.div`
   width: 100%;
 `;
 
-
-
 const TitleText = styled.p`
 font-size: 20px;
   margin: 24px 0 8px 0;

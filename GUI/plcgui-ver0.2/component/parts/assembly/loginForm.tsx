@@ -20,7 +20,7 @@ const FormArea = styled.div`
 const LoginForm: VFC = () => {
   const [userId, setUserId] = useState("")
   const [passWord, setPassword] = useState("")
-  const [loginMissed, setLoginMissed] = useState(true)
+  const [loginMissed, setLoginMissed] = useState(false)
 
   return (
     <AreaParent>
