@@ -13,5 +13,5 @@ type ladderNodeMenuDataModel = {
 // エンティティのデータ型
 export type placementDataModel = {
   panelTitle: string
-  placementMenuData: ladderNodeMenuDataModel
+  placementMenuData: ladderNodeMenuDataModel[]
 }
