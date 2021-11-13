@@ -1,5 +1,6 @@
 import { VFC } from "react";
 import styled from 'styled-components';
+import LadderPlacement from "../../parts/assembly/ladderPlacement";
 
 const HeaderArea = styled.div`
   width: 100%;
@@ -47,7 +48,7 @@ const NodeSettingArea = styled.div`
 type LadderPartList = {
   HeaderPart: VFC
   LadderHeaderPart: VFC
-  LadderPlacementPart?: VFC
+  LadderPlacementPart: VFC
   LadderDisplayPart?: VFC
   LadderNodeSettingPart?: VFC
 }
@@ -69,7 +70,7 @@ const LadderCreateFlame: VFC<LadderPartList> = ({
       <ContentArea>
         <LadderArea>
           <PlacementArea>
-
+            <LadderPlacementPart/>
           </PlacementArea>
           <DisplayArea>
 

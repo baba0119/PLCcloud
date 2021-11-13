@@ -2,7 +2,7 @@ import { colPatternModel } from "../../../../../model/colPatternModel";
 import { KindsModel } from "../../../../../model/ladderDataModel";
 
 // 操作の種類
-type ladderNodeMenuDataModel = {
+export type ladderNodeMenuDataModel = {
   id:    string           // uuid
   kinds: "node" | "col"
   image: StaticImageData  // 画像データ
