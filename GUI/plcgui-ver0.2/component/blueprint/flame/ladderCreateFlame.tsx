@@ -1,6 +1,5 @@
 import { VFC } from "react";
 import styled from 'styled-components';
-import LadderPlacement from "../../parts/assembly/ladderPlacement";
 
 const HeaderArea = styled.div`
   width: 100%;
@@ -13,6 +12,7 @@ const LadderHeaderArea = styled.div`
 `;
 
 const ContentArea = styled.div`
+  background-color: #fafafa;
   width: 100%;
   height: 85vh;
   border-bottom: 2px solid #a8a8a8;
