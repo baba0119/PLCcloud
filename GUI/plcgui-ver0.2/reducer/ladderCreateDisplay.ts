@@ -1,6 +1,6 @@
 import { ladderCreateActions } from "../model/ladderCreateActions";
 import { ladderCreatetDisplayModel } from "../model/ladderStateModel";
-import { colSetting } from "./colSetting";
+import { colSetting } from "./utils/colSetting";
 import { pointSelect } from "./utils/pointSelect";
 
 export const ladderDisplayReducer = (

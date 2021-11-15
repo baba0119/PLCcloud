@@ -1,4 +1,4 @@
-import { colSettingModel } from "../model/colPatternModel";
+import { colSettingModel } from "../../model/colPatternModel";
 
 
 export const colSetting = (state: any, action: colSettingModel) => {

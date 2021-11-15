@@ -1,4 +1,4 @@
-import { ladderDataModel, ladderRecordDataModel } from "./ladderDataModel";
+import { ladderRecordDataModel } from "./ladderDataModel";
 
 export type point = {
   x: number;
