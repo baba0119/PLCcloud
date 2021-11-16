@@ -1,5 +1,6 @@
 import { VFC } from "react";
 import styled from 'styled-components';
+import LadderCreateDisplayProvider from "../../../contexts/ladderCreateDisplayProvider";
 
 const HeaderArea = styled.div`
   width: 100%;
@@ -64,22 +65,24 @@ const LadderCreateFlame: VFC<LadderPartList> = ({
       <HeaderArea>
         <HeaderPart/>
       </HeaderArea>
-      <LadderHeaderArea>
-        <LadderHeaderPart/>
-      </LadderHeaderArea>
-      <ContentArea>
-        <LadderArea>
-          <PlacementArea>
-            <LadderPlacementPart/>
-          </PlacementArea>
-          <DisplayArea>
+      <LadderCreateDisplayProvider>
+        <LadderHeaderArea>
+          <LadderHeaderPart/>
+        </LadderHeaderArea>
+        <ContentArea>
+          <LadderArea>
+            <PlacementArea>
+              <LadderPlacementPart/>
+            </PlacementArea>
+            <DisplayArea>
 
-          </DisplayArea>
-          <NodeSettingArea>
+            </DisplayArea>
+            <NodeSettingArea>
 
-          </NodeSettingArea>
-        </LadderArea>
-      </ContentArea>
+            </NodeSettingArea>
+          </LadderArea>
+        </ContentArea>
+      </LadderCreateDisplayProvider>
     </>
   )
 }
