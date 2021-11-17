@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ladderCreatetDisplayModel, point } from '../../model/ladderStateModel';
+import { ladderCreatetDisplayModel } from '../../model/ladderStateModel';
 import { ladderRecordDataModel } from '../../model/ladderDataModel';
 import { ladderDataModel } from '../../model/ladderDataModel';
 

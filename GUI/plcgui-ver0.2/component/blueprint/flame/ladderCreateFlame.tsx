@@ -26,21 +26,21 @@ const LadderArea = styled.div`
 `;
 
 const PlacementArea = styled.div`
-  width: 25%;
+  width: 20%;
   overflow-x: scroll;
   overflow-y: scroll;
   height: 85vh;
 `;
 
 const DisplayArea = styled.div`
-  width: 50%;
-  min-width: 980px;
+  width: 60%;
+  min-width: 1000px;
   overflow-y: scroll;
   height: 85vh;
 `;
 
 const NodeSettingArea = styled.div`
-  width: 25%;
+  width: 20%;
   overflow-x: scroll;
   overflow-y: scroll;
   height: 85vh;
@@ -50,7 +50,7 @@ type LadderPartList = {
   HeaderPart: VFC
   LadderHeaderPart: VFC
   LadderPlacementPart: VFC
-  LadderDisplayPart?: VFC
+  LadderDisplayPart: VFC
   LadderNodeSettingPart?: VFC
 }
 const LadderCreateFlame: VFC<LadderPartList> = ({
@@ -75,7 +75,7 @@ const LadderCreateFlame: VFC<LadderPartList> = ({
               <LadderPlacementPart/>
             </PlacementArea>
             <DisplayArea>
-
+              <LadderDisplayPart/>
             </DisplayArea>
             <NodeSettingArea>
 

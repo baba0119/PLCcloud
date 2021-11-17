@@ -9,10 +9,11 @@ export const ladderDisplayReducer = (
 ): ladderCreatetDisplayModel => {
   switch ( action.type ) {
     case "pointSelect": {
-      const x = action.payload.x;
-      const y = action.payload.y;
+      state.point.x = action.payload.x;
+      state.point.y = action.payload.y;
+      const newState = { ...state }
 
-      return pointSelect(state, {x: x, y: y});
+      return newState;
     }
     case "nodeUpdate": {
       // 座標の指定 (relayの場合一番右)
@@ -33,9 +34,11 @@ export const ladderDisplayReducer = (
 
       console.log(action.payload);
       if ( x < 9 ) {
-        state = pointSelect(state, {x: x+1, y: y})
+        state.point.x = x+1;
+        state.point.y = y;
       } else {
-        state = pointSelect(state, {x: 0, y: y+1})
+        state.point.x = 0;
+        state.point.y = y + 1;
       }
       return state;
     }
