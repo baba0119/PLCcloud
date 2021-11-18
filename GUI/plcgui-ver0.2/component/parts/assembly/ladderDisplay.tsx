@@ -1,6 +1,6 @@
 import { useContext, VFC } from "react";
 import styled from "styled-components";
-import { createDisplayContext } from "../../../contexts/ladderCreateDisplayProvider";
+import { LadderDisplayContext } from "../../../contexts/models/ladderDisplayContextModel";
 import NodePrint from "../planefigure/ladderDisplay/nodePrint";
 
 const ParentArea = styled.div`
@@ -34,13 +34,13 @@ const LadderRecordParent = styled.div`
 `;
 
 const LadderDisplay: VFC = () => {
-  const { state } = useContext(createDisplayContext)
+  const { displayState } = useContext(LadderDisplayContext);
 
   return (
     <ParentArea>
       <DisplayParent>
         <LadderDisplayWidth>
-          {state.ladderRecordData.map((record, y) => (
+          {displayState.ladderRecordData.map((record, y) => (
             <LadderRecordParent key={record.id}>
               {record.ladderData.map((node, x) => (
                 <div key={node.id}>

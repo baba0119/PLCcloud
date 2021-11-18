@@ -40,7 +40,9 @@ export const ladderDisplayReducer = (
         state.point.x = 0;
         state.point.y = y + 1;
       }
-      return state;
+      const newState = { ...state }
+
+      return newState;
     }
     case "nodeNameUpdate": {
       const x = state.point.x;
@@ -63,10 +65,15 @@ export const ladderDisplayReducer = (
       return state;
     }
     case "colUpdate": {
-      return colSetting(state, {
+      let newState = { ...state };
+
+      newState = colSetting(newState, {
         colPattern: action.payload,
         isCol: true
-      });
+      })
+
+      console.log(newState);
+      return newState;
     }
     case "colSetting": {
       return colSetting(state, action.payload);

@@ -1,6 +1,6 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
-import { createDisplayContext } from "../../../../contexts/ladderCreateDisplayProvider";
+import { LadderDisplayContext } from "../../../../contexts/models/ladderDisplayContextModel";
 import { colStateModel } from "../../../../model/ladderDataModel";
 
 const NodeParentStyle = styled.div`
@@ -60,35 +60,18 @@ type Props = {
 }
 const NodePrint: FC<Props> = ({
   id,
+  isChoice,
   colState,
   x,
   y,
   children
 }) => {
-  const [isChoice, setIsChoice] = useState(false);
-
-  const { state, dispatch } = useContext(createDisplayContext)
-
-  useEffect(() => {
-    const xs = state.point.x;
-    const ys = state.point.y;
-
-    if ( xs === x && ys === y ) {
-      setIsChoice(true);
-    } else {
-      setIsChoice(false);
-    }
-  }, [state.point.x, state.point.y, x, y])
-
-  const pointSelect = () => dispatch({
-    type: "pointSelect",
-    payload: {x: x, y: y}
-  })
+  const { pointSelect } = useContext(LadderDisplayContext);
 
   return (
     <NodeParentStyle
       key={id}
-      onClick={pointSelect}
+      onClick={() => pointSelect({x: x, y: y})}
     >
       <NodeSelectStyle isChoice={isChoice}/>
       <LadderNodePrint>

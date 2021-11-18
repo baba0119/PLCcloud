@@ -84,22 +84,10 @@ const PlacementButton: VFC<ladderNodeMenuDataModel> = ({
   alt,
   control
 }) => {
-  const { dispatch } = useContext(createDisplayContext)
-
-  const nodeUpdate = () => dispatch({
-    type: "nodeUpdate",
-    payload: control as KindsModel
-  })
-
-  const colUpdate = () => dispatch({
-    type: "colUpdate",
-    payload: control as colPatternModel
-  })
-
   switch ( kinds ) {
     case "node": {
       return (
-        <PlacementButtonStyle onClick={nodeUpdate}>
+        <PlacementButtonStyle>
           <Image
             src={image}
             alt={alt}
@@ -109,7 +97,7 @@ const PlacementButton: VFC<ladderNodeMenuDataModel> = ({
     }
     case "col": {
       return (
-        <PlacementButtonStyle onClick={colUpdate}>
+        <PlacementButtonStyle>
           <Image
             src={image}
             alt={alt}
