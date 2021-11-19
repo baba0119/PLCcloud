@@ -1,8 +1,7 @@
-import { createContext, Dispatch, FC, useReducer } from "react";
+import { FC, useReducer } from "react";
 import { colPatternModel, colSettingModel } from "../model/colPatternModel";
-import { ladderCreateActions } from "../model/ladderCreateActions";
 import { KindsModel, ladderRecordDataModel } from "../model/ladderDataModel";
-import { ladderCreatetDisplayModel, point } from "../model/ladderStateModel";
+import { point } from "../model/ladderStateModel";
 import { ladderCreateDisplayInitialState } from "../slices/initialState/ladderCreateDisplay";
 import { ladderCreateDisplaySlice } from "../slices/ladderCreateDisplaySlice";
 import { LadderDisplayContext } from "./models/ladderDisplayContextModel";
