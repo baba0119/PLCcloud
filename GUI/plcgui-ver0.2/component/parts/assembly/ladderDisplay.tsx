@@ -1,6 +1,8 @@
 import { useContext, VFC } from "react";
 import styled from "styled-components";
 import { LadderDisplayContext } from "../../../contexts/models/ladderDisplayContextModel";
+import NomalInput from "../planefigure/ladderDisplay/details/nomalInput";
+import NomalOutput from "../planefigure/ladderDisplay/details/nomalOutput";
 import NodePrint from "../planefigure/ladderDisplay/nodePrint";
 
 const ParentArea = styled.div`
@@ -51,7 +53,24 @@ const LadderDisplay: VFC = () => {
                     x={x}
                     y={y}
                   >
-                    <div></div>
+                    {node.isProof &&
+                      (
+                        node.ladderNode.info === "vrA" ||
+                        node.ladderNode.info === "vrB" ||
+                        node.ladderNode.info === "gpA" ||
+                        node.ladderNode.info === "gpB" ||
+                        node.ladderNode.info === "contact"
+                      ? (
+                          <NomalInput
+                            name={node.ladderNode.name}
+                            kinds={node.ladderNode.info}
+                          />
+                        ) : (
+                          <NomalOutput
+                            name={node.ladderNode.name}
+                          />
+                      ))
+                    }
                   </NodePrint>
                 </div>
               ))}

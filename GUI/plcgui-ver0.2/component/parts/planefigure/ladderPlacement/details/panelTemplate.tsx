@@ -2,9 +2,9 @@ import { useContext, VFC } from "react";
 import Image from 'next/image';
 import styled from "styled-components";
 import { ladderNodeMenuDataModel, placementDataModel } from "../entity/placementDataModel";
-import { createDisplayContext } from "../../../../../contexts/ladderCreateDisplayProvider";
 import { KindsModel } from "../../../../../model/ladderDataModel";
 import { colPatternModel } from "../../../../../model/colPatternModel";
+import { LadderDisplayContext } from "../../../../../contexts/models/ladderDisplayContextModel";
 
 const AreaParent = styled.div`
   width: 100%;
@@ -84,10 +84,15 @@ const PlacementButton: VFC<ladderNodeMenuDataModel> = ({
   alt,
   control
 }) => {
+  const { nodeUpdateFunc, colUpDateFunc } = useContext(LadderDisplayContext);
+
+  const nodeUpdate = () => nodeUpdateFunc(control as KindsModel);
+  const colUpdate = () => colUpDateFunc(control as colPatternModel);
+
   switch ( kinds ) {
     case "node": {
       return (
-        <PlacementButtonStyle>
+        <PlacementButtonStyle onClick={nodeUpdate}>
           <Image
             src={image}
             alt={alt}
@@ -97,7 +102,7 @@ const PlacementButton: VFC<ladderNodeMenuDataModel> = ({
     }
     case "col": {
       return (
-        <PlacementButtonStyle>
+        <PlacementButtonStyle onClick={colUpdate}>
           <Image
             src={image}
             alt={alt}

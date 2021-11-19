@@ -1,0 +1,86 @@
+import { VFC } from "react";
+import Image from 'next/image';
+import styled from "styled-components";
+// 画像の読み込み
+import a from '../entity/images/a.png'
+import b from '../entity/images/b.png'
+import contact from '../entity/images/contact.png'
+import { KindsModel } from "../../../../../model/ladderDataModel";
+
+//
+// スタイル
+//
+const Parent = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+const NameParent = styled.div`
+  width: 100%;
+  text-align: center;
+  position: absolute;
+`;
+
+const NodeName = styled.p`
+
+`;
+
+// 画像を中央に寄せる
+const NodeImage = styled.div`
+  width: 96px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
+//
+// 普通入力ノード
+//
+type inputNodeKindsModel = {
+  [index: string]: {
+    src: StaticImageData
+    alt: string
+  }
+}
+
+type Props = {
+  name: string
+  kinds: KindsModel
+}
+const NomalInput: VFC<Props> = ({ name, kinds }) => {
+  const inputNodeKinds: inputNodeKindsModel = {};
+  inputNodeKinds["a"] = {
+    src: a,
+    alt: "a接点"
+  }
+  inputNodeKinds["b"] = {
+    src: b,
+    alt: "b接点"
+  }
+  inputNodeKinds["contact"] = {
+    src: contact,
+    alt: "接続"
+  }
+
+  const kindsData = ( kinds === "vrA" || kinds === "gpA" ? ( "a" ) : (
+    kinds === "vrB" || kinds === "gpB" ? "b" : "contact"
+  ))
+
+  return (
+    <Parent>
+      <NameParent>
+        <NodeName>{name}</NodeName>
+      </NameParent>
+      <NodeImage>
+        <Image
+          src={inputNodeKinds[kindsData].src}
+          alt={inputNodeKinds[kindsData].alt}
+          width={94}
+        />
+      </NodeImage>
+    </Parent>
+  )
+}
+
+export default NomalInput
