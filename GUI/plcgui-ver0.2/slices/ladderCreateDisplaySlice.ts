@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { colPatternModel, colSettingModel } from "../model/colPatternModel";
 import { KindsModel, ladderRecordDataModel } from "../model/ladderDataModel";
 import { point } from "../model/ladderStateModel";
-import { colSetting } from "../reducer/utils/colSetting";
-import { pointSelect } from "../reducer/utils/pointSelect";
 import { ladderCreateDisplayInitialState } from "./initialState/ladderCreateDisplay";
+import { colSetting } from "./utils/colSetting";
+import { pointSelect } from "./utils/pointSelect";
 
 export const ladderCreateDisplaySlice = createSlice({
   name: 'ladderDisplay',
