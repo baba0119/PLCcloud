@@ -1,12 +1,8 @@
 import { useContext, VFC } from "react";
 import Image from 'next/image'
 import styled from "styled-components";
-import a from "../images/a.png";
-import b from "../images/b.png";
-import contact from "../images/contact.png";
-import relay from "../images/output.png";
-import none from "../images/none.png";
-import { ladderDisplayContext } from "../../../../../model/ladderDisplayContextModel";
+import { LadderDisplayContext } from "../../../../../contexts/models/ladderDisplayContextModel";
+import { NodeImageList } from "../entity/nodeImage";
 
 const DisplayArea = styled.div`
   width: 82px;
@@ -18,12 +14,14 @@ const NodePrintArea = styled.div`
 `;
 
 const NodeImageAreaParent = styled.div`
+  width: 80px;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const NodeImageArea = styled.div`
-  width: 80px;
+  width: 78px;
 `;
 
 const LineArea = styled.div`
@@ -36,14 +34,8 @@ const ColConnLine = styled.div<{ conn: boolean }>`
   background-color: ${ ({ conn }) => conn ? "#000000" : "#e9e9e9"};
 `;
 
-type NodeImageModel = {
-  [index: string]: {
-    src: StaticImageData
-    alt: string
-  }
-}
-const ColStateDisplay: VFC = () => {
-  const { displayState } = useContext(ladderDisplayContext)
+const ColumnStateDisplay: VFC = () => {
+  const { displayState } = useContext(LadderDisplayContext);
 
   const x = displayState.point.x;
   const y = displayState.point.y;
@@ -55,29 +47,7 @@ const ColStateDisplay: VFC = () => {
   const leftHigh = ( x ? record.ladderData[x-1].colState.isUpCol : true);
   const leftLow = ( x ? record.ladderData[x-1].colState.isDownCol : true);
 
-  const nodeKind = record.ladderData[x].ladderNode.info;
-
-  const NodeImageList: NodeImageModel = {};
-  NodeImageList["a"] = {
-    src: a,
-    alt: "a接点"
-  };
-  NodeImageList["b"] = {
-    src: b,
-    alt: "b接点"
-  };
-  NodeImageList["contact"] = {
-    src: contact,
-    alt: "接続線"
-  };
-  NodeImageList["relay"] = {
-    src: relay,
-    alt: "出力接点"
-  };
-  NodeImageList[""] = {
-    src: none,
-    alt: "none"
-  };
+  let nodeKind = record.ladderData[x].ladderNode.info;
 
   const NodeImage = NodeImageList[nodeKind];
 
@@ -93,7 +63,7 @@ const ColStateDisplay: VFC = () => {
             <Image
               src={NodeImage.src}
               alt={NodeImage.alt}
-              width={80}
+              width={76}
             />
           </NodeImageArea>
         </NodeImageAreaParent>
@@ -103,7 +73,7 @@ const ColStateDisplay: VFC = () => {
         </LineArea>
       </NodePrintArea>
     </DisplayArea>
-  );
+  )
 }
 
-export default ColStateDisplay;
+export default ColumnStateDisplay

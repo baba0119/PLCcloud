@@ -51,7 +51,7 @@ type LadderPartList = {
   LadderHeaderPart: VFC
   LadderPlacementPart: VFC
   LadderDisplayPart: VFC
-  LadderNodeSettingPart?: VFC
+  LadderNodeSettingPart: VFC
 }
 const LadderCreateFlame: VFC<LadderPartList> = ({
   HeaderPart,
@@ -78,7 +78,7 @@ const LadderCreateFlame: VFC<LadderPartList> = ({
               <LadderDisplayPart/>
             </DisplayArea>
             <NodeSettingArea>
-
+              <LadderNodeSettingPart/>
             </NodeSettingArea>
           </LadderArea>
         </ContentArea>

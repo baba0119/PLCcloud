@@ -25,7 +25,7 @@ export type KindsModel =
   "contact" |
   "vrA" | "vrB" |
   "gpA" | "gpB" |
-  "vrio" | "gpio" |
+  "vrio" | "gpio" | // 出力
   ""
 
 // ラダーの各接点本体の情報
