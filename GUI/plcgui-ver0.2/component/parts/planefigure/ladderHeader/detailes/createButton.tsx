@@ -1,5 +1,6 @@
-import { VFC } from 'react';
+import { useContext, VFC } from 'react';
 import styled from "styled-components";
+import { LadderDisplayContext } from '../../../../../contexts/models/ladderDisplayContextModel';
 
 // デバッグ開始ボタンのスタイル
 const CreateButtonStyle = styled.button`
@@ -15,8 +16,12 @@ const CreateButtonStyle = styled.button`
 `;
 
 const CreateButton: VFC = () => {
+  const { modeChangeFunc } = useContext(LadderDisplayContext);
+
+  const modeChange = () => modeChangeFunc()
+
   return (
-    <CreateButtonStyle>
+    <CreateButtonStyle onClick={modeChange}>
       create
     </CreateButtonStyle>
   )

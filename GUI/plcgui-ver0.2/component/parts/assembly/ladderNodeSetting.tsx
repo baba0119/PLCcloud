@@ -22,18 +22,25 @@ const LadderNodeSetting: VFC = () => {
   const y = displayState.point.y;
 
   const kind = displayState.ladderRecordData[y].ladderData[x].ladderNode.info;
+  const mode = displayState.mode;
 
   return (
     <AreaParent>
-      {!(kind === "contact" || kind === "") &&
-        <NodeNameSetting/>
-      }
-      <Underline/>
-      <ColumnSetting/>
-      <Underline/>
-      {!(kind === "") &&
-        <DeleteButton/>
-      }
+      {(mode === "create" ? (
+        <>
+          {!(kind === "contact" || kind === "") &&
+            <NodeNameSetting/>
+          }
+          <Underline/>
+          <ColumnSetting/>
+          <Underline/>
+          {!(kind === "") &&
+            <DeleteButton/>
+          }
+        </>
+      ) : (
+        <div></div>
+      ))}
     </AreaParent>
   )
 }

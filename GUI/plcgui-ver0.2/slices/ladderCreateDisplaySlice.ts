@@ -137,6 +137,15 @@ export const ladderCreateDisplaySlice = createSlice({
       }
 
       return state;
+    },
+    modeChange: (state) => {
+      if (state.mode === "create") {
+        state.mode = "debug";
+      } else {
+        state.mode = "create";
+      }
+
+      return state;
     }
   }
 });
