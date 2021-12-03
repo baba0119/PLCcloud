@@ -1,5 +1,6 @@
-import { VFC } from "react";
+import { useContext, VFC } from "react";
 import styled from "styled-components";
+import { LadderDisplayContext } from "../../../contexts/models/ladderDisplayContextModel";
 import ColumnSetting from "../planefigure/ladderNodeSetting/columnSetting";
 import DeleteButton from "../planefigure/ladderNodeSetting/deleteButton";
 import NodeNameSetting from "../planefigure/ladderNodeSetting/nodeNameSetting";
@@ -14,7 +15,9 @@ const Underline = styled.div`
   margin-top: 18px;
 `;
 
-const ladderNodeSetting: VFC = () => {
+const LadderNodeSetting: VFC = () => {
+  const { displayState } = useContext(LadderDisplayContext);
+
   return (
     <AreaParent>
       <NodeNameSetting/>
@@ -26,4 +29,4 @@ const ladderNodeSetting: VFC = () => {
   )
 }
 
-export default ladderNodeSetting
+export default LadderNodeSetting
