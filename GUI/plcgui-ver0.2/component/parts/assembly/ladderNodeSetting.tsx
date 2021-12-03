@@ -18,13 +18,22 @@ const Underline = styled.div`
 const LadderNodeSetting: VFC = () => {
   const { displayState } = useContext(LadderDisplayContext);
 
+  const x = displayState.point.x;
+  const y = displayState.point.y;
+
+  const kind = displayState.ladderRecordData[y].ladderData[x].ladderNode.info;
+
   return (
     <AreaParent>
-      <NodeNameSetting/>
+      {!(kind === "contact" || kind === "") &&
+        <NodeNameSetting/>
+      }
       <Underline/>
       <ColumnSetting/>
       <Underline/>
-      <DeleteButton/>
+      {!(kind === "") &&
+        <DeleteButton/>
+      }
     </AreaParent>
   )
 }
