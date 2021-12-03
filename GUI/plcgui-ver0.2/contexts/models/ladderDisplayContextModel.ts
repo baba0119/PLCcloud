@@ -15,6 +15,7 @@ type ladderDisplayContextModel = {
   nodeNameUpdateFunc: (name: string) => void;
   nodeDeleteFunc: () => void;
   ladderSetFunc: (displayData: ladderRecordDataModel[]) => void;
+  ioKindChangeFunc: (kind: string) => void;
 }
 
 export const LadderDisplayContext = createContext<ladderDisplayContextModel>(

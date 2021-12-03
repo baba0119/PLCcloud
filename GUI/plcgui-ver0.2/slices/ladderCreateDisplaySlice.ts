@@ -96,6 +96,47 @@ export const ladderCreateDisplaySlice = createSlice({
       state.ladderRecordData[0].ladderData[0].isChoice = true;
 
       return state;
+    },
+    ioKindChange: (state, action: PayloadAction<string>) => {
+      const x = state.point.x;
+      const y = state.point.y;
+
+      const nowIoKind = state.ladderRecordData[y].ladderData[x].ladderNode.info;
+
+      if ( action.payload === "gpio" ) {
+        switch ( nowIoKind ) {
+          case "vrA": {
+            state.ladderRecordData[y].ladderData[x].ladderNode.info = "gpA";
+            break;
+          }
+          case "vrB": {
+            state.ladderRecordData[y].ladderData[x].ladderNode.info = "gpB";
+            break;
+          }
+          case "vrio": {
+            state.ladderRecordData[y].ladderData[x].ladderNode.info = "gpio";
+            break;
+          }
+        }
+      } else
+      if ( action.payload === "vrio" ) {
+        switch ( nowIoKind ) {
+          case "gpA": {
+            state.ladderRecordData[y].ladderData[x].ladderNode.info = "vrA";
+            break;
+          }
+          case "gpB": {
+            state.ladderRecordData[y].ladderData[x].ladderNode.info = "vrB";
+            break;
+          }
+          case "gpio": {
+            state.ladderRecordData[y].ladderData[x].ladderNode.info = "vrio";
+            break;
+          }
+        }
+      }
+
+      return state;
     }
   }
 });

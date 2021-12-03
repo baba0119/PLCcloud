@@ -18,7 +18,8 @@ const LadderCreateDisplayProvider: FC = ({ children }) => {
     colSetting,
     nodeNameUpdate,
     nodeDelete,
-    ladderSet
+    ladderSet,
+    ioKindChange
   } = ladderCreateDisplaySlice.actions;
 
   const pointSelect = (point: point) =>
@@ -41,6 +42,8 @@ const LadderCreateDisplayProvider: FC = ({ children }) => {
   const ladderSetFunc = (displayData: ladderRecordDataModel[]) =>
     dispatch(ladderSet(displayData));
 
+  const ioKindChangeFunc = (kind: string) => dispatch(ioKindChange(kind))
+
   return (
     <LadderDisplayContext.Provider
       value={{
@@ -51,7 +54,8 @@ const LadderCreateDisplayProvider: FC = ({ children }) => {
         colSettingFunc,
         nodeNameUpdateFunc,
         nodeDeleteFunc,
-        ladderSetFunc
+        ladderSetFunc,
+        ioKindChangeFunc
       }}
     >
       {children}
