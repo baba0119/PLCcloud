@@ -36,5 +36,7 @@ export const ladderCreateDisplayInitialState: ladderCreatetDisplayModel = {
   ladderRecordData: ladderInitialState,
   point: { x: 0, y: 0 },
   mode: "create",
-  isSave: true
+  isSave: true,
+  inputState: [],
+  outputState: []
 }
