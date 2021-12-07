@@ -7,7 +7,7 @@ const AreaParent = styled.div`
   width: 100%;
 `;
 
-const LadderPlacement: VFC = () => {
+const LadderLeftTab: VFC = () => {
   const { displayState } = useContext(LadderDisplayContext);
   const mode = displayState.mode;
 
@@ -22,4 +22,4 @@ const LadderPlacement: VFC = () => {
   )
 }
 
-export default LadderPlacement
+export default LadderLeftTab

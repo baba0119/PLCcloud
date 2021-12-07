@@ -15,7 +15,7 @@ const Underline = styled.div`
   margin-top: 18px;
 `;
 
-const LadderNodeSetting: VFC = () => {
+const LadderRightTab: VFC = () => {
   const { displayState } = useContext(LadderDisplayContext);
 
   const x = displayState.point.x;
@@ -45,4 +45,4 @@ const LadderNodeSetting: VFC = () => {
   )
 }
 
-export default LadderNodeSetting
+export default LadderRightTab

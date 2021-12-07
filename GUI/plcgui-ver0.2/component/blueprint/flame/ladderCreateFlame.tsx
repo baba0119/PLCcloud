@@ -49,16 +49,16 @@ const NodeSettingArea = styled.div`
 type LadderPartList = {
   HeaderPart: VFC
   LadderHeaderPart: VFC
-  LadderPlacementPart: VFC
+  LadderLeftTabPart: VFC
   LadderDisplayPart: VFC
-  LadderNodeSettingPart: VFC
+  LadderRightTabPart: VFC
 }
 const LadderCreateFlame: VFC<LadderPartList> = ({
   HeaderPart,
   LadderHeaderPart,
-  LadderPlacementPart,
+  LadderLeftTabPart,
   LadderDisplayPart,
-  LadderNodeSettingPart
+  LadderRightTabPart
 }) => {
   return (
     <>
@@ -72,13 +72,13 @@ const LadderCreateFlame: VFC<LadderPartList> = ({
         <ContentArea>
           <LadderArea>
             <PlacementArea>
-              <LadderPlacementPart/>
+              <LadderLeftTabPart/>
             </PlacementArea>
             <DisplayArea>
               <LadderDisplayPart/>
             </DisplayArea>
             <NodeSettingArea>
-              <LadderNodeSettingPart/>
+              <LadderRightTabPart/>
             </NodeSettingArea>
           </LadderArea>
         </ContentArea>
