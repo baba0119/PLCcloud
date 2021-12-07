@@ -1,11 +1,6 @@
 import { error } from "../model/apiRequestModel/error";
+import { requestFlame } from "../model/apiRequestModel/requestFlame";
 import { END_POINT } from "./endpoint"
-
-type requestFlame = {
-  path: string
-  method: "GET" | "POST" | "PUT" | "DELETE"
-  data: string
-}
 
 export const apiRequest = async <T>(request: requestFlame): Promise<T | error> => {
   const endPoint = END_POINT + request.path;
