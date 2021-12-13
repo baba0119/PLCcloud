@@ -1,7 +1,7 @@
 package ladderdebug
 
 import (
-	"PLC/datamodel/ldexemodel"
+	"PLC/plcengine/datamodel/ldexemodel"
 )
 
 // ---------------------------------------------

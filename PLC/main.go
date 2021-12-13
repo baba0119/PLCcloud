@@ -1,7 +1,7 @@
 package main
 
 import (
-	"PLC/plctest/selfholding"
+	"PLC/plcengine/plctest/selfholding"
 )
 
 func main() {

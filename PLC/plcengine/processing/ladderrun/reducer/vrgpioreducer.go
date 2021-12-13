@@ -1,8 +1,8 @@
 package reducer
 
 import (
-	"PLC/datamodel/vrgpiomodel"
-	"PLC/processing/gpiooperation/virtualgpio"
+	"PLC/plcengine/datamodel/vrgpiomodel"
+	"PLC/plcengine/processing/gpiooperation/virtualgpio"
 	"fmt"
 )
 

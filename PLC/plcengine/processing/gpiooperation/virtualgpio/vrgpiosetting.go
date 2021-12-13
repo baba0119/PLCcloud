@@ -1,8 +1,8 @@
 package virtualgpio
 
 import (
-	"PLC/datamodel/ldexemodel"
-	"PLC/datamodel/vrgpiomodel"
+	"PLC/plcengine/datamodel/ldexemodel"
+	"PLC/plcengine/datamodel/vrgpiomodel"
 )
 
 // ===========================================================

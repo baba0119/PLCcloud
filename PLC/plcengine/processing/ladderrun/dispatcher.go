@@ -1,9 +1,9 @@
 package ladderrun
 
 import (
-	"PLC/datamodel/ldexemodel"
-	"PLC/datamodel/vrgpiomodel"
-	"PLC/processing/ladderrun/reducer"
+	"PLC/plcengine/datamodel/ldexemodel"
+	"PLC/plcengine/datamodel/vrgpiomodel"
+	"PLC/plcengine/processing/ladderrun/reducer"
 	"fmt"
 )
 

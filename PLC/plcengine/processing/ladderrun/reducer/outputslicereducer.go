@@ -1,7 +1,7 @@
 package reducer
 
 import (
-	"PLC/datamodel/ldexemodel"
+	"PLC/plcengine/datamodel/ldexemodel"
 )
 
 // 引数として必要な情報

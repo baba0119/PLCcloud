@@ -1,8 +1,8 @@
 package ladderrun
 
 import (
-	"PLC/datamodel/ldexemodel"
-	"PLC/datamodel/vrgpiomodel"
+	"PLC/plcengine/datamodel/ldexemodel"
+	"PLC/plcengine/datamodel/vrgpiomodel"
 	"fmt"
 )
 
@@ -44,7 +44,7 @@ func BlockInnerProcessing(
 	// ブロックの各行内の演算
 	for i := 0; len(blockLdSlice) > i; i++ {
 
-		// 行の始まりの時の処理
+		// 行の始端が来た時の処理
 		if blockLdSlice[i].IsColSp {
 			recordOp = append(recordOp, true)
 			recordNum++

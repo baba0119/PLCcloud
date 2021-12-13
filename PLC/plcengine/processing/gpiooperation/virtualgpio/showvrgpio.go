@@ -1,7 +1,7 @@
 package virtualgpio
 
 import (
-	"PLC/datamodel/vrgpiomodel"
+	"PLC/plcengine/datamodel/vrgpiomodel"
 	"fmt"
 	"strconv"
 	"sync"
