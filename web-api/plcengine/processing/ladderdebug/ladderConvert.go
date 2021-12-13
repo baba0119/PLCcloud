@@ -1,7 +1,7 @@
 package ladderdebug
 
 import (
-	"fmt"
+	// "fmt"
 	"log"
 	"plc-web-api/plcengine/datamodel/debugmodels"
 	"plc-web-api/plcengine/datamodel/ldexemodel"
@@ -26,10 +26,18 @@ func LadderConvert(
 	// ------------------------------------
 
 	ld := dproxy.New(ladder).M("ladder")
-	ldConvertSlice := make([]*ldexemodel.InputLdexeModel, 1)
+	ldConvertSlice := make([]*ldexemodel.InputLdexeModel, 0)
 
 	// 入出力座標のまとまったスライスを for range で回す
-	for _, IOpoints := range IOpointSlice {
+	for i, IOpoints := range IOpointSlice {
+
+		// 構造体
+		ldConvertSlice = append(ldConvertSlice, &ldexemodel.InputLdexeModel{
+			InputLd:   []*ldexemodel.InputLdModel{},
+			OutputKey: ldexemodel.OutputKeyModel{},
+		})
+		// ldConvertSlice[i].InputLd = make([]*ldexemodel.InputLdModel, 0)
+
 		// -- 出力キーの作成 --
 		// 出力座標の取り出し
 		opX := IOpoints.OutputPoint.X
@@ -80,20 +88,21 @@ func LadderConvert(
 		inputLdSlice.OutputKey = opKey
 		inputLdSlice.InputLd = inputLd
 
-		for _, data := range inputLd {
-			fmt.Println(data)
-		}
-		fmt.Println(opKey)
+		// for _, data := range inputLd {
+		// 	fmt.Println(data)
+		// }
+		// fmt.Println(opKey)
 
-		ldConvertSlice = append(ldConvertSlice, &ldexemodel.InputLdexeModel{
-			InputLd:   inputLd,
-			OutputKey: opKey,
-		})
+		ldConvertSlice[i].InputLd = append(ldConvertSlice[i].InputLd, inputLd...)
+		ldConvertSlice[i].OutputKey = opKey
 	}
 
-	for _, data := range ldConvertSlice {
-		fmt.Println(data.OutputKey)
-	}
+	// for _, data := range ldConvertSlice {
+	// 	for _, ld := range data.InputLd {
+	// 		fmt.Println(ld)
+	// 	}
+	// 	fmt.Println(data.OutputKey)
+	// }
 
 	return ldConvertSlice, nil
 }

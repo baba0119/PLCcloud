@@ -1,3 +1,3 @@
 export type sample = {
-  type: "success"
+  type: "success" | "server" | "connection"
 }

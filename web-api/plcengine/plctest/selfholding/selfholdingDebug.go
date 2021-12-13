@@ -48,9 +48,16 @@ func SelfholdingDebug() {
 	}
 
 	// 実行用ラダーへ変換する
-	_, err = ladderdebug.LadderConvert(jsonData, IOpointSlice)
+	ldConvertSlice, err := ladderdebug.LadderConvert(jsonData, IOpointSlice)
 	if err != nil {
 		log.Fatal(err)
 		return
+	}
+
+	for _, data := range ldConvertSlice {
+		for _, ld := range data.InputLd {
+			fmt.Println(ld)
+		}
+		fmt.Println(data.OutputKey)
 	}
 }
