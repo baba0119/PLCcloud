@@ -4,4 +4,5 @@ package debugmodels
 type NodePoint struct {
 	X int
 	Y int
+	Exist bool
 }

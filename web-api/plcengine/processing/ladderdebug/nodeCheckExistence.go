@@ -57,6 +57,7 @@ func NodeCheckExistence(ladder interface{}) ([]debugmodels.NodePoint, error) {
 			if isProof {
 				NodeCoordinate.X = x
 				NodeCoordinate.Y = y
+				NodeCoordinate.Exist = false
 				NodeExistList[qua] = NodeCoordinate
 				qua++
 			}

@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { sample } from "../model/apiRequestModel/sample";
 import { colPatternModel, colSettingModel } from "../model/colPatternModel";
 import { KindsModel, ladderRecordDataModel } from "../model/ladderDataModel";
 import { point } from "../model/ladderStateModel";
+import { apiRequest } from "../utils/apiRequest";
 import { ladderCreateDisplayInitialState } from "./initialState/ladderCreateDisplay";
 import { colSetting } from "./utils/colSetting";
 import { pointSelect } from "./utils/pointSelect";
@@ -141,6 +143,13 @@ export const ladderCreateDisplaySlice = createSlice({
     modeChange: (state) => {
       if (state.mode === "create") {
         state.mode = "debug";
+        const test = apiRequest<sample>({
+          path: "/",
+          method: "POST",
+          data: JSON.stringify({
+            ladder: state.ladderRecordData
+          })
+        });
       } else {
         state.mode = "create";
       }
