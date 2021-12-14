@@ -7,4 +7,5 @@ import (
 
 func Handler() {
 	http.HandleFunc("/debug", controlers.LdDebug)
+	http.HandleFunc("/login", controlers.Login)
 }

@@ -1,7 +1,9 @@
 package main
 
-import "plc-web-api/plcengine/plctest/selfholding"
+import (
+	"plc-web-api/utils"
+)
 
 func main() {
-	selfholding.SelfholdingDebug()
+	utils.UserRegister()
 }
