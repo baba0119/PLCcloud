@@ -12,9 +12,11 @@ const ContentArea = styled.div`
 
 type homeModel = {
   HeaderPart: VFC
+  HomeContentPart?: VFC
 }
 const HomeFlame: VFC<homeModel> = ({
-  HeaderPart
+  HeaderPart,
+  HomeContentPart
 }) => {
   return (
     <>
