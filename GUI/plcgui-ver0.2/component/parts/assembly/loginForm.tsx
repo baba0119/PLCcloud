@@ -50,6 +50,7 @@ const LoginForm: VFC = () => {
     .then(res => {
       console.log(res);
       sessionStorage.setItem("token", res.Token);
+      sessionStorage.setItem("userid", res.Id);
       sessionStorage.setItem("isLogin", "true");
       router.replace('/');
     }).catch(error => {
