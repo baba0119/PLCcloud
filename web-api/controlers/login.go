@@ -13,16 +13,6 @@ import (
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	errResData := httpdatahandle.ErrorRes{
-		Types: "missed",
-	}
-	errRes, err := json.Marshal(errResData)
-	if err != nil {
-		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -40,13 +30,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != "POST" {
 		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintln(w, errRes)
 		return
 	}
 
 	if r.Header.Get("Content-Type") != "application/json" {
 		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintln(w, errRes)
 		return
 	}
 
@@ -64,7 +52,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
@@ -74,7 +61,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	DB, err := db.DbConnect()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
@@ -85,7 +71,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	hash, err := db.GetPassHash(DB, user.Id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
@@ -95,7 +80,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	err = bcrypt.CompareHashAndPassword([]byte(hash), []byte(user.Password))
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
@@ -105,7 +89,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	token, err := uuid.NewRandom()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
@@ -115,7 +98,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	err = db.UpdateToken(DB, user.Id, token.String())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
@@ -128,7 +110,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	res, err := json.Marshal(resData)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, errRes)
 
 		log.Println(err)
 		return
