@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"plc-web-api/db"
+	"plc-web-api/infrastructure/db"
 
 	"golang.org/x/crypto/bcrypt"
 	_ "github.com/go-sql-driver/mysql"
