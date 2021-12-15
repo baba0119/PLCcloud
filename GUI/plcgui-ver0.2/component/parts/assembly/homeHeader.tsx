@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 import LoginFormMoveButton from '../planefigure/homeHeader/loginFormMoveButton';
 import Logo from '../planefigure/homeHeader/logo';
@@ -11,10 +11,20 @@ const HomeHeaderArea = styled.div`
 `;
 
 const HomeHeader: VFC = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("isLogin") === "true") {
+      setIsLogin(true);
+    }
+  }, [])
+  
   return (
     <HomeHeaderArea>
       <Logo/>
-      <LoginFormMoveButton/>
+      {!isLogin &&
+        <LoginFormMoveButton/>
+      }
     </HomeHeaderArea>
   )
 }

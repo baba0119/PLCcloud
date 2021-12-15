@@ -20,14 +20,13 @@ func DbConnect() (*sql.DB, error) {
 
 	db, err := sql.Open("mysql", dbOpenStr)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("sql.Open():", err)
 		return nil, err
 	}
-	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("db.Ping():", err)
 		return nil, err
 	}
 

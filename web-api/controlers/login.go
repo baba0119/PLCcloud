@@ -18,7 +18,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 	errRes, err := json.Marshal(errResData)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -30,6 +30,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	// プリフライトリクエストへ対応
 	if r.Method == "OPTIONS" {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		w.WriteHeader(http.StatusOK)
 		return
 	}
@@ -46,16 +50,25 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data, err := httpdatahandle.HttpJsonParse(r)
+	body, err := httpdatahandle.DataRetrieval(r)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	var user httpdatahandle.User
+	err = json.Unmarshal(body, &user)
+	if err != nil {
+		log.Println(err)
+		return
+	}
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
-
-	user := data.(httpdatahandle.User)
 
 	// DBとの接続
 	DB, err := db.DbConnect()
@@ -63,9 +76,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
+	defer DB.Close()
 
 	// useridからパスワードのハッシュを取り出す
 	hash, err := db.GetPassHash(DB, user.Id)
@@ -73,7 +87,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
 
@@ -83,7 +97,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
 
@@ -93,7 +107,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
 
@@ -103,7 +117,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
 
@@ -116,9 +130,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintln(w, errRes)
 
-		log.Fatal(err)
+		log.Println(err)
 		return
 	}
-	fmt.Fprintln(w, res)
+	fmt.Println("return token: ", string(res))
+	fmt.Fprintln(w, string(res))
 
 }

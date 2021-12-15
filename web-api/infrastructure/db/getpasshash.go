@@ -8,7 +8,7 @@ import (
 
 func GetPassHash(db *sql.DB, userid string) (string, error) {
 	var hash string
-	err := db.QueryRow("SELECT pass FROM users WHERE id = ?", userid).Scan(&hash)
+	err := db.QueryRow("SELECT passwords FROM users WHERE userid = ?", userid).Scan(&hash)
 	if err != nil {
 		log.Fatal(err)
 		return "", err

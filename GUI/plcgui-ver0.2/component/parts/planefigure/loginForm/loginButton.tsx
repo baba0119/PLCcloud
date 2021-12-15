@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 
 const ParentArea = styled.div`
@@ -18,14 +18,19 @@ const LoginButtonStyle = styled.button`
   }
 `;
 
-const LoginButton: VFC = () => {
+type Props = {
+  handleClick: () => void
+}
+const LoginButton: VFC<Props> = ({
+  handleClick
+}) => {
   return (
     <ParentArea>
-      <LoginButtonStyle>
+      <LoginButtonStyle onClick={handleClick}>
         login
       </LoginButtonStyle>
     </ParentArea>
-  )
+  );
 }
 
 export default LoginButton

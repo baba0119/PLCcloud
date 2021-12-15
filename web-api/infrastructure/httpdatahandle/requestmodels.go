@@ -1,6 +1,6 @@
 package httpdatahandle
 
 type User struct {
-	Id   string
-	Password string
+	Id   string     `json:"id"`
+	Password string `json:"password"`
 }
