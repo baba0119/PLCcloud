@@ -8,6 +8,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var Db *sql.DB
+
 func DbConnect() (*sql.DB, error) {
 	DBinfo := DBinfo()
 	dbOpenStr := fmt.Sprintf(
@@ -29,6 +31,8 @@ func DbConnect() (*sql.DB, error) {
 		log.Fatal("db.Ping():", err)
 		return nil, err
 	}
+
+	Db = db
 
 	return db, nil
 }
