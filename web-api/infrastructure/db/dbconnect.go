@@ -10,7 +10,7 @@ import (
 
 var Db *sql.DB
 
-func DbConnect() (*sql.DB, error) {
+func DbConnect() (error) {
 	DBinfo := DBinfo()
 	dbOpenStr := fmt.Sprintf(
 		"%s:%s@tcp(%s)/%s",
@@ -23,16 +23,16 @@ func DbConnect() (*sql.DB, error) {
 	db, err := sql.Open("mysql", dbOpenStr)
 	if err != nil {
 		log.Fatal("sql.Open():", err)
-		return nil, err
+		return err
 	}
 
 	err = db.Ping()
 	if err != nil {
 		log.Fatal("db.Ping():", err)
-		return nil, err
+		return err
 	}
 
 	Db = db
 
-	return db, nil
+	return nil
 }

@@ -1,14 +1,13 @@
 package db
 
 import (
-	"database/sql"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func UpdateToken(db *sql.DB, userid, token string) error {
-	stmtUpdate, err := db.Prepare("UPDATE users SET token=? WHERE userid=?")
+func UpdateToken(userid, token string) error {
+	stmtUpdate, err := Db.Prepare("UPDATE users SET token=? WHERE userid=?")
 	if err != nil {
 		log.Fatal(err)
 		return err

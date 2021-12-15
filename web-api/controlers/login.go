@@ -57,18 +57,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// DBとの接続
-	DB, err := db.DbConnect()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-
-		log.Println(err)
-		return
-	}
-	defer DB.Close()
-
 	// useridからパスワードのハッシュを取り出す
-	hash, err := db.GetPassHash(DB, user.Id)
+	hash, err := db.GetPassHash(user.Id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 
@@ -95,7 +85,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// tokenをdbに保存
-	err = db.UpdateToken(DB, user.Id, token.String())
+	err = db.UpdateToken(user.Id, token.String())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 
