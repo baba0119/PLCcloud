@@ -96,6 +96,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	// レスポンス
 	resData := httpdatahandle.LoginRes{
 		Token: token.String(),
+		Id: user.Id,
 	}
 	res, err := json.Marshal(resData)
 	if err != nil {

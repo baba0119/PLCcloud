@@ -6,4 +6,5 @@ type ErrorRes struct {
 
 type LoginRes struct {
 	Token string
+	Id string
 }
