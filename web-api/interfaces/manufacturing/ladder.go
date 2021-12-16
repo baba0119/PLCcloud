@@ -1,4 +1,4 @@
-package methodbifu
+package manufacturing
 
 import (
 	"net/http"
