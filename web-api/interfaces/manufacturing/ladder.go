@@ -50,11 +50,16 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = controlers.ProjectInsert(project)
+		isSuccess, err := controlers.ProjectInsert(project)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 
 			log.Println(err)
+			return
+		}
+
+		if !isSuccess {
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
