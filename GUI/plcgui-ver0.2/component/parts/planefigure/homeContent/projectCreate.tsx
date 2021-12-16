@@ -8,6 +8,7 @@ const AreaParent = styled.div`
 
 const ProjectNameInputTitle = styled.h3`
   color: #4e4e4e;
+  margin-bottom: 12px;
 `;
 
 const DataInputArea = styled.div`
@@ -17,7 +18,7 @@ const DataInputArea = styled.div`
 
 const ProjectNameInput = styled.input`
   width: 80%;
-  padding: 10px 15px;
+  padding: 8px 12px;
   font-size: 16px;
   border-radius: 3px;
   border: 2px solid #ddd;
