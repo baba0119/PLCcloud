@@ -7,12 +7,18 @@ const HeaderArea = styled.div`
 `;
 
 const ContentArea = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
+`;
+
+const ContentPartArea = styled.div`
+  width: 60%;
 `;
 
 type homeModel = {
   HeaderPart: VFC
-  HomeContentPart?: VFC
+  HomeContentPart: VFC
 }
 const HomeFlame: VFC<homeModel> = ({
   HeaderPart,
@@ -23,7 +29,11 @@ const HomeFlame: VFC<homeModel> = ({
       <HeaderArea>
         <HeaderPart/>
       </HeaderArea>
-      <ContentArea></ContentArea>
+      <ContentArea>
+        <ContentPartArea>
+          <HomeContentPart/>
+        </ContentPartArea>
+      </ContentArea>
     </>
   )
 }
