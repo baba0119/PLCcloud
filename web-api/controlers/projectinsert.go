@@ -1,7 +1,13 @@
 package controlers
 
-import "net/http"
+import (
+	"plc-web-api/interfaces/httpdatahandle"
+)
 
-func ProjectInsert(w http.ResponseWriter, r *http.Request) {
+func ProjectInsert(project httpdatahandle.Project) error {
+	// ログイン状態かどうか確かめる
 
+	// プロジェクトの新規保存
+	
+	return nil
 }

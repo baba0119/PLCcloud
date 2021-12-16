@@ -38,6 +38,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	// リクエストボディからデータの取り出し
 	body, err := httpdatahandle.DataRetrieval(r)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+
 		log.Println(err)
 		return
 	}
@@ -45,6 +47,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	var user httpdatahandle.User
 	err = json.Unmarshal(body, &user)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		
 		log.Println(err)
 		return
 	}
