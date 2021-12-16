@@ -21,8 +21,7 @@ func NewProjectCreate(userid, projectName string) (bool, error) {
 	}
 	plcid := u.String()
 
-	insertStr := "INSERT INTO projects(userid, projectid, projectname, plcid)) VALUES(?)"
-	stmtInsert, err := Db.Prepare(insertStr)
+	stmtInsert, err := Db.Prepare("INSERT INTO projects(userid, projectid, projectname, plcid) VALUES(?, ?, ?, ?)")
 	if err != nil {
 		fmt.Println(err)
 		return false, err

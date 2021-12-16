@@ -4,7 +4,7 @@ import "log"
 
 func GetUserToken(userid string) (string, error) {
 	var token string
-	err := Db.QueryRow("SELECT token FROM users WHERE id = ?", userid).Scan(&token)
+	err := Db.QueryRow("SELECT token FROM users WHERE userid = ?", userid).Scan(&token)
 	if err != nil {
 		log.Println(err)
 		return "", err

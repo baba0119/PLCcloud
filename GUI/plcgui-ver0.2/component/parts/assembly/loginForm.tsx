@@ -27,7 +27,6 @@ const LoginForm: VFC = () => {
   const router = useRouter()
 
   const loginBtnHandler = () => {
-    console.log("ログインapi叩く")
     const reqData = {
       id: userId,
       password: passWord
