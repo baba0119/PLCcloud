@@ -1,6 +1,8 @@
 import React, { useState, VFC } from "react";
 import styled from "styled-components";
 import { END_POINT } from "../../../../utils/endpoint";
+import { Dispatch, SetStateAction } from "react";
+import { type } from "os";
 
 const AreaParent = styled.div`
   width: 100%;
@@ -45,7 +47,12 @@ const NewProjectCreateBtn = styled.button`
   }
 `;
 
-const ProjectCreate: VFC = () => {
+type Props = {
+  setTrigger: Dispatch<SetStateAction<boolean>>
+}
+const ProjectCreate: VFC<Props> = ({
+  setTrigger
+}) => {
   const [projectName, setProjectName] = useState("");
 
   const onChangeProjectName = (
@@ -80,11 +87,15 @@ const ProjectCreate: VFC = () => {
       }
       if (res.ok) {
         setProjectName("");
+        setTrigger(true);
+
       }
     }).catch(error => {
       console.log("通信失敗");
     })
   }
+
+  const onClickHndler = () => newProjectBtnHandler();
 
   return (
     <AreaParent>
@@ -95,7 +106,7 @@ const ProjectCreate: VFC = () => {
           onChange={onChangeProjectName}
         />
         <ControlBtnArea>
-          <NewProjectCreateBtn onClick={() => newProjectBtnHandler()}>
+          <NewProjectCreateBtn onClick={onClickHndler}>
             create
           </NewProjectCreateBtn>
         </ControlBtnArea>

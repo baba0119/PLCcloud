@@ -1,5 +1,8 @@
-import { VFC } from "react";
+import { useEffect, useState, VFC } from "react";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from 'uuid';
+import { END_POINT } from "../../../../utils/endpoint";
 
 const AreaParent = styled.div`
   width: 100%;
@@ -66,52 +69,64 @@ const ControlText = styled.p`
   cursor: default;
 `;
 
-const ProjectListDisplay: VFC = () => {
+type Props = {
+  trigger: boolean
+  setTrigger: Dispatch<SetStateAction<boolean>>
+}
+const ProjectListDisplay: VFC<Props> = ({
+  trigger,
+  setTrigger
+}) => {
+  type projectFlame = {
+    Id: string
+    Name: string
+  }
+  const [projectList, setProjectList] = useState([{} as projectFlame]);
+
+  useEffect(() => {
+    const userid = sessionStorage.getItem("userid") as string;
+    const endpoint = END_POINT + `/project?userid=${userid}`;
+    if (trigger) {
+      fetch(endpoint, {
+        method: "GET",
+        mode: "cors",
+        credentials: 'include',
+      }).then(res => {
+        if (!res.ok) {
+          console.log("サーバーエラー");
+          return
+        }
+        return res.json()
+      }).then(res => {
+        console.log(res);
+        setProjectList(res);
+      }).catch(error => {
+        console.log("通信失敗");
+      })
+
+      setTrigger(false);
+    }
+  }, [setTrigger, trigger])
+
   return (
     <AreaParent>
       <ProjectListTitle>projects</ProjectListTitle>
       <ProjectListArea>
-
-        <ProjectArea>
-          <ProjectNameArea>
-            <ProjectName>test</ProjectName>
-          </ProjectNameArea>
-          <ControlPanelArea>
-            <ControlBtn color="#02751b">
-              <ControlText>edit</ControlText>
-            </ControlBtn>
-            <ControlBtn color="#eb001f">
-              <ControlText>setting</ControlText>
-            </ControlBtn>
-          </ControlPanelArea>
-        </ProjectArea>
-        <ProjectArea>
-          <ProjectNameArea>
-            <ProjectName>test</ProjectName>
-          </ProjectNameArea>
-          <ControlPanelArea>
-            <ControlBtn color="#02751b">
-              <ControlText>edit</ControlText>
-            </ControlBtn>
-            <ControlBtn color="#eb001f">
-              <ControlText>setting</ControlText>
-            </ControlBtn>
-          </ControlPanelArea>
-        </ProjectArea>
-        <ProjectArea>
-          <ProjectNameArea>
-            <ProjectName>test</ProjectName>
-          </ProjectNameArea>
-          <ControlPanelArea>
-            <ControlBtn color="#02751b">
-              <ControlText>edit</ControlText>
-            </ControlBtn>
-            <ControlBtn color="#eb001f">
-              <ControlText>setting</ControlText>
-            </ControlBtn>
-          </ControlPanelArea>
-        </ProjectArea>
-
+        {projectList.map(project => (
+          <ProjectArea key={uuidv4()}>
+            <ProjectNameArea>
+              <ProjectName>{project.Name}</ProjectName>
+            </ProjectNameArea>
+            <ControlPanelArea>
+              <ControlBtn color="#02751b">
+                <ControlText>edit</ControlText>
+              </ControlBtn>
+              <ControlBtn color="#eb001f">
+                <ControlText>setting</ControlText>
+              </ControlBtn>
+            </ControlPanelArea>
+          </ProjectArea>
+        ))}
       </ProjectListArea>
     </AreaParent>
   )
