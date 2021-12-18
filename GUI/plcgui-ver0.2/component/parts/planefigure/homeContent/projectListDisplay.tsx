@@ -8,6 +8,7 @@ const AreaParent = styled.div`
 const ProjectListTitle = styled.h3`
   color: #4e4e4e;
   margin-top: 28px;
+  margin-bottom: 12px;
 `;
 
 const ProjectListArea = styled.div`
@@ -36,6 +37,7 @@ const ProjectName = styled.p`
   font-size: 1.2rem;
   color: #414141;
   margin-left: 8px;
+  cursor: default;
 `;
 
 const ControlPanelArea = styled.div`
@@ -58,9 +60,10 @@ const ControlBtn = styled.div<{color: string}>`
   }
 `;
 
-const ControlText = styled.h5`
+const ControlText = styled.p`
   color: #f9f9f9;
   font-size: 1rem;
+  cursor: default;
 `;
 
 const ProjectListDisplay: VFC = () => {

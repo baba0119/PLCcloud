@@ -50,6 +50,7 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// コントローラーの使用
 		isSuccess, err := controlers.ProjectInsert(project)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -63,7 +64,30 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// レスポンス
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, "ok!!!")
+
+	case "GET":
+		// データ取り出し
+		userid := r.FormValue("userid")
+
+		projectList, err := controlers.GetProjectList(userid)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+
+			log.Println(err)
+			return
+		}
+
+		res, err := json.Marshal(projectList)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+
+			log.Println(err)
+			return
+		}
+		fmt.Println("project list: ", string(res))
+		fmt.Fprintln(w, string(res))
 	}
 }
