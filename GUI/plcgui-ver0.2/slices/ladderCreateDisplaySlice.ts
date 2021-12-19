@@ -150,6 +150,11 @@ export const ladderCreateDisplaySlice = createSlice({
       return state;
     },
     ladderInit: (state) => {
+      type ProjectReqFlame = {
+        token: string
+        userid: string
+        projectid: string
+      }
     }
   }
 });
