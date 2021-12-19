@@ -143,18 +143,13 @@ export const ladderCreateDisplaySlice = createSlice({
     modeChange: (state) => {
       if (state.mode === "create") {
         state.mode = "debug";
-        const test = apiRequest<sample>({
-          path: "/",
-          method: "POST",
-          data: JSON.stringify({
-            ladder: state.ladderRecordData
-          })
-        });
       } else {
         state.mode = "create";
       }
 
       return state;
+    },
+    ladderInit: (state) => {
     }
   }
 });

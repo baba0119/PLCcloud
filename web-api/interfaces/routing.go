@@ -9,5 +9,5 @@ import (
 func Handler() {
 	http.HandleFunc("/debug", controlers.LdDebug)
 	http.HandleFunc("/login", manufacturing.Login)
-	http.HandleFunc("/project", manufacturing.Ladder)
+	http.HandleFunc("/project", manufacturing.Project)
 }

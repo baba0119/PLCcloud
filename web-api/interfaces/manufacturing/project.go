@@ -9,7 +9,7 @@ import (
 	"plc-web-api/interfaces/httpdatahandle"
 )
 
-func Ladder(w http.ResponseWriter, r *http.Request) {
+func Project(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", LOCAL_END_POINT)
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
