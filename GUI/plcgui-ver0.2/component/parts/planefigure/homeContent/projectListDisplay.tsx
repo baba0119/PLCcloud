@@ -21,7 +21,7 @@ const ProjectListArea = styled.div`
 `;
 
 const ProjectArea = styled.div`
-  height: 6vh;
+  height: 7vh;
   display: flex;
   border-bottom: 2px solid #b9b9b9;
   background-color: #fdfdfd;
@@ -108,6 +108,42 @@ const ProjectListDisplay: VFC<Props> = ({
     }
   }, [setTrigger, trigger])
 
+  const projectDelete = (project: projectFlame) => {
+    type deleteProjectReqFlame = {
+      token: string
+      userid: string
+      projectid: string
+    }
+    const deleteReq: deleteProjectReqFlame = {
+      token: sessionStorage.getItem("token") as string,
+      userid: sessionStorage.getItem("userid") as string,
+      projectid: project.Id
+    }
+    const isDelete = confirm(`${project.Name} を削除しますか？`)
+    if (!isDelete) {
+      return
+    }
+    const endpoint = END_POINT + "/project"
+    fetch(endpoint, {
+      method: "DELETE",
+      mode: "cors",
+      credentials: 'include',
+      body: JSON.stringify(deleteReq),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      if (!res.ok) {
+        console.log("サーバーエラー");
+      }
+      if (res.ok) {
+        setTrigger(true);
+      }
+    }).catch(error => {
+      console.log("通信失敗");
+    })
+  }
+
   return (
     <AreaParent>
       <ProjectListTitle>projects</ProjectListTitle>
@@ -121,7 +157,10 @@ const ProjectListDisplay: VFC<Props> = ({
               <ControlBtn color="#02751b">
                 <ControlText>edit</ControlText>
               </ControlBtn>
-              <ControlBtn color="#eb001f">
+              <ControlBtn
+                color="#eb001f"
+                onClick={() => projectDelete(project)}
+              >
                 <ControlText>delete</ControlText>
               </ControlBtn>
             </ControlPanelArea>
