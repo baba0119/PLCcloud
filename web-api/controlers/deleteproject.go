@@ -16,11 +16,11 @@ func DeleteProject(usertoken, userid, projectid string) (bool, error) {
 		return false, err
 	}
 
-	isSuccess, err := db.DeleteProject(projectid)
+	err = db.DeleteProject(projectid)
 	if err != nil {
 		log.Println(err)
 		return false, err
 	}
 
-	return isSuccess, nil
+	return true, nil
 }
