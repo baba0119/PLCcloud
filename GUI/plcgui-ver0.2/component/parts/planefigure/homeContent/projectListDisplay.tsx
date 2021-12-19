@@ -122,7 +122,7 @@ const ProjectListDisplay: VFC<Props> = ({
                 <ControlText>edit</ControlText>
               </ControlBtn>
               <ControlBtn color="#eb001f">
-                <ControlText>setting</ControlText>
+                <ControlText>delete</ControlText>
               </ControlBtn>
             </ControlPanelArea>
           </ProjectArea>

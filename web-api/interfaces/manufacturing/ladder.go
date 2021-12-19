@@ -89,5 +89,49 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Println("project list: ", string(res))
 		fmt.Fprintln(w, string(res))
+
+	case "DELETE":
+		if r.Header.Get("Content-Type") != "application/json" {
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
+		// リクエストボディからデータの取り出し
+		body, err := httpdatahandle.DataRetrieval(r)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+
+			log.Println(err)
+			return
+		}
+
+		var deleteProject httpdatahandle.DeleteProjectReqFlame
+		err = json.Unmarshal(body, &deleteProject)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+
+			log.Println(err)
+			return
+		}
+
+		isSuccess, err := controlers.DeleteProject(
+			deleteProject.Token,
+			deleteProject.UserId,
+			deleteProject.ProjectId,
+		)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+
+			log.Println(err)
+			return
+		}
+
+		if isSuccess {
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintln(w, "ok")
+		} else {
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintln(w, "missed")
+		}
 	}
 }

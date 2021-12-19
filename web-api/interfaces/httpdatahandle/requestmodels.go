@@ -10,3 +10,9 @@ type Project struct {
 	Token  string `json:"token"`
 	Name   string `json:"name"`
 }
+
+type DeleteProjectReqFlame struct {
+	Token     string `json:"token"`
+	UserId    string `json:"userid"`
+	ProjectId string `json:"projectid"`
+}
