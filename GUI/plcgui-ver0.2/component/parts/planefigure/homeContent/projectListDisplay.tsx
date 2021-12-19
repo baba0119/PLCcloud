@@ -1,5 +1,6 @@
 import { useEffect, useState, VFC } from "react";
 import { Dispatch, SetStateAction } from "react";
+import Link from 'next/link'
 import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
 import { END_POINT } from "../../../../utils/endpoint";
@@ -144,6 +145,10 @@ const ProjectListDisplay: VFC<Props> = ({
     })
   }
 
+  const projectIdSet = (projectId: string) => {
+    sessionStorage.setItem("projectid", projectId);
+  }
+
   return (
     <AreaParent>
       <ProjectListTitle>projects</ProjectListTitle>
@@ -154,9 +159,14 @@ const ProjectListDisplay: VFC<Props> = ({
               <ProjectName>{project.Name}</ProjectName>
             </ProjectNameArea>
             <ControlPanelArea>
-              <ControlBtn color="#02751b">
-                <ControlText>edit</ControlText>
-              </ControlBtn>
+              <Link href="/ladder/Assemble" passHref>
+                <ControlBtn
+                  color="#02751b"
+                  onClick={() => projectIdSet(project.Id)}
+                >
+                  <ControlText>edit</ControlText>
+                </ControlBtn>
+              </Link>
               <ControlBtn
                 color="#eb001f"
                 onClick={() => projectDelete(project)}
