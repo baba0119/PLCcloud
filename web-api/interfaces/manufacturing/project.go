@@ -107,7 +107,7 @@ func Project(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var deleteProject httpdatahandle.DeleteProjectReqFlame
+		var deleteProject httpdatahandle.ProjectReqFlame
 		err = json.Unmarshal(body, &deleteProject)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
