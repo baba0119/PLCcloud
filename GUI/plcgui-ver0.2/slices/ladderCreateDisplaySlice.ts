@@ -4,6 +4,7 @@ import { colPatternModel, colSettingModel } from "../model/colPatternModel";
 import { KindsModel, ladderRecordDataModel } from "../model/ladderDataModel";
 import { point } from "../model/ladderStateModel";
 import { apiRequest } from "../utils/apiRequest";
+import { END_POINT } from "../utils/endpoint";
 import { ladderCreateDisplayInitialState } from "./initialState/ladderCreateDisplay";
 import { colSetting } from "./utils/colSetting";
 import { pointSelect } from "./utils/pointSelect";
@@ -155,6 +156,31 @@ export const ladderCreateDisplaySlice = createSlice({
         userid: string
         projectid: string
       }
+      const ladderGetReq: ProjectReqFlame = {
+        token: sessionStorage.getItem("token") as string,
+        userid: sessionStorage.getItem("userid") as string,
+        projectid: sessionStorage.getItem("projectid") as string
+      }
+      const endpoint = END_POINT + "/ladder"
+      fetch(endpoint, {
+        method: "POST",
+        mode: "cors",
+        credentials: 'include',
+        body: JSON.stringify(ladderGetReq),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if (!res.ok) {
+          console.log("サーバーエラー");
+          return
+        }
+        return res.json()
+      }).then(res => {
+        console.log(res)
+      }).catch(error => {
+        console.log("通信失敗");
+      })
     }
   }
 });

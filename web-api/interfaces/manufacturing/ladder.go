@@ -62,10 +62,40 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 
 		if isSuccess {
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintln(w, ladderJson)
+			var ladderRes httpdatahandle.LadderRes
+			if ladderJson == "" {
+				ladderRes = httpdatahandle.LadderRes{
+					IsExist: false,
+					LdJSON:  ladderJson,
+				}
+			} else {
+				ladderRes = httpdatahandle.LadderRes{
+					IsExist: true,
+					LdJSON:  ladderJson,
+				}
+			}
+
+			res, err := json.Marshal(ladderRes)
+			if err != nil {
+				w.WriteHeader(http.StatusBadRequest)
+				log.Println(err)
+				return
+			}
+			fmt.Fprintln(w, string(res))
 		} else {
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintln(w, "missed")
+			ladderRes := httpdatahandle.LadderRes{
+				IsExist: false,
+				LdJSON:  ladderJson,
+			}
+
+			res, err := json.Marshal(ladderRes)
+			if err != nil {
+				w.WriteHeader(http.StatusBadRequest)
+				log.Println(err)
+				return
+			}
+			fmt.Fprintln(w, string(res))
 		}
 	}
 }

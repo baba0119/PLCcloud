@@ -13,3 +13,8 @@ type ProjectRes struct {
 	Id   string
 	Name string
 }
+
+type LadderRes struct {
+	IsExist bool
+	LdJSON  interface{}
+}

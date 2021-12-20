@@ -1,4 +1,4 @@
-import { useContext, VFC } from "react";
+import { useContext, useEffect, VFC } from "react";
 import styled from "styled-components";
 import { LadderDisplayContext } from "../../../contexts/models/ladderDisplayContextModel";
 import NomalInput from "../planefigure/ladderDisplay/details/nomalInput";
@@ -36,7 +36,11 @@ const LadderRecordParent = styled.div`
 `;
 
 const LadderDisplay: VFC = () => {
-  const { displayState } = useContext(LadderDisplayContext);
+  const { displayState, ladderInitFunc } = useContext(LadderDisplayContext);
+
+  useEffect(() => {
+    ladderInitFunc()
+  }, [ladderInitFunc])
 
   return (
     <ParentArea>

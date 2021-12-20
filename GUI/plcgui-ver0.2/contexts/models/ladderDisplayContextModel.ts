@@ -17,6 +17,7 @@ type ladderDisplayContextModel = {
   ladderSetFunc: (displayData: ladderRecordDataModel[]) => void;
   ioKindChangeFunc: (kind: string) => void;
   modeChangeFunc: () => void;
+  ladderInitFunc: () => void;
 }
 
 export const LadderDisplayContext = createContext<ladderDisplayContextModel>(
