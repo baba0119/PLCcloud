@@ -161,6 +161,7 @@ export const ladderCreateDisplaySlice = createSlice({
         userid: sessionStorage.getItem("userid") as string,
         projectid: sessionStorage.getItem("projectid") as string
       }
+
       const endpoint = END_POINT + "/ladder"
       fetch(endpoint, {
         method: "POST",
@@ -178,9 +179,19 @@ export const ladderCreateDisplaySlice = createSlice({
         return res.json()
       }).then(res => {
         console.log(res)
+        if(!res.IsExist) {
+          state = ladderCreateDisplayInitialState;
+        } else {
+          state.ladderRecordData = JSON.parse(res.LdJSON);
+        }
       }).catch(error => {
         console.log("通信失敗");
       })
+
+      return state
+    },
+    ladderSave: () => {
+
     }
   }
 });
