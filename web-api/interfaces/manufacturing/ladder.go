@@ -97,5 +97,28 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 			}
 			fmt.Fprintln(w, string(res))
 		}
+
+		case "GET":
+			// データ取り出し
+			projectid := r.FormValue("projectid")
+
+			projectname, err := controlers.GetProjectName(projectid)
+			if err != nil {
+				w.WriteHeader(http.StatusBadRequest)
+				log.Println(err)
+				return
+			}
+
+			Res := httpdatahandle.ProjectNameRes{
+				Name: projectname,
+			}
+
+			res, err := json.Marshal(Res)
+			if err != nil {
+				w.WriteHeader(http.StatusBadRequest)
+				log.Println(err)
+				return
+			}
+			fmt.Fprintln(w, string(res))
 	}
 }

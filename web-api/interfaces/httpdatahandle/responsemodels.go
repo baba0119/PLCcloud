@@ -14,6 +14,10 @@ type ProjectRes struct {
 	Name string
 }
 
+type ProjectNameRes struct {
+	Name string
+}
+
 type LadderRes struct {
 	IsExist bool
 	LdJSON  interface{}
