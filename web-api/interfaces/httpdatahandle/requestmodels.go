@@ -16,3 +16,8 @@ type ProjectReqFlame struct {
 	UserId    string `json:"userid"`
 	ProjectId string `json:"projectid"`
 }
+
+type LadderSaveReq struct {
+	ProjectReqFlame
+	LdJSON interface{} `json:"ladder"`
+}
