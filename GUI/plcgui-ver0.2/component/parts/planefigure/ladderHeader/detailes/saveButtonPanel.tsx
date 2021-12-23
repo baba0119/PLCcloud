@@ -1,5 +1,6 @@
-import { VFC } from "react";
+import { useContext, VFC } from "react";
 import styled from "styled-components";
+import { LadderDisplayContext } from "../../../../../contexts/models/ladderDisplayContextModel";
 
 const AreaParent = styled.div`
   height: 100%;
@@ -27,9 +28,11 @@ const SaveButton = styled.button`
 `;
 
 const SaveButtonPanel: VFC = () => {
+  const { ladderSaveFunc } = useContext(LadderDisplayContext)
+
   return (
     <AreaParent>
-      <SaveButton>Save</SaveButton>
+      <SaveButton onClick={ladderSaveFunc}>Save</SaveButton>
     </AreaParent>
   )
 }

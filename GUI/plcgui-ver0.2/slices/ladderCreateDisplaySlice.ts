@@ -190,8 +190,41 @@ export const ladderCreateDisplaySlice = createSlice({
 
       return state
     },
-    ladderSave: () => {
+    ladderSave: (state) => {
+      type saveReqFlame = {
+        token: string
+        userid: string
+        projectid: string
+        ladder: any
+      }
+      const saveReq: saveReqFlame = {
+        token: sessionStorage.getItem("token") as string,
+        userid: sessionStorage.getItem("userid") as string,
+        projectid: sessionStorage.getItem("projectid") as string,
+        ladder: state.ladderRecordData
+      }
+      const endpoint = END_POINT + "/ladder"
+      fetch(endpoint, {
+        method: "PUT",
+        mode: "cors",
+        credentials: 'include',
+        body: JSON.stringify(saveReq),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if (!res.ok) {
+          console.log("サーバーエラー");
+          return
+        }
+        return res.text()
+      }).then(res => {
+        console.log(res)
+      }).catch(error => {
+        console.log("通信失敗");
+      })
 
+      return state
     }
   }
 });
