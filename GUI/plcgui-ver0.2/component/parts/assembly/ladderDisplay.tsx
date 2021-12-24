@@ -40,7 +40,9 @@ const LadderDisplay: VFC = () => {
 
   useEffect(() => {
     ladderInitFunc()
-  }, [ladderInitFunc])
+    ladderInitFunc()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ParentArea>

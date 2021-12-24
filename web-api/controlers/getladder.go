@@ -1,6 +1,7 @@
 package controlers
 
 import (
+	"fmt"
 	"log"
 	"plc-web-api/infrastructure/db"
 	"plc-web-api/interfaces/httpdatahandle"
@@ -8,7 +9,7 @@ import (
 
 func GetLadderProgram(
 	project httpdatahandle.ProjectReqFlame) (
-	interface{}, bool, error,
+		[]byte, bool, error,
 ) {
 	token, err := db.GetUserToken(project.UserId)
 	if err != nil {
@@ -25,6 +26,8 @@ func GetLadderProgram(
 		log.Println(err)
 		return nil, false, err
 	}
+
+	fmt.Println(string(ladderJson))
 
 	return ladderJson, true, err
 }

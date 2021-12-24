@@ -28,11 +28,16 @@ const SaveButton = styled.button`
 `;
 
 const SaveButtonPanel: VFC = () => {
-  const { ladderSaveFunc } = useContext(LadderDisplayContext)
+  const { ladderSaveFunc, ladderInitFunc } = useContext(LadderDisplayContext)
+
+  const clickHandeler = () => {
+    ladderSaveFunc()
+    ladderInitFunc()
+  }
 
   return (
     <AreaParent>
-      <SaveButton onClick={ladderSaveFunc}>Save</SaveButton>
+      <SaveButton onClick={() => clickHandeler()}>Save</SaveButton>
     </AreaParent>
   )
 }

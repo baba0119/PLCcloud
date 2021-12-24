@@ -176,18 +176,16 @@ export const ladderCreateDisplaySlice = createSlice({
           console.log("サーバーエラー");
           return
         }
-        return res.json()
+        return res.text()
       }).then(res => {
-        console.log(res)
-        if(!res.IsExist) {
-          state = ladderCreateDisplayInitialState;
-        } else {
-          state.ladderRecordData = JSON.parse(res.LdJSON);
-        }
+        console.log(typeof res, res)
+        sessionStorage.setItem("ld", res as string)
       }).catch(error => {
-        console.log("通信失敗");
+        console.log("通信失敗", error);
       })
 
+      const ld = sessionStorage.getItem("ld");
+      state.ladderRecordData = JSON.parse(ld as string);
       return state
     },
     ladderSave: (state) => {
@@ -224,6 +222,8 @@ export const ladderCreateDisplaySlice = createSlice({
         console.log("通信失敗");
       })
 
+      const ld = JSON.stringify(state.ladderRecordData);
+      sessionStorage.setItem("ld", ld);
       return state
     }
   }

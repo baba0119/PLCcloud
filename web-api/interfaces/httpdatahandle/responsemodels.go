@@ -20,5 +20,5 @@ type ProjectNameRes struct {
 
 type LadderRes struct {
 	IsExist bool
-	LdJSON  interface{}
+	LdJSON  string
 }

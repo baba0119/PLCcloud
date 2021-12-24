@@ -53,7 +53,7 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		ladderJson, isSuccess, err := controlers.GetLadderProgram(ladder)
+		ladderJson, _, err := controlers.GetLadderProgram(ladder)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 
@@ -61,42 +61,12 @@ func Ladder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if isSuccess {
+		if ladderJson == nil {
 			w.WriteHeader(http.StatusOK)
-			var ladderRes httpdatahandle.LadderRes
-			if ladderJson == "" {
-				ladderRes = httpdatahandle.LadderRes{
-					IsExist: false,
-					LdJSON:  ladderJson,
-				}
-			} else {
-				ladderRes = httpdatahandle.LadderRes{
-					IsExist: true,
-					LdJSON:  ladderJson,
-				}
-			}
-
-			res, err := json.Marshal(ladderRes)
-			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
-				log.Println(err)
-				return
-			}
-			fmt.Fprintln(w, string(res))
+			fmt.Fprintln(w, "null")
 		} else {
 			w.WriteHeader(http.StatusOK)
-			ladderRes := httpdatahandle.LadderRes{
-				IsExist: false,
-				LdJSON:  ladderJson,
-			}
-
-			res, err := json.Marshal(ladderRes)
-			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
-				log.Println(err)
-				return
-			}
-			fmt.Fprintln(w, string(res))
+			fmt.Fprintln(w, string(ladderJson))
 		}
 
 		// プロジェクトの名前を取得する
