@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { sample } from "../model/apiRequestModel/sample";
 import { colPatternModel, colSettingModel } from "../model/colPatternModel";
 import { KindsModel, ladderRecordDataModel } from "../model/ladderDataModel";
-import { point } from "../model/ladderStateModel";
-import { apiRequest } from "../utils/apiRequest";
+import { ioStateModel, point } from "../model/ladderStateModel";
 import { END_POINT } from "../utils/endpoint";
 import { ladderCreateDisplayInitialState } from "./initialState/ladderCreateDisplay";
 import { colSetting } from "./utils/colSetting";
@@ -144,6 +142,29 @@ export const ladderCreateDisplaySlice = createSlice({
     modeChange: (state) => {
       if (state.mode === "create") {
         state.mode = "debug";
+        const inputList: ioStateModel[] = [];
+        const outputList: ioStateModel[] = [];
+        const ladder = state.ladderRecordData;
+
+        ladder.map(record => {
+          record.ladderData.map(node => {
+            const info = node.ladderNode.info;
+            if ( info === "gpA" || info === "gpB" ) {
+              inputList.push({
+                nodeName: node.ladderNode.name,
+                ioState: false
+              })
+            } else if ( info === "vrio" || info === "gpio" ) {
+              outputList.push({
+                nodeName: node.ladderNode.name,
+                ioState: false
+              })
+            }
+          })
+        })
+
+        state.inputState = inputList;
+        state.outputState = outputList;
       } else {
         state.mode = "create";
       }
@@ -225,6 +246,9 @@ export const ladderCreateDisplaySlice = createSlice({
       const ld = JSON.stringify(state.ladderRecordData);
       sessionStorage.setItem("ld", ld);
       return state
+    },
+    inputControl: () => {
+
     }
   }
 });

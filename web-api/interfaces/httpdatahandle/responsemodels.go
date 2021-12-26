@@ -18,7 +18,7 @@ type ProjectNameRes struct {
 	Name string
 }
 
-type LadderRes struct {
-	IsExist bool
-	LdJSON  string
+type IOoutputRes struct {
+	NodeName string
+	State    bool
 }
