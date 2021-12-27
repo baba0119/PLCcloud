@@ -247,8 +247,28 @@ export const ladderCreateDisplaySlice = createSlice({
       sessionStorage.setItem("ld", ld);
       return state
     },
-    inputControl: () => {
+    inputControl: (state, action: PayloadAction<string>) => {
+      // 型定義
+      type StateListFlame = {
+        nodeName: string
+        state: boolean
+        nodeType?: string
+      }
+      type ioFlame = {
+        stateList: StateListFlame[]
+        elementCount: number
+      }
+      type debugReqFlame = {
+        input: ioFlame
+        output: ioFlame
+        ladder: ladderRecordDataModel[]
+      }
 
+      // 入力の変更
+
+      // 状態からリクエストデータの作成
+
+      // apiを叩く(出力の変更)
     }
   }
 });
