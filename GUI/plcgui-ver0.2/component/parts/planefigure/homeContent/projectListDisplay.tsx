@@ -46,7 +46,7 @@ const ProjectName = styled.p`
 `;
 
 const ControlPanelArea = styled.div`
-  width: 20%;
+  width: 28%;
   display: flex;
   align-items: center;
 `;
@@ -166,6 +166,13 @@ const ProjectListDisplay: VFC<Props> = ({
                   onClick={() => projectIdSet(project.Id)}
                 >
                   <ControlText>edit</ControlText>
+                </ControlBtn>
+              </Link>
+              <Link href="/ladder/console" passHref>
+                <ControlBtn
+                  color="#022175"
+                >
+                  <ControlText>console</ControlText>
                 </ControlBtn>
               </Link>
               <ControlBtn
