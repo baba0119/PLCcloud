@@ -28,6 +28,7 @@ func Project(w http.ResponseWriter, r *http.Request) {
 	}
 
 	switch r.Method {
+	// プロジェクト作成api
 	case "POST":
 		if r.Header.Get("Content-Type") != "application/json" {
 			w.WriteHeader(http.StatusBadRequest)
@@ -53,7 +54,7 @@ func Project(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// コントローラーの使用
-		isSuccess, err := controlers.ProjectInsert(project)
+		isSuccess, projectid, err := controlers.ProjectInsert(project)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 
@@ -68,7 +69,7 @@ func Project(w http.ResponseWriter, r *http.Request) {
 
 		// レスポンス
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "ok!!!")
+		fmt.Fprintln(w, projectid)
 
 	case "GET":
 		// データ取り出し

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
 import { END_POINT } from "../../../../utils/endpoint";
+import { ladderCreateDisplayInitialState } from "../../../../slices/initialState/ladderCreateDisplay";
 
 const AreaParent = styled.div`
   width: 100%;

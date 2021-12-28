@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { END_POINT } from "../../../../utils/endpoint";
 import { Dispatch, SetStateAction } from "react";
 import { type } from "os";
+import { ladderCreateDisplayInitialState } from "../../../../slices/initialState/ladderCreateDisplay";
 
 const AreaParent = styled.div`
   width: 100%;
@@ -88,11 +89,51 @@ const ProjectCreate: VFC<Props> = ({
       if (res.ok) {
         setProjectName("");
         setTrigger(true);
-
       }
+      return res.text()
+    }).then(res => {
+      console.log(res)
+      sessionStorage.setItem("projectid", res)
     }).catch(error => {
       console.log("通信失敗");
     })
+
+    setTimeout(() => {}, 1000)
+
+    type saveReqFlame = {
+      token: string
+      userid: string
+      projectid: string
+      ladder: any
+    }
+    const saveReq: saveReqFlame = {
+      token: sessionStorage.getItem("token") as string,
+      userid: sessionStorage.getItem("userid") as string,
+      projectid: sessionStorage.getItem("projectid") as string,
+      ladder: ladderCreateDisplayInitialState.ladderRecordData
+    }
+    const endpoint2 = END_POINT + "/ladder"
+    fetch(endpoint2, {
+      method: "PUT",
+      mode: "cors",
+      credentials: 'include',
+      body: JSON.stringify(saveReq),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      if (!res.ok) {
+        console.log("サーバーエラー");
+        return
+      }
+      return res.text()
+    }).then(res => {
+      console.log(res)
+    }).catch(error => {
+      console.log("通信失敗");
+    })
+
+    setTimeout(() => {}, 1000)
   }
 
   const onClickHndler = () => newProjectBtnHandler();

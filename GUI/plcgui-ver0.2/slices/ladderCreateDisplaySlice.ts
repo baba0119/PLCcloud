@@ -206,7 +206,10 @@ export const ladderCreateDisplaySlice = createSlice({
       })
 
       const ld = sessionStorage.getItem("ld");
-      state.ladderRecordData = JSON.parse(ld as string);
+      if (ld != "null") {
+        console.log("true")
+        state.ladderRecordData = JSON.parse(ld as string);
+      }
       return state
     },
     ladderSave: (state) => {

@@ -6,28 +6,28 @@ import (
 	"plc-web-api/interfaces/httpdatahandle"
 )
 
-func ProjectInsert(project httpdatahandle.Project) (bool, error) {
+func ProjectInsert(project httpdatahandle.Project) (bool, string, error) {
 	// ログイン状態かどうか確かめる
 	token, err := db.GetUserToken(project.UserId)
 	if err != nil {
 		log.Println(err)
-		return false, err
+		return false, "", err
 	}
 
 	if project.Token != token {
-		return false, nil
+		return false, "", nil
 	}
 
 	// プロジェクトの新規保存
-	isSuccess, err := db.NewProjectCreate(project.UserId, project.Name)
+	isSuccess, projectid, err := db.NewProjectCreate(project.UserId, project.Name)
 	if err != nil {
 		log.Println(err)
-		return false, err
+		return false, "", err
 	}
 
 	if !isSuccess {
-		return false, nil
+		return false, "", nil
 	}
 
-	return true, nil
+	return true, projectid, nil
 }
