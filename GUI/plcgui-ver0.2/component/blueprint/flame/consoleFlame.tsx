@@ -13,7 +13,7 @@ const ContentArea = styled.div`
 `;
 
 const ContentPartArea = styled.div`
-  width: 60%;
+  width: 50%;
 `;
 
 

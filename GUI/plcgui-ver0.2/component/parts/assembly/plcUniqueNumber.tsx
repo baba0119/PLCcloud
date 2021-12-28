@@ -9,7 +9,12 @@ const AreaParent = styled.div`
 const PLCUniqueNumber: VFC = () => {
   return (
     <AreaParent>
-      <ConsoleDisplayFlame/>
+      <ConsoleDisplayFlame
+        texts="PLC識別暗号"
+        Component={() => (
+          <p></p>
+        )}
+      />
     </AreaParent>
   )
 }
