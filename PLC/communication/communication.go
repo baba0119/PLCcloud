@@ -1,10 +1,12 @@
 package communication
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"net"
 	"os"
+	"strings"
 
 	proto "github.com/huin/mqtt"
 	"github.com/jeffallen/mqtt"
@@ -46,9 +48,23 @@ func Subscriber() {
 	fmt.Println("Connected with client id", cc.ClientId)
 	cc.Subscribe(tq)
 
+	tmpStdout := os.Stdout  // 標準出力を元に戻せるように保存
+	r, w, _ := os.Pipe()
+
 	for m := range cc.Incoming {
-		fmt.Print(m.TopicName, "\t")
-		m.Payload.WritePayload(os.Stdout)
+		fmt.Print("TopicName: ", m.TopicName, "\t")
+
+		os.Stdout = w // 標準出力の書き込み先を変更
+		m.Payload.WritePayload(os.Stdout) // 標準出力へ書き込み
+
+		w.Close() // 閉じないと永遠に書き込みが終わらない
+		var buf bytes.Buffer
+		buf.ReadFrom(r) // バッファーに値をコピー
+
+		s := strings.TrimRight(buf.String(), "\n")  // バッファーから文字列へ変換
+		os.Stdout = tmpStdout
+		fmt.Fprintf(os.Stdout, "%s\t", s)
+
 		fmt.Println("\tr: ", m.Header.Retain)
 	}
 }

@@ -1,12 +1,12 @@
 package main
 
-import (
-	// "PLC/plcengine/plctest/selfholding"
-)
+import "PLC/communication"
+
+// "PLC/plcengine/plctest/selfholding"
 
 func main() {
 	// mqtt コミュニ―ケーション goroutin
-	
+	communication.Subscriber()
 
 	// plc 動作管理 goroutin
 
