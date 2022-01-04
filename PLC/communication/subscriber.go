@@ -20,7 +20,7 @@ func Subscriber() {
 	var user = flag.String("user", "", "username")
 	var pass = flag.String("pass", "", "password")
 	var dump = flag.Bool("dump", false, "dump messages?")
-	
+
 	flag.Parse()
 
 	if flag.NArg() < 1 {
@@ -51,28 +51,24 @@ func Subscriber() {
 	fmt.Println("Connected with client id", cc.ClientId)
 	cc.Subscribe(tq)
 
-	tmpStdout := os.Stdout  // 標準出力を元に戻せるように保存
-	r, w, _ := os.Pipe()
-
 	for m := range cc.Incoming {
+		r, w, _ := os.Pipe()
 		fmt.Print("TopicName: ", m.TopicName, "\t")
 
-		os.Stdout = w // 標準出力の書き込み先を変更
-		m.Payload.WritePayload(os.Stdout) // 標準出力へ書き込み
+		m.Payload.WritePayload(w) // 標準出力へ書き込み
 
 		w.Close() // 閉じないと永遠に書き込みが終わらない
 		var buf bytes.Buffer
 		buf.ReadFrom(r) // バッファーに値をコピー
+		r.Close()
 
 		s := strings.TrimRight(buf.String(), "\n")  // バッファーから文字列へ変換
-		os.Stdout = tmpStdout
-		fmt.Fprintf(os.Stdout, "%s\t", s) // この時 s は JSON文字列 であること
+		fmt.Fprintf(os.Stdout, "%s", s) // この時 s は JSON文字列 であること
+		fmt.Printf("\tr: %v\n", m.Header.Retain)
 
-		// resMessage, result := ComProcess(s)
-		// fmt.Printf("response Message: %s\n", resMessage)
-		// fmt.Printf("result: %v\n", result)
+		resMessage, result := ComProcess(s)
+		fmt.Printf("response Message: %s\n", resMessage)
+		fmt.Printf("result: %v\n", result)
 		// Publisher(resMessage, result)
-
-		fmt.Println("\tr: ", m.Header.Retain)
 	}
 }

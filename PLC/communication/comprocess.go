@@ -3,6 +3,7 @@ package communication
 import (
 	"PLC/statement"
 	"encoding/json"
+	"fmt"
 	"log"
 )
 
@@ -14,7 +15,7 @@ func ComProcess(JSONstring string) (string, bool) {
 	// json文字列のパース
 	err := json.Unmarshal([]byte(JSONstring), &operation)
 	if err != nil {
-		log.Println("error: json.Unmashal() missed", err)
+		log.Println("error: json.Unmashal() missed\n", err)
 		return "", false
 	}
 
@@ -43,5 +44,8 @@ func ComProcess(JSONstring string) (string, bool) {
 		return "", false
 	}
 
-	return resMessage, false
+	fmt.Printf("plc state: %v\n", statement.PLCmode)
+	fmt.Printf("true => run\tfalse => stop\n")
+
+	return resMessage, true
 }
