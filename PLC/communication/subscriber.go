@@ -1,6 +1,7 @@
 package communication
 
 import (
+	"PLC/statement"
 	"bytes"
 	"flag"
 	"fmt"
@@ -12,13 +13,14 @@ import (
 	"github.com/jeffallen/mqtt"
 )
 
-var host = flag.String("host", "localhost:1883", "hostname of broker")
-var id = flag.String("id", "", "client id")
-var user = flag.String("user", "", "username")
-var pass = flag.String("pass", "", "password")
-var dump = flag.Bool("dump", false, "dump messages?")
 
 func Subscriber() {
+	var host = flag.String("host", "localhost:1883", "hostname of broker")
+	var id = flag.String("id", "", "client id")
+	var user = flag.String("user", "", "username")
+	var pass = flag.String("pass", "", "password")
+	var dump = flag.Bool("dump", false, "dump messages?")
+	
 	flag.Parse()
 
 	if flag.NArg() < 1 {
@@ -38,6 +40,7 @@ func Subscriber() {
 	tq := make([]proto.TopicQos, flag.NArg())
 	for i := 0; i < flag.NArg(); i++ {
 		tq[i].Topic = flag.Arg(i)
+		statement.PLCid = flag.Arg(i)
 		tq[i].Qos = proto.QosAtMostOnce
 	}
 
@@ -63,7 +66,12 @@ func Subscriber() {
 
 		s := strings.TrimRight(buf.String(), "\n")  // バッファーから文字列へ変換
 		os.Stdout = tmpStdout
-		fmt.Fprintf(os.Stdout, "%s\t", s)
+		fmt.Fprintf(os.Stdout, "%s\t", s) // この時 s は JSON文字列 であること
+
+		// resMessage, result := ComProcess(s)
+		// fmt.Printf("response Message: %s\n", resMessage)
+		// fmt.Printf("result: %v\n", result)
+		// Publisher(resMessage, result)
 
 		fmt.Println("\tr: ", m.Header.Retain)
 	}

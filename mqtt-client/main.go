@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"net"
 	"os"
 
@@ -17,10 +19,20 @@ var dump = flag.Bool("dump", false, "dump messages?")
 var retain = flag.Bool("retain", false, "retain message?")
 var wait = flag.Bool("wait", false, "stay connected after publishing?")
 
+type OperationModel struct {
+	Kind    string `json:"kind"`
+	Command string `json:"command"`
+}
+
+// 第一引数：key
+// 第二引数：operation.Kind
+// 第三引数：operation.command
 func main() {
+	var operation OperationModel
+
 	flag.Parse()
 
-	if flag.NArg() != 2 {
+	if flag.NArg() != 3 {
 		fmt.Fprintln(os.Stderr, "usage: pub topic message")
 		return
 	}
@@ -39,10 +51,19 @@ func main() {
 	}
 	fmt.Println("Connected with client id", cc.ClientId)
 
+	operation.Kind = flag.Arg(1)
+	operation.Command = flag.Arg(2)
+	e, err := json.Marshal(operation)
+	if err != nil {
+		log.Println("json.Marshal():", err)
+		return
+	}
+	fmt.Printf("json文字列 : %s\n", string(e))
+
 	cc.Publish(&proto.Publish{
 		Header:    proto.Header{Retain: *retain},
 		TopicName: flag.Arg(0),
-		Payload:   proto.BytesPayload([]byte(flag.Arg(1))),
+		Payload:   proto.BytesPayload(e),
 	})
 
 	if *wait {
