@@ -12,30 +12,30 @@ import (
 )
 
 func Publisher(resMessage string, result bool) {
-	var host = flag.String("host", "localhost:1883", "hostname of broker")
-	var user = flag.String("user", "", "username")
-	var pass = flag.String("pass", "", "password")
-	var dump = flag.Bool("dump", false, "dump messages?")
-	var retain = flag.Bool("retain", false, "retain message?")
+	var pubhost = flag.String("pubhost", "localhost:1883", "hostname of broker")
+	var pubuser = flag.String("pubuser", "", "username")
+	var pubpass = flag.String("pubpass", "", "password")
+	var pubdump = flag.Bool("pubdump", false, "dump messages?")
+	var pubretain = flag.Bool("pubretain", false, "retain message?")
 	var wait = flag.Bool("wait", false, "stay connected after publishing?")
 
-	conn, err := net.Dial("tcp", *host)
+	conn, err := net.Dial("tcp", *pubhost)
 	if err != nil {
 		fmt.Fprint(os.Stderr, "dial: ", err)
 		return
 	}
 	cc := mqtt.NewClientConn(conn)
-	cc.Dump = *dump
+	cc.Dump = *pubdump
 
-	if err := cc.Connect(*user, *pass); err != nil {
+	if err := cc.Connect(*pubuser, *pubpass); err != nil {
 		fmt.Fprintf(os.Stderr, "connect: %v\n", err)
 		os.Exit(1)
 	}
 	fmt.Println("Connected with client id", cc.ClientId)
 
 	cc.Publish(&proto.Publish{
-		Header:    proto.Header{Retain: *retain},
-		TopicName: statement.PLCid + "pub",
+		Header:    proto.Header{Retain: *pubretain},
+		TopicName: statement.PLCid + "sub",
 		Payload:   proto.BytesPayload([]byte(resMessage)),
 	})
 

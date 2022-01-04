@@ -51,6 +51,11 @@ func Subscriber() {
 	fmt.Println("Connected with client id", cc.ClientId)
 	cc.Subscribe(tq)
 
+	fmt.Println("--- plc info ---")
+	fmt.Printf("plc-id : %s\n", statement.PLCid)
+	fmt.Printf("client-id : %s\n", statement.PLCid + "sub")
+	fmt.Printf("---------------\n\n")
+
 	for m := range cc.Incoming {
 		r, w, _ := os.Pipe()
 		fmt.Print("TopicName: ", m.TopicName, "\t")
@@ -69,6 +74,8 @@ func Subscriber() {
 		resMessage, result := ComProcess(s)
 		fmt.Printf("response Message: %s\n", resMessage)
 		fmt.Printf("result: %v\n", result)
-		// Publisher(resMessage, result)
+		// メッセージのレスポンスは後で実装
+		Publisher(resMessage, result)
+		fmt.Println("---------------")
 	}
 }
