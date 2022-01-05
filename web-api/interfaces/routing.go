@@ -10,4 +10,5 @@ func Handler() {
 	http.HandleFunc("/login", manufacturing.Login)
 	http.HandleFunc("/project", manufacturing.Project)
 	http.HandleFunc("/ladder", manufacturing.Ladder)
+	http.HandleFunc("/plcid", manufacturing.PLCId)
 }

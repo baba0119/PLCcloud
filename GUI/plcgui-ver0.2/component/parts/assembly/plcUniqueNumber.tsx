@@ -7,10 +7,12 @@ const AreaParent = styled.div`
 `;
 
 const PLCUniqueNumber: VFC = () => {
+  // 一番最初にapiのコール
+  // 識別idの取得
   return (
     <AreaParent>
       <ConsoleDisplayFlame
-        texts="PLC識別暗号"
+        texts="PLC識別番号"
         Component={() => (
           <p></p>
         )}
