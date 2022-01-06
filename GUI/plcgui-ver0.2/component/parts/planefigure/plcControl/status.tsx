@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import { useEffect, useState, VFC } from "react";
 import styled from "styled-components";
 
 const AreaParent = styled.div`
@@ -14,9 +14,10 @@ const StatusArea = styled.p`
 `;
 
 const Status: VFC = () => {
+  const [status, setStatus] = useState("stop");
   return (
     <AreaParent>
-      <StatusArea>online, running</StatusArea>
+      <StatusArea>{status}</StatusArea>
     </AreaParent>
   )
 }

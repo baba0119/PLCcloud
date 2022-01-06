@@ -10,7 +10,9 @@ const AreaParent = styled.div`
 
 const Control: VFC = () => {
   return (
-    <AreaParent></AreaParent>
+    <AreaParent>
+      
+    </AreaParent>
   )
 }
 
