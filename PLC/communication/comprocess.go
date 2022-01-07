@@ -34,9 +34,17 @@ func ComProcess(JSONstring string) (string, bool) {
 
 	case "check":
 		if statement.PLCmode {
-			resMessage = "run"
+			if statement.LdJSON == "" {
+				resMessage = "run. ラダープログラムが存在しません"
+			} else {
+				resMessage = "run."
+			}
 		} else {
-			resMessage = "stop"
+			if statement.LdJSON == "" {
+				resMessage = "stop. ラダープログラムが存在しません"
+			} else {
+				resMessage = "run."
+			}
 		}
 
 	default:

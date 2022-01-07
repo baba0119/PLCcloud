@@ -14,12 +14,12 @@ import (
 )
 
 
-func Subscriber(isEnd, subup chan bool) {
-	var host = flag.String("host", "localhost:1883", "hostname of broker")
-	var id = flag.String("id", "", "client id")
-	var user = flag.String("user", "", "username")
-	var pass = flag.String("pass", "", "password")
-	var dump = flag.Bool("dump", false, "dump messages?")
+func SendSubscriber() {
+	var sendhost = flag.String("sendhost", "localhost:1883", "hostname of broker")
+	var sendid = flag.String("sendid", "", "client id")
+	var senduser = flag.String("senduser", "", "username")
+	var sendpass = flag.String("sendpass", "", "password")
+	var senddump = flag.Bool("senddump", false, "dump messages?")
 
 	flag.Parse()
 
@@ -28,14 +28,14 @@ func Subscriber(isEnd, subup chan bool) {
 		return
 	}
 
-	conn, err := net.Dial("tcp", *host)
+	conn, err := net.Dial("tcp", *sendhost)
 	if err != nil {
 		fmt.Fprint(os.Stderr, "dial: ", err)
 		return
 	}
 	cc := mqtt.NewClientConn(conn)
-	cc.Dump = *dump
-	cc.ClientId = *id
+	cc.Dump = *senddump
+	cc.ClientId = *sendid
 
 	tq := make([]proto.TopicQos, flag.NArg())
 	for i := 0; i < flag.NArg(); i++ {
@@ -44,7 +44,7 @@ func Subscriber(isEnd, subup chan bool) {
 		tq[i].Qos = proto.QosAtMostOnce
 	}
 
-	if err := cc.Connect(*user, *pass); err != nil {
+	if err := cc.Connect(*senduser, *sendpass); err != nil {
 		fmt.Fprintf(os.Stderr, "connect: %v\n", err)
 		os.Exit(1)
 	}
@@ -52,19 +52,17 @@ func Subscriber(isEnd, subup chan bool) {
 	cc.Subscribe(tq)
 
 	fmt.Println("--- plc info ---")
-	fmt.Println("命令受け取り Subscriber")
-	fmt.Printf("plc-id : %s\n", statement.PLCid)
-	fmt.Printf("client-id : %s\n", statement.PLCid + "sub")
+	fmt.Println("ラダープログラム受け取り Subscriber")
+	fmt.Printf("plc-id : %s\n", statement.PLCid + "send")
 	fmt.Printf("---------------\n\n")
 
-	subup <- true
 	for m := range cc.Incoming {
-		fmt.Println(":命令受け取り")
-		
+		fmt.Println(":ラダープログラム受け取り")
+
 		r, w, _ := os.Pipe()
 		fmt.Print("TopicName: ", m.TopicName, "\t")
 
-		m.Payload.WritePayload(w) // 標準出力へ書き込み
+		m.Payload.WritePayload(w) // パイプへ書き込み
 
 		w.Close() // 閉じないと永遠に書き込みが終わらない
 		var buf bytes.Buffer
@@ -72,14 +70,10 @@ func Subscriber(isEnd, subup chan bool) {
 		r.Close()
 
 		s := strings.TrimRight(buf.String(), "\n")  // バッファーから文字列へ変換
-		fmt.Fprintf(os.Stdout, "%s", s) // この時 s は JSON文字列 であること
+		if s == "" {
+			continue
+		}
+		fmt.Print("json文字列受信\t")
 		fmt.Printf("\tr: %v\n", m.Header.Retain)
-
-		resMessage, result := ComProcess(s)
-		fmt.Printf("response Message: %s\n", resMessage)
-		fmt.Printf("result: %v\n", result)
-		// メッセージのレスポンスは後で実装
-		Publisher(resMessage, result)
-		fmt.Println("---------------")
 	}
 }
