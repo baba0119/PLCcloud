@@ -43,7 +43,7 @@ func ComProcess(JSONstring string) (string, bool) {
 			if statement.LdJSON == "" {
 				resMessage = "stop. ラダープログラムが存在しません"
 			} else {
-				resMessage = "run."
+				resMessage = "stop."
 			}
 		}
 
