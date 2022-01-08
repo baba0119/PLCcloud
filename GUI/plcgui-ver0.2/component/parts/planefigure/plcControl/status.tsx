@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from "react";
+import { useState, VFC } from "react";
 import styled from "styled-components";
 
 const AreaParent = styled.div`
