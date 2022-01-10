@@ -39,7 +39,7 @@ func SendSubscriber() {
 
 	tq := make([]proto.TopicQos, flag.NArg())
 	for i := 0; i < flag.NArg(); i++ {
-		tq[i].Topic = flag.Arg(i)
+		tq[i].Topic = flag.Arg(i) + "send"
 		statement.PLCid = flag.Arg(i)
 		tq[i].Qos = proto.QosAtMostOnce
 	}
@@ -75,5 +75,7 @@ func SendSubscriber() {
 		}
 		fmt.Print("json文字列受信\t")
 		fmt.Printf("\tr: %v\n", m.Header.Retain)
+
+		fmt.Printf("json文字列:\n%s\n", s)
 	}
 }

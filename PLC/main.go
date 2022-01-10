@@ -10,7 +10,7 @@ func main() {
 
 	// mqtt コミュニ―ケーション goroutin
 	// 命令受け取り Subscriber
-	communication.Subscriber(isEnd, subup)
+	go communication.Subscriber(isEnd, subup)
 	isSubup1 := <- subup
 	if !isSubup1 {
 		return

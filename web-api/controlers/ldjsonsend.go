@@ -1,6 +1,7 @@
 package controlers
 
 import (
+	"fmt"
 	"log"
 	"plc-web-api/infrastructure/db"
 	"plc-web-api/infrastructure/plcconn"
@@ -15,6 +16,8 @@ func LdJSONSend(ldJSON []byte, projectid string) error {
 	}
 
 	// ラダープログラムの送信
+	fmt.Printf("plcid:\t%s\n", plcid + "send")
+
 	err = plcconn.LdJSONPub(ldJSON, plcid)
 	if err != nil {
 		log.Println(err)
