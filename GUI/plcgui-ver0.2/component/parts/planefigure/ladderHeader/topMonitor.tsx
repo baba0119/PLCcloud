@@ -2,6 +2,7 @@ import { useEffect, useState, VFC } from "react";
 import styled from "styled-components";
 import { END_POINT } from "../../../../utils/endpoint";
 import SaveButtonPanel from "./detailes/saveButtonPanel";
+import SendButton from "./detailes/sendButton";
 
 const AreaParent = styled.div`
   width: 100%;
@@ -22,7 +23,7 @@ const ProjectTitle = styled.h3`
   margin-right: 36px;
 `;
 
-const SaveButtonArea = styled.div`
+const SomeButtonArea = styled.div`
   width: 8%;
   height: 100%;
 `;
@@ -56,9 +57,12 @@ const TopMonitor: VFC = () => {
       <ProjectTitleArea>
         <ProjectTitle>{projectName}</ProjectTitle>
       </ProjectTitleArea>
-      <SaveButtonArea>
+      <SomeButtonArea>
         <SaveButtonPanel/>
-      </SaveButtonArea>
+      </SomeButtonArea>
+      <SomeButtonArea>
+        <SendButton/>
+      </SomeButtonArea>
     </AreaParent>
   )
 }
