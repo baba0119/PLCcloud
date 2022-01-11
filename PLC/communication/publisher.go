@@ -11,14 +11,14 @@ import (
 	"github.com/jeffallen/mqtt"
 )
 
-func Publisher(resMessage string, result bool) {
-	var pubhost = flag.String("pubhost", "localhost:1883", "hostname of broker")
-	var pubuser = flag.String("pubuser", "", "username")
-	var pubpass = flag.String("pubpass", "", "password")
-	var pubdump = flag.Bool("pubdump", false, "dump messages?")
-	var pubretain = flag.Bool("pubretain", false, "retain message?")
-	var wait = flag.Bool("wait", false, "stay connected after publishing?")
+var pubhost = flag.String("pubhost", "localhost:1883", "hostname of broker")
+var pubuser = flag.String("pubuser", "", "username")
+var pubpass = flag.String("pubpass", "", "password")
+var pubdump = flag.Bool("pubdump", false, "dump messages?")
+var pubretain = flag.Bool("pubretain", false, "retain message?")
+var wait = flag.Bool("wait", false, "stay connected after publishing?")
 
+func Publisher(resMessage string, result bool) {
 	conn, err := net.Dial("tcp", *pubhost)
 	if err != nil {
 		fmt.Fprint(os.Stderr, "dial: ", err)

@@ -1,6 +1,9 @@
 package main
 
-import "PLC/communication"
+import (
+	"PLC/communication"
+	"PLC/statement"
+)
 
 // "PLC/plcengine/plctest/selfholding"
 
@@ -17,9 +20,10 @@ func main() {
 	}
 
 	// ラダープログラム受け取り Subscriber
-	communication.SendSubscriber()
+	// communication.SendSubscriber()
 
 	// plc 動作管理 goroutin
+	statement.PLCManagement()
 
 	// エラーが発生したときに出る
 

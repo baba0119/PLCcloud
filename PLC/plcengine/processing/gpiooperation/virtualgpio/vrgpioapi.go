@@ -101,25 +101,16 @@ func VrgpioInputChange(
 	input bool,
 	vrgpio map[string]*vrgpiomodel.VRgpio,
 ) bool {
-	// mapをゴルーチンでそうさするため排他的に
-	// lock/unlockする必要があった
-	var ClientMutex struct {
-		sync.Mutex
-	}
-
 	// gpio が実在するかチェック
 	for i := 0 ; i < 34 ; i++ {
 		str := "Gpio" + strconv.Itoa(i)
-		ClientMutex.Lock()  // ロック
 		if gpio == str || vrgpio[str].GpioMode == "input" {
 			vrgpio[gpio] = &vrgpiomodel.VRgpio{
 				GpioMode: vrgpio[gpio].GpioMode,
 				GpioState: input,
 			}
-			ClientMutex.Unlock() // アンロック
 			return true
 		}
-		ClientMutex.Unlock() // アンロック
 	}
 
 	return false
