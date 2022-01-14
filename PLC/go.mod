@@ -16,4 +16,6 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/huin/mqtt v0.0.0-20200914141616-61735481eb15 // indirect
 	github.com/jeffallen/mqtt v0.0.0-20180518073322-5387cfa89df0 // indirect
+	periph.io/x/conn/v3 v3.6.10
+	periph.io/x/host/v3 v3.7.2
 )

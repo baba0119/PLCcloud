@@ -8,6 +8,7 @@ github.com/huin/mqtt v0.0.0-20200914141616-61735481eb15 h1:BT2uKnsrOQvQzZjFIpDMM
 github.com/huin/mqtt v0.0.0-20200914141616-61735481eb15/go.mod h1:zbO4h3NDGxpAVWGYzQNle+BDfuwm8fWcgVxFuIHyuas=
 github.com/jeffallen/mqtt v0.0.0-20180518073322-5387cfa89df0 h1:ESdZtIOKF9F7Ah9lbdKyc0xiioZvnGe3XrvXzgEka0Y=
 github.com/jeffallen/mqtt v0.0.0-20180518073322-5387cfa89df0/go.mod h1:5VmMaANxUXHvNfKSdcjuEYlAFnxsu6vVAr6kgQOoUG4=
+github.com/jonboulle/clockwork v0.2.2/go.mod h1:Pkfl5aHPm1nk2H9h0bjmnJD/BcgbGXUBGnn1kMkgxc8=
 github.com/koron/go-dproxy v1.3.0 h1:wE0gxsw1NJnbkk5czp3/xUtwgTeLP8p/YaSjdUOmI7k=
 github.com/koron/go-dproxy v1.3.0/go.mod h1:M+lZRjGA7zf1CdgBWoL8HH1lKb6jlgR4qnX3hxRdQHs=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
@@ -16,3 +17,8 @@ golang.org/x/net v0.0.0-20200425230154-ff2c4b7c35a0/go.mod h1:qpuaurCH72eLCgpAm/
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
+periph.io/x/conn/v3 v3.6.10 h1:gwU4ssmZkq1D/uz8hU91i/COo2c9DrRaS4PJZBbCd+c=
+periph.io/x/conn/v3 v3.6.10/go.mod h1:UqWNaPMosWmNCwtufoTSTTYhB2wXWsMRAJyo1PlxO4Q=
+periph.io/x/d2xx v0.0.4/go.mod h1:38Euaaj+s6l0faIRHh32a+PrjXvxFTFkPBEQI0TKg34=
+periph.io/x/host/v3 v3.7.2 h1:rCAUxkzy2xrzh18HP2AoVwTL/fEKqmcJ1icsZQGM58Q=
+periph.io/x/host/v3 v3.7.2/go.mod h1:nHMlzkPwmnHyP9Tn0I8FV+e0N3K7TjFXLZkIWzAicog=

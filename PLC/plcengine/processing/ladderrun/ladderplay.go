@@ -77,6 +77,8 @@ func LadderPlay(
 			opStateMapCopy(OpStateSliceCache, opStateSlice)
 			vrgpioMapCopy(vrgpioCache, vrgpio)
 		}
+
+		// ここにvrgpio と gpio の同期処理
 	}
 }
 
