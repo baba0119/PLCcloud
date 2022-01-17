@@ -14,7 +14,7 @@ func ShowVirtualGpio(vrgpio map[string]*vrgpiomodel.VRgpio) {
 	var ClientMutex struct {
 		sync.Mutex
 	}
-	for i := 0 ; i < 34 ; i++ {
+	for i := 0 ; i < 27 ; i++ {
 		str := "Gpio" + strconv.Itoa(i)
 		ClientMutex.Lock()  // ロック
 		fmt.Printf("%v\t{mode:%v,\tstate:%v}\n",

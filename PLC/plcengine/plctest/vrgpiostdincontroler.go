@@ -2,6 +2,7 @@ package plctest
 
 import (
 	"PLC/plcengine/datamodel/vrgpiomodel"
+	"PLC/plcengine/processing/gpiooperation"
 	"PLC/plcengine/processing/gpiooperation/virtualgpio"
 	"fmt"
 )
@@ -31,11 +32,22 @@ func VrgpioStdinControler(
 				IsStdin = false
 				continue
 			}
-			virtualgpio.VrgpioOutputChange(pin, op, vrgpio)
-			done <- true // 出力動作開始
-			<- delay     // 出力動作終了伝達
+			isSuccess := virtualgpio.VrgpioOutputChange(pin, op, vrgpio)
+			if !isSuccess {
+				fmt.Println("出力変更に失敗しました")
+			}
+
+			// ここで出力更新処理の呼出し
+			gpiooperation.Control(vrgpio)
+
+			// done <- true // 出力動作開始
+			// <- delay     // 出力動作終了伝達
+
 		case "mode":
-			virtualgpio.VrgpioModeChange(pin, content, vrgpio)
+			isSuccess := virtualgpio.VrgpioModeChange(pin, content, vrgpio)
+			if !isSuccess {
+				fmt.Println("モード変更に失敗しました")
+			}
 		case "show":
 			virtualgpio.ShowVirtualGpio(vrgpio)
 		default:

@@ -2,21 +2,17 @@ package plctest
 
 import (
 	"PLC/plcengine/datamodel/vrgpiomodel"
-	"fmt"
+	"strings"
+
+	// "fmt"
 	"log"
 	"time"
 
 	"periph.io/x/conn/v3/gpio"
 	"periph.io/x/conn/v3/gpio/gpioreg"
-	"periph.io/x/host/v3"
 )
 
 func GpioInputDiffDetection(vrgpio map[string]*vrgpiomodel.VRgpio) {
-	// Load all the drivers:
-	if _, err := host.Init(); err != nil {
-		log.Fatal(err)
-	}
-
 	for {
 		if IsStdin {
 			continue
@@ -28,13 +24,14 @@ func GpioInputDiffDetection(vrgpio map[string]*vrgpiomodel.VRgpio) {
 				continue
 			}
 
-			p := gpioreg.ByName(pin)
+			name := strings.ToUpper(pin)
+			p := gpioreg.ByName(name)
 			if p == nil {
-					log.Fatal("Failed to find " + pin)
+					log.Fatal("Failed to find " + name)
 			}
 
 			// Set it as input, with an internal pull down resistor:
-			if err := p.In(gpio.PullUp, gpio.BothEdges); err != nil {
+			if err := p.In(gpio.PullDown, gpio.BothEdges); err != nil {
 					log.Fatal(err)
 			}
 
@@ -47,7 +44,19 @@ func GpioInputDiffDetection(vrgpio map[string]*vrgpiomodel.VRgpio) {
 			for name, pin := range ioLen {
 				if !IsStdin {
 					time.Sleep(10 * time.Millisecond)
-					fmt.Printf("%s -> %s\n", name ,pin.Read())
+					// fmt.Printf("%s -> %s\n", name ,pin.Read())
+					pinState := pin.Read().String()
+
+					// ボタン押してるとき   :Low
+					// ボタン押してないとき :High
+					switch {
+					case vrgpio[name].GpioState && pinState == "High":
+						// fmt.Printf("%s: %s\n", name, pinState)
+						vrgpio[name].GpioState = false
+					case !vrgpio[name].GpioState && pinState == "Low":
+						// fmt.Printf("%s: %s\n", name, pinState)
+						vrgpio[name].GpioState = true
+					}
 				}
 			}
 		}

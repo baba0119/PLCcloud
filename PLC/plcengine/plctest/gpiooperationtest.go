@@ -3,6 +3,9 @@ package plctest
 import (
 	"PLC/plcengine/processing/gpiooperation/virtualgpio"
 	"fmt"
+	"log"
+
+	"periph.io/x/host/v3"
 )
 
 func GpioOperationTest() {
@@ -17,6 +20,12 @@ func GpioOperationTest() {
 	virtualgpio.ShowVirtualGpio(vrgpio)
 	fmt.Println()
 
+	// 全てのドライバを読み込み
+	if _, err := host.Init(); err != nil {
+		log.Fatal(err)
+	}
+
 	var done, delay chan bool
 	go VrgpioStdinControler(done, delay, vrgpio)
+	GpioInputDiffDetection(vrgpio)
 }
