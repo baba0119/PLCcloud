@@ -1,14 +1,21 @@
 package main
 
 import (
-	"PLC/plcengine/plctest"
 	// "PLC/communication"
-	// "PLC/statement"
+	"PLC/statement"
+	"log"
+
+	"periph.io/x/host/v3"
 )
 
 // "PLC/plcengine/plctest/selfholding"
 
 func main() {
+	// 全てのドライバを読み込み
+	if _, err := host.Init(); err != nil {
+		log.Fatal(err)
+	}
+
 	// isEnd := make(chan bool)
 	// subup := make(chan bool)
 
@@ -24,9 +31,5 @@ func main() {
 	// communication.SendSubscriber()
 
 	// plc 動作管理 goroutin
-	// statement.PLCManagement()
-
-	// エラーが発生したときに出る
-
-	plctest.GpioOperationTest()
+	statement.PLCManagement()
 }

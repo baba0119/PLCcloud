@@ -50,12 +50,14 @@ func SelfholdingRun() {
 	// input モードのとこのみ変更可能
 	// ゴルーチンで処理を動かす
 	done := make(chan bool)
+	delay := make(chan bool)
 	go plctest.VrgpioSimulated(done, vrgpio)
 
 	// ラダープログラムの動作(無限ループ)
 	// ラダープレイの中で無限ループ
 	if !ladderrun.LadderPlay(
 		done,							// ゴルーチンチャネル
+		delay,
 		inputLdSlice,			// 入力部ラダースライス
 		outputStateSlice,	// 出力保持スライス
 		vrgpio,						// virtual gpio

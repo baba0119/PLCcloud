@@ -3,6 +3,7 @@ package ladderrun
 import (
 	"PLC/plcengine/datamodel/ldexemodel"
 	"PLC/plcengine/datamodel/vrgpiomodel"
+	"PLC/plcengine/processing/gpiooperation"
 	"fmt"
 )
 
@@ -24,6 +25,7 @@ import (
 // ---------------------------------------------
 func LadderPlay(
 	done chan bool,
+	delay chan bool,
 	inputLdSlice 	[]*ldexemodel.InputLdexeModel,
 	opStateSlice 	map[string]*ldexemodel.OutputLdexeModel,
 	vrgpio				map[string]*vrgpiomodel.VRgpio,
@@ -38,12 +40,14 @@ func LadderPlay(
 	vrgpioMapCopy(vrgpioCache, vrgpio)
 
 	for {
+		// 処理指令が来るまで待ち
+		isDone := <- done
 
 		// 入力があったときにラダープログラム動作
 		// 前回と出力の状態が違うときにも動作
 		// 出力:
 		// opStateSlice と vrgpio が出力
-		if <-done || stateDiff {
+		for isDone || stateDiff {
 			for _, ld := range inputLdSlice {
 				// ラダープログラム処理 ture or false return
 				outCome, result := BlockInnerProcessing(
@@ -79,6 +83,11 @@ func LadderPlay(
 		}
 
 		// ここにvrgpio と gpio の同期処理
+		if !gpiooperation.Control(vrgpio) {
+			return false
+		}
+
+		delay <- true
 	}
 }
 

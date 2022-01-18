@@ -1,14 +1,15 @@
 package statement
 
 import (
+	// "PLC/plcengine/plctest"
+	"PLC/plcengine/processing/gpiooperation"
+	"PLC/plcengine/processing/gpiooperation/virtualgpio"
+	"PLC/plcengine/processing/ladderdebug"
+	"PLC/plcengine/processing/ladderrun"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
-	"PLC/plcengine/processing/ladderdebug"
-	"PLC/plcengine/processing/gpiooperation/virtualgpio"
-	"PLC/plcengine/processing/ladderrun"
-	"PLC/plcengine/plctest"
 )
 
 func PLCManagement() {
@@ -93,12 +94,19 @@ func PLCManagement() {
 			// input モードのとこのみ変更可能
 			// ゴルーチンで処理を動かす
 			done := make(chan bool)
-			go plctest.VrgpioSimulated(done, vrgpio)
+			delay := make(chan bool)
+
+			// gpio差分検出
+			go gpiooperation.Observer(done, delay, vrgpio)
+
+			// コマンドで vrgpio の操作
+			// go plctest.VrgpioSimulated(done, vrgpio)
 
 			// ラダープログラムの動作(無限ループ)
 			// ラダープレイの中で無限ループ
 			if !ladderrun.LadderPlay(
 				done,							// ゴルーチンチャネル
+				delay,						// 動作終了伝達
 				ldConvertSlice,		// 入力部ラダースライス
 				outputStateSlice,	// 出力保持スライス
 				vrgpio,						// virtual gpio
