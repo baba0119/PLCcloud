@@ -2,6 +2,7 @@ package main
 
 import (
 	// "PLC/communication"
+	"PLC/interfaces"
 	"PLC/statement"
 	"log"
 
@@ -16,19 +17,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// isEnd := make(chan bool)
-	// subup := make(chan bool)
-
-	// mqtt コミュニ―ケーション goroutin
-	// 命令受け取り Subscriber
-	// go communication.Subscriber(isEnd, subup)
-	// isSubup1 := <- subup
-	// if !isSubup1 {
-	// 	return
-	// }
-
-	// ラダープログラム受け取り Subscriber
-	// communication.SendSubscriber()
+	// 標準入力で PLC の操作
+	go interfaces.CmdInput()
 
 	// plc 動作管理 goroutin
 	statement.PLCManagement()
