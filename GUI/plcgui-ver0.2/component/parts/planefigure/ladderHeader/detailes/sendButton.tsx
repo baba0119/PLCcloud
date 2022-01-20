@@ -14,7 +14,7 @@ const SendButtonDedign = styled.button`
   background-color: #118320;
   color: #d5feff;
   height: 80%;
-  width: 64px;
+  width: 94px;
   border: none;
   border-radius: 8px;
   &:hover {
@@ -73,7 +73,7 @@ const SendButton: VFC = () => {
 
   return (
     <AreaParent>
-      <SendButtonDedign onClick={onClickHandler}>send</SendButtonDedign>
+      <SendButtonDedign onClick={onClickHandler}>DownLoad</SendButtonDedign>
     </AreaParent>
   )
 }

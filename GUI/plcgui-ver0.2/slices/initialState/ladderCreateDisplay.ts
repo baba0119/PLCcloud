@@ -23,7 +23,7 @@ for ( let i: number = 0; i < 10; i++ ) {
   });
 }
 
-const ladderInitialState: ladderRecordDataModel[] = [];
+export const ladderInitialState: ladderRecordDataModel[] = [];
 
 for ( let i:number = 0; i < 11; i++ ) {
   ladderInitialState.push({

@@ -3,7 +3,7 @@ import { colPatternModel, colSettingModel } from "../model/colPatternModel";
 import { KindsModel, ladderRecordDataModel } from "../model/ladderDataModel";
 import { ioStateModel, point } from "../model/ladderStateModel";
 import { END_POINT } from "../utils/endpoint";
-import { ladderCreateDisplayInitialState } from "./initialState/ladderCreateDisplay";
+import { ladderCreateDisplayInitialState, ladderInitialState } from "./initialState/ladderCreateDisplay";
 import { colSetting } from "./utils/colSetting";
 import { pointSelect } from "./utils/pointSelect";
 
@@ -200,16 +200,17 @@ export const ladderCreateDisplaySlice = createSlice({
         return res.text()
       }).then(res => {
         console.log(typeof res, res)
-        sessionStorage.setItem("ld", res as string)
+        if (res != "null") {
+          console.log("res が nullじゃなかった")
+          sessionStorage.setItem("ld", res as string)
+        }
       }).catch(error => {
         console.log("通信失敗", error);
       })
 
-      const ld = sessionStorage.getItem("ld");
-      if (ld != "null") {
-        console.log("true")
-        state.ladderRecordData = JSON.parse(ld as string);
-      }
+      const ldJson = sessionStorage.getItem("ld")
+      const ld = JSON.parse(ldJson as string)
+      state.ladderRecordData = ld;
       return state
     },
     ladderSave: (state) => {

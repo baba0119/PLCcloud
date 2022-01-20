@@ -3,13 +3,15 @@ package gpiooperation
 import (
 	"PLC/plcengine/datamodel/vrgpiomodel"
 	"strings"
-	// "fmt"
+	"fmt"
 	"log"
 	"time"
 
 	"periph.io/x/conn/v3/gpio"
 	"periph.io/x/conn/v3/gpio/gpioreg"
 )
+
+var IsProcess = false
 
 func Observer(
 	done chan bool,
@@ -42,6 +44,10 @@ func Observer(
 		// 差分を検出したらvrgpioに処理を反映
 		for {
 			for name, pin := range ioLen {
+				if IsProcess {
+					continue
+				}
+				
 				time.Sleep(10 * time.Millisecond)
 				// fmt.Printf("%s -> %s\n", name ,pin.Read())
 				pinState := pin.Read().String()
@@ -50,15 +56,13 @@ func Observer(
 				// ボタン押してないとき :High
 				switch {
 				case vrgpio[name].GpioState && pinState == "High":
-					// fmt.Printf("%s: %s\n", name, pinState)
+					fmt.Printf("%s: %s\n", name, pinState)
 					vrgpio[name].GpioState = false
 					done <- true
-					<- delay
 				case !vrgpio[name].GpioState && pinState == "Low":
-					// fmt.Printf("%s: %s\n", name, pinState)
+					fmt.Printf("%s: %s\n", name, pinState)
 					vrgpio[name].GpioState = true
 					done <- true
-					<- delay
 				}
 			}
 		}

@@ -42,12 +42,15 @@ func LadderPlay(
 	for {
 		// 処理指令が来るまで待ち
 		isDone := <- done
+		gpiooperation.IsProcess = true
+		fmt.Println("処理指令到達")
 
 		// 入力があったときにラダープログラム動作
 		// 前回と出力の状態が違うときにも動作
 		// 出力:
 		// opStateSlice と vrgpio が出力
 		for isDone || stateDiff {
+			isDone = false
 			for _, ld := range inputLdSlice {
 				// ラダープログラム処理 ture or false return
 				outCome, result := BlockInnerProcessing(
@@ -87,7 +90,8 @@ func LadderPlay(
 			return false
 		}
 
-		delay <- true
+		gpiooperation.IsProcess = false
+		fmt.Println("処理終了")
 	}
 }
 

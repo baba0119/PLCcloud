@@ -2,6 +2,7 @@ package gpiooperation
 
 import (
 	"PLC/plcengine/datamodel/vrgpiomodel"
+	"fmt"
 	"log"
 	"strings"
 
@@ -19,8 +20,10 @@ func Control(vrgpio map[string]*vrgpiomodel.VRgpio) bool {
 		var l gpio.Level
 		if pin.GpioState {
 			l = gpio.High
+			fmt.Printf("%s -> %s\n", name, l)
 		} else {
 			l = gpio.Low
+			fmt.Printf("%s -> %s\n", name, l)
 		}
 
 		if err := gpioreg.ByName(name).Out(l); err != nil {
